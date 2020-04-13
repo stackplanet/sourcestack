@@ -1,0 +1,50 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+.cache
+dist
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Amplify section
+
+# current backend as deployed (presumably used for change detection)
+/amplify/\#current-cloud-backend
+
+# config which is partly portable and partly machine-specific ¯\_(ツ)_/¯
+/amplify/.config
+
+# information about currently used amplify resources
+# (not sure if this should be ignored or not but it changes often)
+/amplify/backend/amplify-meta.json
+
+# I am ignoring the function dists too
+/amplify/backend/function/*/dist
+
+# ...and the function node_modules
+/amplify/backend/function/**/node_modules
+
+#amplify
+amplify/\#current-cloud-backend
+amplify/.config/local-*
+amplify/backend/amplify-meta.json
+# aws-exports.js
+awsconfiguration.json
