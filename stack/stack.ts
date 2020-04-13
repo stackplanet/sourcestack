@@ -22,6 +22,8 @@ export class ServerlessWikiStack extends cdk.Stack {
             }
         });
 
+        table.grantReadWriteData(apiFunction);
+
         let endpoint = new apigw.LambdaRestApi(this, 'Endpoint', {
             handler: apiFunction
         })
