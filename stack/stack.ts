@@ -12,7 +12,8 @@ export class ServerlessWikiStack extends cdk.Stack {
             partitionKey: { name: 'path', type: dynamodb.AttributeType.STRING }
         });
 
-        let apiFunction = new lambda.Function(this, 'HelloHandler', {
+        let apiFunction = new lambda.Function(this, 'WikiHandler', {
+            functionName: 'WikiApi',
             code: lambda.Code.asset('backend/api'),
             runtime: lambda.Runtime.NODEJS_10_X,
             handler: 'handler.handler',
@@ -29,4 +30,4 @@ export class ServerlessWikiStack extends cdk.Stack {
 }
 
 const app = new cdk.App();
-new ServerlessWikiStack(app, 'CdkWorkshopStack');
+new ServerlessWikiStack(app, 'ServerlessWikiStack');
