@@ -13,7 +13,7 @@ export class ServerlessWikiStack extends cdk.Stack {
         });
 
         let apiFunction = new lambda.Function(this, 'HelloHandler', {
-            code: lambda.Code.asset('lambda/hello'),
+            code: lambda.Code.asset('backend/api'),
             runtime: lambda.Runtime.NODEJS_10_X,
             handler: 'handler.handler',
             environment: {

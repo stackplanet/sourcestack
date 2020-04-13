@@ -1,5 +1,4 @@
 import { DynamoDB, Lambda } from 'aws-sdk';
-import * as moment from 'moment'
 
 exports.handler = async function (event: any) {
     //   let m = moment();
