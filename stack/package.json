@@ -6,8 +6,9 @@
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w",
-    "deploy": "cdk deploy --require-approval=never--require-approval=never --outputs-file out.json"
+    "deploy": "npm run deploy-stack && npm run deploy-web-assets",
+    "deploy-stack": "cdk deploy --require-approval=never",
+    "deploy-web-assets" : "echo Deploying Web Assets!!"
   },
   "devDependencies": {
     "@types/node": "8.10.45",
