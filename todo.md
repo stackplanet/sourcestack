@@ -1,2 +1,3 @@
+- Once there is some kind of post-deploy hook, I can do the generation of the config.json file in CDK
 - Pass in ENVIRONMENT and PROJECT env vars
 - You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
