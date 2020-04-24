@@ -1,0 +1,2 @@
+- Pass in ENVIRONMENT and PROJECT env vars
+- You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'

@@ -5,10 +5,7 @@
     "cdk-workshop": "bin/cdk-workshop.js"
   },
   "scripts": {
-    "build": "tsc",
-    "deploy": "npm run deploy-stack && npm run deploy-web-assets",
-    "deploy-stack": "cdk deploy --require-approval=never",
-    "deploy-web-assets" : "echo Deploying Web Assets!!"
+    "deploy": "cdk deploy --require-approval=never --outputs-file out.json"
   },
   "devDependencies": {
     "@types/node": "8.10.45",
@@ -17,16 +14,18 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "@aws-cdk/aws-apigateway": "^1.33.0",
     "@aws-cdk/aws-cloudfront": "^1.33.0",
     "@aws-cdk/aws-codebuild": "^1.33.0",
-    "@aws-cdk/aws-iam": "^1.33.0",
-    "@aws-cdk/aws-s3": "^1.33.0",
-    "@aws-cdk/aws-apigateway": "^1.33.0",
     "@aws-cdk/aws-dynamodb": "^1.33.0",
+    "@aws-cdk/aws-iam": "^1.33.0",
     "@aws-cdk/aws-lambda": "^1.33.0",
+    "@aws-cdk/aws-s3": "^1.33.0",
+    "@aws-cdk/aws-s3-deployment": "^1.35.0",
     "@aws-cdk/aws-sns": "^1.33.0",
     "@aws-cdk/aws-sns-subscriptions": "^1.33.0",
     "@aws-cdk/aws-sqs": "^1.33.0",
-    "@aws-cdk/core": "^1.33.0"
+    "@aws-cdk/core": "^1.33.0",
+    "module": "^1.2.5"
   }
 }
