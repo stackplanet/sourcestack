@@ -1,3 +1,5 @@
-- Once there is some kind of post-deploy hook, I can do the generation of the config.json file in CDK
+- https://aws.amazon.com/blogs/compute/building-better-apis-http-apis-now-generally-available/
+  - Not GA in CDK yet, see https://github.com/aws/aws-cdk/issues/5301
+- Parcel exclude the aws-sdk from lambda    
 - Pass in ENVIRONMENT and PROJECT env vars
 - You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'

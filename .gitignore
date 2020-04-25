@@ -1,2 +1,3 @@
 *.code-workspace
 stack/*.out.json
+node_modules
