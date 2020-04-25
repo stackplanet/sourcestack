@@ -1,7 +1,8 @@
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
-import { UserDetails } from './common/UserDetails';
 import * as AWS from 'aws-sdk';
+import { UserDetails } from './userdetails';
+import e = require('express');
 
 declare global {
 
@@ -57,9 +58,15 @@ export namespace AuthHandler {
                         PASSWORD: req.body.password
                     }
                 }).promise();
-                res.cookie('auth_token', authResponse.AuthenticationResult.AccessToken);
-                res.cookie('refresh_token', authResponse.AuthenticationResult.RefreshToken);
-                res.send(<UserDetails>{userId: req.body.username});
+                if (authResponse.AuthenticationResult === undefined){
+                    console.error('Invalid Cognito response');
+                    res.status(500);
+                }
+                else {
+                    res.cookie('auth_token', authResponse.AuthenticationResult.AccessToken);
+                    res.cookie('refresh_token', authResponse.AuthenticationResult.RefreshToken);
+                    res.send(<UserDetails>{userId: req.body.username});
+                }
 
             } catch (e){
                 res.status(400);
@@ -72,7 +79,7 @@ export namespace AuthHandler {
     function getId(req: express.Request, config: any) {
         let token = req.cookies['auth_token'];
         if (!token) return null;
-        let decoded = jwt.decode(token, { complete: true });
+        let decoded = jwt.decode(token, { complete: true }) as any;
         if (!decoded) return null;
         let kid = decoded['header']['kid'];
         let pem = config.kidToPems[kid];
