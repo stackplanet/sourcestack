@@ -4,7 +4,8 @@
   "description": "",
   "main": "hello.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "parcel build src/handler.ts --target=node --global handler -o index.js --bundle-node-modules --no-source-maps"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +25,8 @@
     "@types/express": "^4.17.6",
     "@types/jsonwebtoken": "^8.3.9",
     "@types/node": "^13.11.1",
+    "parcel": "^1.12.4",
+    "parcel-plugin-zip": "^1.0.6",
     "typescript": "^3.8.3"
   }
 }

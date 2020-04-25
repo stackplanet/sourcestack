@@ -2,10 +2,12 @@ import cdk = require('@aws-cdk/core');
 import lambda = require('@aws-cdk/aws-lambda');
 import apigw = require('@aws-cdk/aws-apigateway');
 import dynamodb = require('@aws-cdk/aws-dynamodb');
+import cognito = require('@aws-cdk/aws-cognito');
 import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
 import { CloudFrontWebDistribution, OriginAccessIdentity } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
+import { VerificationEmailStyle } from '@aws-cdk/aws-cognito';
 
 export class ServerlessWikiStack extends cdk.Stack {
 
@@ -74,8 +76,31 @@ export class ServerlessWikiStack extends cdk.Stack {
         this.endpoint = new apigw.LambdaRestApi(this, Config.appEnv() + '-endpoint', {
             handler: apiFunction
         })
-        new cdk.CfnOutput(this, 'FunctionName', { value: apiFunction.functionName })
-        new cdk.CfnOutput(this, 'EndpointUrl', { value: this.endpoint.url })
+
+        let userPool = new cognito.UserPool(this, Config.appEnv() + '-user-pool', {
+            selfSignUpEnabled: true,
+            userVerification: {
+                emailSubject: 'Verify your email for our awesome app!',
+                emailBody: 'Hello {username}, Thanks for signing up to our awesome app! Your verification code is {####}',
+                emailStyle: VerificationEmailStyle.CODE,
+                smsMessage: 'Hello {username}, Thanks for signing up to our awesome app! Your verification code is {####}',
+            }
+        });
+
+        let userPoolClient = new cognito.UserPoolClient(this, Config.appEnv() + 'user-pool-client', {
+            userPoolClientName: Config.appEnv() + 'user-pool-client',
+            authFlows: {
+                adminUserPassword: true,
+                refreshToken: true
+            },
+            generateSecret: false,
+            userPool: userPool
+        })
+
+        new cdk.CfnOutput(this, 'UserPoolId', { value: userPool.userPoolId });
+        new cdk.CfnOutput(this, 'UserPoolClientId', { value: userPoolClient.userPoolClientId });
+        new cdk.CfnOutput(this, 'FunctionName', { value: apiFunction.functionName });
+        new cdk.CfnOutput(this, 'EndpointUrl', { value: this.endpoint.url });
     }
 
 }

@@ -10,11 +10,12 @@ export function configureApp() {
     const app = express();
     app.use(json());
 
-    // let config: any = require('./config.json')
 
     app.use(cookieParser());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
+
+    let config = {} // TODO - get config from env vars
     AuthHandler.init(config, app);
 
     app.get('/api/ping', async (req, res) => {

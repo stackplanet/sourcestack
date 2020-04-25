@@ -6,7 +6,8 @@
   },
   "scripts": {
     "stack": "cdk deploy --require-approval=never --outputs-file $npm_config_app-$npm_config_env.out.json",
-    "publish": "ts-node src/publish.ts"
+    "publish-frontend": "ts-node src/publish-frontend.ts",
+    "publish-backend": "ts-node src/publish-backend.ts"
   },
   "devDependencies": {
     "@types/node": "8.10.45",
@@ -19,6 +20,7 @@
     "@aws-cdk/aws-apigateway": "^1.33.0",
     "@aws-cdk/aws-cloudfront": "^1.33.0",
     "@aws-cdk/aws-codebuild": "^1.33.0",
+    "@aws-cdk/aws-cognito": "^1.35.0",
     "@aws-cdk/aws-dynamodb": "^1.33.0",
     "@aws-cdk/aws-iam": "^1.33.0",
     "@aws-cdk/aws-lambda": "^1.33.0",
