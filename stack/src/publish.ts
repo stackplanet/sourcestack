@@ -1,21 +1,19 @@
-import { execute } from "./execute";
+import { execute } from "./util/execute";
 import { writeFileSync } from "fs";
+import { Config } from "./util/config";
 
-let cdkOut = require('../out.json');
-
-let config = cdkOut['sunwiki-alpha'];
-
-let hostingBucket = config.HostingBucket;
-let distributionId = config.DistributionId;
-let apiEndpoint = config.EndpointUrl;
-
-let frontendConfig = {
-    api: apiEndpoint
-}
-writeFileSync('../frontend/dist/config.json', JSON.stringify(frontendConfig));
-
-execute(`aws s3 sync --delete ../frontend/dist ${hostingBucket}`).then(() => {
-    execute(`aws cloudfront create-invalidation --distribution-id ${distributionId} --paths "/*"`);
-}).then(() => {
-    console.log('Deployed!');
-})
+(async () => {
+    Config.ensureArgsSupplied();
+    let cdkOut = require(`../${Config.appEnv()}.out.json`);
+    let config = cdkOut[Config.appEnv()];
+    let hostingBucket = config.HostingBucket;
+    let distributionId = config.DistributionId;
+    let apiEndpoint = config.EndpointUrl;
+    let frontendConfig = {
+        api: apiEndpoint
+    }
+    writeFileSync('../frontend/dist/config.json', JSON.stringify(frontendConfig));
+    await execute(`aws s3 sync --delete ../frontend/dist ${hostingBucket}`);
+    await execute(`aws cloudfront create-invalidation --distribution-id ${distributionId} --paths "/*"`);
+    console.log('Published ' + Config.appEnv() + ' to ' + config.DistributionUri);
+})();

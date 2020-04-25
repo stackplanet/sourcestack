@@ -28,8 +28,8 @@ export function execute(command: string, exitOnError=true) {
                 resolve(output);
             }
             else {
-                if (exitOnError) process.exit(1)
-                else resolve(output)
+                if (exitOnError) process.exit(1);
+                else resolve(output);
             }
         })
     })

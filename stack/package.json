@@ -5,7 +5,8 @@
     "cdk-workshop": "bin/cdk-workshop.js"
   },
   "scripts": {
-    "deploy": "cdk deploy --require-approval=never --outputs-file out.json"
+    "stack": "cdk deploy --require-approval=never --outputs-file $npm_config_app-$npm_config_env.out.json",
+    "publish": "ts-node src/publish.ts"
   },
   "devDependencies": {
     "@types/node": "8.10.45",

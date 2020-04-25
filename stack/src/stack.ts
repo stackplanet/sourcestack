@@ -4,15 +4,8 @@ import apigw = require('@aws-cdk/aws-apigateway');
 import dynamodb = require('@aws-cdk/aws-dynamodb');
 import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
-import * as s3deploy from '@aws-cdk/aws-s3-deployment';
 import { CloudFrontWebDistribution, OriginAccessIdentity } from '@aws-cdk/aws-cloudfront';
-import { writeFileSync } from 'fs';
-import { execute } from './execute';
-
-let PROJECT = 'sunwiki';
-let ENVIRONMENT = 'alpha';
-let QUALIFIED_NAME = `${PROJECT}-${ENVIRONMENT}`;
-let BUCKET_NAME = `${QUALIFIED_NAME}-hosting-bucket`;
+import { Config } from './util/config';
 
 export class ServerlessWikiStack extends cdk.Stack {
 
@@ -22,33 +15,20 @@ export class ServerlessWikiStack extends cdk.Stack {
 
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
+        Config.ensureArgsSupplied();
+        console.log(Config.appEnv())
         this.backend();
         this.frontend();
-        // this.publish();
-    }
-
-    publish() {
-        // let frontendDir = '../frontend/dist';
-        // let frontendConfig = {
-        //     api: this.endpoint.url
-        // }
-        // writeFileSync(frontendDir + '/config.json', JSON.stringify(frontendConfig));
-        // new s3deploy.BucketDeployment(this, 'BucketDeployment', {
-        //     sources: [s3deploy.Source.asset('../frontend/dist')],
-        //     destinationBucket: this.bucket,
-        //     distribution: this.distribution,
-        //     distributionPaths: ['/*'],
-        // });
     }
 
     frontend() {
-        this.bucket = new S3.Bucket(this, BUCKET_NAME, {
+        this.bucket = new S3.Bucket(this, Config.appEnv() + '-hosting-bucket', {
             websiteIndexDocument: 'index.html',
             websiteErrorDocument: 'index.html',
             removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
-        let oai = new OriginAccessIdentity(this, QUALIFIED_NAME + '-oai');
-        this.distribution = new CloudFrontWebDistribution(this, QUALIFIED_NAME + '-distribution', {
+        let oai = new OriginAccessIdentity(this, Config.appEnv() + '-oai');
+        this.distribution = new CloudFrontWebDistribution(this, Config.appEnv() + '-distribution', {
             originConfigs: [{
                 s3OriginSource: {
                     s3BucketSource: this.bucket,
@@ -78,11 +58,11 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
 
     backend() {
-        let table = new dynamodb.Table(this, QUALIFIED_NAME + '-pages', {
+        let table = new dynamodb.Table(this, Config.appEnv() + '-pages', {
             partitionKey: { name: 'path', type: dynamodb.AttributeType.STRING }
         });
-        let apiFunction = new lambda.Function(this, QUALIFIED_NAME + '-api', {
-            functionName: QUALIFIED_NAME + '-api',
+        let apiFunction = new lambda.Function(this, Config.appEnv() + '-api', {
+            functionName: Config.appEnv() + '-api',
             code: lambda.Code.asset('../backend/api'),
             runtime: lambda.Runtime.NODEJS_10_X,
             handler: 'handler.handler',
@@ -91,7 +71,7 @@ export class ServerlessWikiStack extends cdk.Stack {
             }
         });
         table.grantReadWriteData(apiFunction);
-        this.endpoint = new apigw.LambdaRestApi(this, QUALIFIED_NAME + '-endpoint', {
+        this.endpoint = new apigw.LambdaRestApi(this, Config.appEnv() + '-endpoint', {
             handler: apiFunction
         })
         new cdk.CfnOutput(this, 'FunctionName', { value: apiFunction.functionName })
@@ -102,4 +82,4 @@ export class ServerlessWikiStack extends cdk.Stack {
 
 
 const app = new cdk.App();
-new ServerlessWikiStack(app, QUALIFIED_NAME);
+new ServerlessWikiStack(app, Config.appEnv());
