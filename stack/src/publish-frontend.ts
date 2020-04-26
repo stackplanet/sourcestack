@@ -10,7 +10,6 @@ import { StackOutput } from "./stackoutput";
     let frontendConfig = {
         app: Config.app(),
         env: Config.env(),
-        api: stackOutput.EndpointUrl
     }
     await execute(`cd ../frontend && npm run build`);
     writeFileSync('../frontend/dist/frontend-config.json', JSON.stringify(frontendConfig, null, 2));

@@ -5,10 +5,10 @@ import dynamodb = require('@aws-cdk/aws-dynamodb');
 import cognito = require('@aws-cdk/aws-cognito');
 import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
-import { CloudFrontWebDistribution, OriginAccessIdentity } from '@aws-cdk/aws-cloudfront';
+import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
 import { VerificationEmailStyle } from '@aws-cdk/aws-cognito';
-import {StackOutput} from './stackoutput';
+import { StackOutput } from './stackoutput';
 
 export class ServerlessWikiStack extends cdk.Stack {
 
@@ -28,7 +28,7 @@ export class ServerlessWikiStack extends cdk.Stack {
         this.outputs();
     }
 
-    outputs(){
+    outputs() {
         let output: StackOutput = {
             DistributionUri: 'https://' + this.distribution.domainName,
             DistributionId: this.distribution.distributionId,
@@ -38,11 +38,11 @@ export class ServerlessWikiStack extends cdk.Stack {
             FunctionName: this.apiFunction.functionName,
             EndpointUrl: this.endpoint.url,
         }
-        Object.keys(output).forEach((key) => new cdk.CfnOutput(this, key, { value: output[key as keyof StackOutput]}));
+        Object.keys(output).forEach((key) => new cdk.CfnOutput(this, key, { value: output[key as keyof StackOutput] }));
     }
 
     frontend() {
-        
+
         this.bucket = new S3.Bucket(this, Config.appEnv() + '-hosting-bucket', {
             websiteIndexDocument: 'index.html',
             websiteErrorDocument: 'index.html',
@@ -56,6 +56,16 @@ export class ServerlessWikiStack extends cdk.Stack {
                     originAccessIdentity: oai,
                 },
                 behaviors: [{ isDefaultBehavior: true }],
+            }, {
+                customOriginSource: {
+                    // domainName: this.endpoint.domainName?.domainName as string,
+                    domainName: `${this.endpoint.restApiId}.execute-api.${this.region}.${this.urlSuffix}`
+                },
+                originPath: `/${this.endpoint.deploymentStage.stageName}`,
+                behaviors: [{
+                    pathPattern: '/api/*',
+                    allowedMethods: CloudFrontAllowedMethods.ALL
+                }]
             }]
         });
         this.bucket.addToResourcePolicy(new IAM.PolicyStatement({
@@ -73,7 +83,7 @@ export class ServerlessWikiStack extends cdk.Stack {
                 new IAM.CanonicalUserPrincipal(oai.cloudFrontOriginAccessIdentityS3CanonicalUserId)
             ]
         }));
-        
+
     }
 
     backend() {
@@ -114,7 +124,7 @@ export class ServerlessWikiStack extends cdk.Stack {
             userPool: this.userPool
         })
 
-        
+
     }
 
 }

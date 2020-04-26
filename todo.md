@@ -1,19 +1,16 @@
-- The publish scripts in ./stack should compile and deploy the frontend/backend
-- Can I remove the lambda source code reference from the stack?
-- Run Config.ensureArgsSupplied before update-stack, perhaps as a separate "npm run check-args"
 
 ssh -T git@github.com
 ssh: connect to host github.com port 22: No route to host
 
-- Add Cognito user pool
+
+- rename req.user to req.jwtInfo or similar
+- Run Config.ensureArgsSupplied before update-stack, perhaps as a separate "npm run check-args"
 - Add login pages
-- Add api as origin to distribution
 - Parcel exclude the aws-sdk from lambda    
   - https://github.com/FlorianRappl/parcel-plugin-externals
 
 - https://aws.amazon.com/blogs/compute/building-better-apis-http-apis-now-generally-available/
   - Not GA in CDK yet, see https://github.com/aws/aws-cdk/issues/5301
-- Pass in ENVIRONMENT and PROJECT env vars
 - You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
 
 

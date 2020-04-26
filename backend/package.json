@@ -5,7 +5,7 @@
   "main": "hello.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build src/handler.ts --target=node --global handler -o index.js --bundle-node-modules --no-source-maps"
+    "build": "parcel build src/handler.ts --target=node --global handler -o handler.js --bundle-node-modules --no-source-maps"
   },
   "author": "",
   "license": "ISC",
