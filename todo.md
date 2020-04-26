@@ -2,6 +2,9 @@
 - Can I remove the lambda source code reference from the stack?
 - Run Config.ensureArgsSupplied before update-stack, perhaps as a separate "npm run check-args"
 
+ssh -T git@github.com
+ssh: connect to host github.com port 22: No route to host
+
 - Add Cognito user pool
 - Add login pages
 - Add api as origin to distribution

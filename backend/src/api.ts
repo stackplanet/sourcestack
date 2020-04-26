@@ -9,14 +9,11 @@ import { BackendConfig } from './backendconfig';
 export function configureApp() {
     const app = express();
     app.use(json());
-
-
     app.use(cookieParser());
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: true }));
-
-    let config = BackendConfig.init();
-    AuthHandler.init(config, app);
+    BackendConfig.init();
+    AuthHandler.init(BackendConfig.instance, app);
 
     app.get('/api/ping', async (req, res) => {
         res.send('pong');

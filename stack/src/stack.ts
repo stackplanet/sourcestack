@@ -8,12 +8,16 @@ import * as IAM from '@aws-cdk/aws-iam';
 import { CloudFrontWebDistribution, OriginAccessIdentity } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
 import { VerificationEmailStyle } from '@aws-cdk/aws-cognito';
+import {StackOutput} from './stackoutput';
 
 export class ServerlessWikiStack extends cdk.Stack {
 
     bucket: S3.Bucket;
     distribution: CloudFrontWebDistribution;
     endpoint: apigw.LambdaRestApi;
+    userPool: cognito.UserPool;
+    userPoolClient: cognito.UserPoolClient;
+    apiFunction: lambda.Function;
 
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
@@ -21,9 +25,24 @@ export class ServerlessWikiStack extends cdk.Stack {
         console.log(Config.appEnv())
         this.backend();
         this.frontend();
+        this.outputs();
+    }
+
+    outputs(){
+        let output: StackOutput = {
+            DistributionUri: 'https://' + this.distribution.domainName,
+            DistributionId: this.distribution.distributionId,
+            HostingBucket: 's3://' + this.bucket.bucketName,
+            UserPoolId: this.userPool.userPoolId,
+            UserPoolClientId: this.userPoolClient.userPoolClientId,
+            FunctionName: this.apiFunction.functionName,
+            EndpointUrl: this.endpoint.url,
+        }
+        Object.keys(output).forEach((key) => new cdk.CfnOutput(this, key, { value: output[key as keyof StackOutput]}));
     }
 
     frontend() {
+        
         this.bucket = new S3.Bucket(this, Config.appEnv() + '-hosting-bucket', {
             websiteIndexDocument: 'index.html',
             websiteErrorDocument: 'index.html',
@@ -54,16 +73,14 @@ export class ServerlessWikiStack extends cdk.Stack {
                 new IAM.CanonicalUserPrincipal(oai.cloudFrontOriginAccessIdentityS3CanonicalUserId)
             ]
         }));
-        new cdk.CfnOutput(this, 'DistributionUri', { value: 'https://' + this.distribution.domainName })
-        new cdk.CfnOutput(this, 'DistributionId', { value: this.distribution.distributionId })
-        new cdk.CfnOutput(this, 'HostingBucket', { value: 's3://' + this.bucket.bucketName })
+        
     }
 
     backend() {
         let table = new dynamodb.Table(this, Config.appEnv() + '-pages', {
             partitionKey: { name: 'path', type: dynamodb.AttributeType.STRING }
         });
-        let apiFunction = new lambda.Function(this, Config.appEnv() + '-api', {
+        this.apiFunction = new lambda.Function(this, Config.appEnv() + '-api', {
             functionName: Config.appEnv() + '-api',
             code: lambda.Code.asset('../backend/'),
             runtime: lambda.Runtime.NODEJS_10_X,
@@ -72,12 +89,12 @@ export class ServerlessWikiStack extends cdk.Stack {
                 TABLE_NAME: table.tableName
             }
         });
-        table.grantReadWriteData(apiFunction);
+        table.grantReadWriteData(this.apiFunction);
         this.endpoint = new apigw.LambdaRestApi(this, Config.appEnv() + '-endpoint', {
-            handler: apiFunction
+            handler: this.apiFunction
         })
 
-        let userPool = new cognito.UserPool(this, Config.appEnv() + '-user-pool', {
+        this.userPool = new cognito.UserPool(this, Config.appEnv() + '-user-pool', {
             selfSignUpEnabled: true,
             userVerification: {
                 emailSubject: 'Verify your email for our awesome app!',
@@ -87,20 +104,17 @@ export class ServerlessWikiStack extends cdk.Stack {
             }
         });
 
-        let userPoolClient = new cognito.UserPoolClient(this, Config.appEnv() + 'user-pool-client', {
+        this.userPoolClient = new cognito.UserPoolClient(this, Config.appEnv() + 'user-pool-client', {
             userPoolClientName: Config.appEnv() + 'user-pool-client',
             authFlows: {
                 adminUserPassword: true,
                 refreshToken: true
             },
             generateSecret: false,
-            userPool: userPool
+            userPool: this.userPool
         })
 
-        new cdk.CfnOutput(this, 'UserPoolId', { value: userPool.userPoolId });
-        new cdk.CfnOutput(this, 'UserPoolClientId', { value: userPoolClient.userPoolClientId });
-        new cdk.CfnOutput(this, 'FunctionName', { value: apiFunction.functionName });
-        new cdk.CfnOutput(this, 'EndpointUrl', { value: this.endpoint.url });
+        
     }
 
 }

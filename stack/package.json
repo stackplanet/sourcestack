@@ -5,18 +5,19 @@
     "cdk-workshop": "bin/cdk-workshop.js"
   },
   "scripts": {
+    "deploy": "npm run update-stack && npm run publish-frontend && npm run publish-backend",
     "update-stack": "cdk deploy --require-approval=never --outputs-file $npm_config_app-$npm_config_env.out.json",
     "publish-frontend": "ts-node src/publish-frontend.ts",
     "publish-backend": "ts-node src/publish-backend.ts"
   },
   "devDependencies": {
     "@types/node": "8.10.45",
-    "aws-cdk": "^1.33.0",
-    "child_process": "^1.0.2",
     "ts-node": "^8.8.2",
     "typescript": "^3.8.3"
-  },
-  "dependencies": {
+},
+"dependencies": {
+    "aws-cdk": "^1.33.0",
+    "child_process": "^1.0.2",
     "@aws-cdk/aws-apigateway": "^1.33.0",
     "@aws-cdk/aws-cloudfront": "^1.33.0",
     "@aws-cdk/aws-codebuild": "^1.33.0",
