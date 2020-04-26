@@ -5,7 +5,7 @@
     "cdk-workshop": "bin/cdk-workshop.js"
   },
   "scripts": {
-    "stack": "cdk deploy --require-approval=never --outputs-file $npm_config_app-$npm_config_env.out.json",
+    "update-stack": "cdk deploy --require-approval=never --outputs-file $npm_config_app-$npm_config_env.out.json",
     "publish-frontend": "ts-node src/publish-frontend.ts",
     "publish-backend": "ts-node src/publish-backend.ts"
   },
@@ -30,6 +30,7 @@
     "@aws-cdk/aws-sns-subscriptions": "^1.33.0",
     "@aws-cdk/aws-sqs": "^1.33.0",
     "@aws-cdk/core": "^1.33.0",
+    "jwk-to-pem": "^2.0.3",
     "module": "^1.2.5"
   }
 }

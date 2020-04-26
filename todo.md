@@ -1,7 +1,6 @@
-The publish scripts in ./stack should compile and deploy the frontend/backend
-
-
-Should use environment vars to provide config to the lambda function, not json
+- The publish scripts in ./stack should compile and deploy the frontend/backend
+- Can I remove the lambda source code reference from the stack?
+- Run Config.ensureArgsSupplied before update-stack, perhaps as a separate "npm run check-args"
 
 - Add Cognito user pool
 - Add login pages

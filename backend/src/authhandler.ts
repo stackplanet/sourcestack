@@ -3,6 +3,7 @@ import * as jwt from 'jsonwebtoken';
 import * as AWS from 'aws-sdk';
 import { UserDetails } from './userdetails';
 import e = require('express');
+import { BackendConfig } from './backendconfig';
 
 declare global {
 
@@ -16,7 +17,7 @@ declare global {
 
 export namespace AuthHandler {
 
-    export function init(config: any, app: express.Express) {
+    export function init(config: BackendConfig, app: express.Express) {
 
         app.use((req: express.Request, res: express.Response, next: any) => {
             req.user = {};
@@ -50,8 +51,8 @@ export namespace AuthHandler {
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
                 let authResponse = await cognito.adminInitiateAuth({
-                    UserPoolId: config.userPoolId,
-                    ClientId: config.clientId,
+                    UserPoolId: config.UserPoolId,
+                    ClientId: config.UserPoolClientId,
                     AuthFlow: 'ADMIN_NO_SRP_AUTH',
                     AuthParameters: {
                         USERNAME: req.body.username,
@@ -76,7 +77,7 @@ export namespace AuthHandler {
 
     }
 
-    function getId(req: express.Request, config: any) {
+    function getId(req: express.Request, config: BackendConfig) {
         let token = req.cookies['auth_token'];
         if (!token) return null;
         let decoded = jwt.decode(token, { complete: true }) as any;
@@ -85,7 +86,7 @@ export namespace AuthHandler {
         let pem = config.kidToPems[kid];
         if (!pem) return null;
         try {
-            let issuer = `https://cognito-idp.eu-west-1.amazonaws.com/${config.userPoolId}`;
+            let issuer = `https://cognito-idp.eu-west-1.amazonaws.com/${config.UserPoolId}`;
             jwt.verify(token, pem, { issuer: issuer });
         }
         catch (err) {

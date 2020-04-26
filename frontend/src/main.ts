@@ -1,10 +1,10 @@
 import m from 'mithril';
 import { HomePage } from './pages/homepage';
-import { UiConfig } from './Config';
+import { FrontendConfig } from './frontendconfig';
 
 
-UiConfig.init().then(() => {
-    console.log('API endpoint is ' + UiConfig.instance.api);
+FrontendConfig.init().then(() => {
+    console.log('API endpoint is ' + FrontendConfig.instance.api);
 })
 
 

@@ -6,14 +6,13 @@ import { Config } from "./util/config";
     Config.ensureArgsSupplied();
     let cdkOut = require(`../${Config.appEnv()}.out.json`);
     let config = cdkOut[Config.appEnv()];
-    let hostingBucket = config.HostingBucket;
-    let distributionId = config.DistributionId;
-    let apiEndpoint = config.EndpointUrl;
     let frontendConfig = {
-        api: apiEndpoint
+        app: Config.app(),
+        env: Config.env(),
+        api: config.EndpointUrl
     }
-    writeFileSync('../frontend/dist/config.json', JSON.stringify(frontendConfig));
-    await execute(`aws s3 sync --delete ../frontend/dist ${hostingBucket}`);
-    await execute(`aws cloudfront create-invalidation --distribution-id ${distributionId} --paths "/*"`);
+    writeFileSync('../frontend/dist/frontend-config.json', JSON.stringify(frontendConfig, null, 2));
+    await execute(`aws s3 sync --delete ../frontend/dist ${config.HostingBucket}`);
+    await execute(`aws cloudfront create-invalidation --distribution-id ${config.DistributionId} --paths "/*"`);
     console.log('Published ' + Config.appEnv() + ' to ' + config.DistributionUri);
 })();
