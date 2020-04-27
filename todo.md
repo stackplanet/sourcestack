@@ -1,16 +1,22 @@
 
-ssh -T git@github.com
-ssh: connect to host github.com port 22: No route to host
 
-
-- rename req.user to req.jwtInfo or similar
+- add login pages
+- git issues
+    ssh -T git@github.com
+    ssh: connect to host github.com port 22: No route to host
 - Run Config.ensureArgsSupplied before update-stack, perhaps as a separate "npm run check-args"
-- Add login pages
+  - consider moving env and app into config file?
+- rename req.user to req.jwtInfo or similar
+- Caching on Cloudfront for API Gateway - what is the best practice?
+- Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
+
+# Post launch
 
 - https://aws.amazon.com/blogs/compute/building-better-apis-http-apis-now-generally-available/
   - Not GA in CDK yet, see https://github.com/aws/aws-cdk/issues/5301
-- Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
-- Caching on Cloudfront for API Gateway - what is the best practice?
+
+
+# Notes
 
 Keep the faith on the custom auth
     https://github.com/aws-amplify/amplify-js/issues/3436
