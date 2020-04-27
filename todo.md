@@ -1,4 +1,7 @@
 
+- running locally
+  - get the local backend config and frontend config in place
+- debugging locally
 
 - add login pages
 - git issues
@@ -9,6 +12,9 @@
 - rename req.user to req.jwtInfo or similar
 - Caching on Cloudfront for API Gateway - what is the best practice?
 - Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
+
+- document certificate thing: thisisunsafe
+  - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
 
 # Post launch
 

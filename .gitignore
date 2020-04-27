@@ -2,3 +2,9 @@
 stack/*.out.json
 node_modules
 .DS_Store
+backend/backend-config.json
+
+frontend/server.cert
+frontend/server.key
+
+backend/src/backend-config.json

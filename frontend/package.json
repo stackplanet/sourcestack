@@ -3,17 +3,22 @@
     "version": "1.0.0",
     "description": "Web App",
     "dependencies": {
+        "bulma": "^0.8.2",
         "mithril": "^2.0.4",
         "mithril-tsx-component": "^3.0.1"
     },
     "devDependencies": {
         "@types/mithril": "^2.0.0",
+        "@types/node": "^13.13.4",
         "parcel": "^1.12.4",
+        "parcel-bundler": "^1.12.4",
         "parcel-plugin-static-files-copy": "^2.2.1",
+        "parcel-proxy-server": "^1.1.0",
+        "sass": "^1.26.5",
         "typescript": "^3.6.3"
     },
     "scripts": {
-        "start": "parcel index.html",
+        "start": "ts-node src/devserver.ts",
         "build": "parcel build index.html"
     }
 }

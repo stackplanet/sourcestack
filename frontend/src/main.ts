@@ -6,7 +6,7 @@ import { LoadingPage } from './pages/LoadingPage';
 import { SplashPage } from './pages/SplashPage';
 import { SignInPage } from './pages/SignInPage';
 import { UserHomePage } from './pages/UserHomePage';
-
+import '../sass/mystyles.scss'
 
 (async () => {
     
