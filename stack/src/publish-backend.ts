@@ -1,25 +1,27 @@
 import { execute } from "./util/execute";
 import { writeFileSync } from "fs";
 import { Config } from "./util/config";
-import { StackOutput } from "./stackoutput";
+import { StackOutputs, fromStack } from "./stackoutputs";
 let jwkToPem = require('jwk-to-pem');
 
 (async () => {
     Config.ensureArgsSupplied();
-    let cdkOut = require(`../${Config.appEnv()}.out.json`);
-    let stackOutput = cdkOut[Config.appEnv()] as StackOutput;
+    let stackOutputs = await fromStack(Config.appEnv());
+    let userPoolId = stackOutputs.get(StackOutputs.UserPoolId);
+    const userPoolClientId = stackOutputs.get(StackOutputs.UserPoolClientId);
     let backendConfig = {
         app: Config.app(),
         env: Config.env(),
-        UserPoolId: stackOutput.UserPoolId,
-        UserPoolClientId: stackOutput.UserPoolClientId,
-        kidToPems: await getKidToPems(stackOutput.UserPoolId)
+        UserPoolId: userPoolId,
+        UserPoolClientId: userPoolClientId,
+        kidToPems: await getKidToPems(userPoolId as string)
     }
     await execute(`cd ../backend && npm run build`);
     writeFileSync('../backend/dist/backend-config.json', JSON.stringify(backendConfig, null, 2));
     await execute(`cd ../backend/dist && zip ../dist.zip *`);
-    await execute(`aws lambda --region eu-west-1 update-function-code --function-name ${stackOutput.FunctionName} --zip-file fileb://../backend/dist.zip`);
-    console.log('Published ' + stackOutput.FunctionName);
+    const functionName = stackOutputs.get(StackOutputs.FunctionName);
+    await execute(`aws lambda --region eu-west-1 update-function-code --function-name ${functionName} --zip-file fileb://../backend/dist.zip`);
+    console.log('Published ' + functionName);
 })();
 
 

@@ -1,7 +1,14 @@
 
 - running locally
-  - get the local backend config and frontend config in place
+    - Use get-stack-config in the publish scripts
+      - convert to StackConfig class
+        - getFromStack
+        - createBackendConfig
+    - Create a "use" script that populates the local config with a stack
+
 - debugging locally
+
+- Forgetting the = signs in "npm run update-stack --app=sunwiki --env=alpha" results in "true-true" being deployed!
 
 - add login pages
 - git issues
@@ -27,3 +34,15 @@
 Keep the faith on the custom auth
     https://github.com/aws-amplify/amplify-js/issues/3436
         "All cognito session tokens id, access and refresh tokens are being persisted into localstorage. This goes against all industry security best practice of storing sensitive infomation in signed httponly cookies."
+
+I like to understand what everything does and be able to change it
+
+Malleable stack
+    Can add extra infrastructure, e.g.
+        - WAF
+        - SNS
+        - Use aurora instead of dynamodb
+        - use HTTP api
+
+Future directions
+    - Look at SSR app

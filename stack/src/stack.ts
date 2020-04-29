@@ -8,7 +8,7 @@ import * as IAM from '@aws-cdk/aws-iam';
 import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
 import { VerificationEmailStyle } from '@aws-cdk/aws-cognito';
-import { StackOutput } from './stackoutput';
+import { StackOutputs } from './stackoutputs';
 
 export class ServerlessWikiStack extends cdk.Stack {
 
@@ -26,19 +26,6 @@ export class ServerlessWikiStack extends cdk.Stack {
         this.backend();
         this.frontend();
         this.outputs();
-    }
-
-    outputs() {
-        let output: StackOutput = {
-            DistributionUri: 'https://' + this.distribution.domainName,
-            DistributionId: this.distribution.distributionId,
-            HostingBucket: 's3://' + this.bucket.bucketName,
-            UserPoolId: this.userPool.userPoolId,
-            UserPoolClientId: this.userPoolClient.userPoolClientId,
-            FunctionName: this.apiFunction.functionName,
-            EndpointUrl: this.endpoint.url,
-        }
-        Object.keys(output).forEach((key) => new cdk.CfnOutput(this, key, { value: output[key as keyof StackOutput] }));
     }
 
     frontend() {
@@ -92,7 +79,7 @@ export class ServerlessWikiStack extends cdk.Stack {
         });
         this.apiFunction = new lambda.Function(this, Config.appEnv() + '-api', {
             functionName: Config.appEnv() + '-api',
-            code: lambda.Code.asset('../backend/'),
+            code: lambda.Code.asset('../backend/dist'),
             runtime: lambda.Runtime.NODEJS_10_X,
             handler: 'handler.handler',
             environment: {
@@ -124,7 +111,16 @@ export class ServerlessWikiStack extends cdk.Stack {
             userPool: this.userPool
         })
 
+    }
 
+    outputs() {
+        new cdk.CfnOutput(this, StackOutputs.DistributionUri, {value: 'https://' + this.distribution.domainName});
+        new cdk.CfnOutput(this, StackOutputs.DistributionId, {value: this.distribution.distributionId});
+        new cdk.CfnOutput(this, StackOutputs.HostingBucket, {value: 's3://' + this.bucket.bucketName});
+        new cdk.CfnOutput(this, StackOutputs.UserPoolId, {value: this.userPool.userPoolId});
+        new cdk.CfnOutput(this, StackOutputs.UserPoolClientId, {value: this.userPoolClient.userPoolClientId});
+        new cdk.CfnOutput(this, StackOutputs.FunctionName, {value: this.apiFunction.functionName});
+        new cdk.CfnOutput(this, StackOutputs.EndpointUrl, {value: this.endpoint.url});
     }
 
 }
