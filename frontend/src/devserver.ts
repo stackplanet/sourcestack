@@ -8,15 +8,13 @@ const server = new ParcelProxyServer({
     },
     proxies: {
         '/api': {
-            target: 'http://127.0.0.1:3000'
+            target: 'http://localhost:3000'
         }
     }
 });
 
-// server.bundler.on('buildEnd', () => {
-//     console.log('Build completed!');
-// });
+let port = 1234;
 
-server.listen(8080, () => {
-    console.log('Parcel proxy server has started');
+server.listen(port, () => {
+    console.log(`Server running on https://localhost:${port}`);
 });
