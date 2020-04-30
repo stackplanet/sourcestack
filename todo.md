@@ -1,3 +1,5 @@
+infra, frontend and backend
+
 
 - running locally
     - Use get-stack-config in the publish scripts
@@ -10,6 +12,7 @@
 
 - Forgetting the = signs in "npm run update-stack --app=sunwiki --env=alpha" results in "true-true" being deployed!
 
+- make scripts cross-platform
 - add login pages
 - git issues
     ssh -T git@github.com

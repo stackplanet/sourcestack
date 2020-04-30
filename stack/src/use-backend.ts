@@ -7,12 +7,8 @@ let jwkToPem = require('jwk-to-pem');
 (async () => {
     Config.ensureArgsSupplied();
     let stackOutputs = await getStackOutput(Config.appEnv());
-    await execute(`cd ../backend && npm run build`);
-    await writeBackendConfig('../backend/dist', stackOutputs);
-    await execute(`cd ../backend/dist && zip ../dist.zip *`);
-    const functionName = stackOutputs.get(StackOutput.FunctionName);
-    await execute(`aws lambda --region eu-west-1 update-function-code --function-name ${functionName} --zip-file fileb://../backend/dist.zip`);
-    console.log('Published ' + functionName);
+    await writeBackendConfig('../backend/', stackOutputs);
+    console.log('Local server configured to use backend ' + Config.appEnv() + '. Please restart the server.');
 })();
 
 
