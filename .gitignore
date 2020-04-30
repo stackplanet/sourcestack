@@ -1,5 +1,5 @@
 *.code-workspace
-stack/*.out.json
+infra/*.out.json
 node_modules
 .DS_Store
 backend/backend-config.json

@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "npm-run-all install-stack install-frontend install-backend",
-    "install-stack": "npm install --prefix=stack",
+    "postinstall": "npm-run-all install-infra install-frontend install-backend",
+    "install-infra": "npm install --prefix=infra",
     "install-frontend": "npm install --prefix=frontend",
     "install-backend": "npm install --prefix=backend",
     "start": "npm-run-all --parallel start-frontend start-backend",
@@ -14,11 +14,11 @@
     "build": "npm-run-all build-frontend build-backend",
     "build-frontend": "npm run build --prefix=frontend",
     "build-backend": "npm run build --prefix=backend",
-    "deploy": "npm-run-all deploy-stack deploy-frontend deploy-backend",
-    "deploy-frontend": "npm run deploy-frontend --prefix=stack",
-    "deploy-backend": "npm run deploy-backend --prefix=stack",
-    "deploy-stack": "npm run deploy-stack --prefix=stack",
-    "use-backend": "npm run use-backend --prefix=stack"
+    "deploy": "npm-run-all deploy-infra deploy-frontend deploy-backend",
+    "deploy-frontend": "npm run deploy-frontend --prefix=infra",
+    "deploy-backend": "npm run deploy-backend --prefix=infra",
+    "deploy-infra": "npm run deploy-infra --prefix=infra",
+    "use-backend": "npm run use-backend --prefix=infra"
   },
   "repository": {
     "type": "git",

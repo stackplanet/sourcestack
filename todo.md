@@ -1,5 +1,3 @@
-infra, frontend and backend
-
 - Forgetting the = signs in "npm run update-stack --app=sunwiki --env=alpha" results in "true-true" being deployed!
 
 - make scripts cross-platform

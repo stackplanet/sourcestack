@@ -2,7 +2,7 @@
   "name": "cdk-workshop",
   "version": "0.1.0",
   "scripts": {
-    "deploy-stack": "cdk deploy --require-approval=never",
+    "deploy-infra": "cdk deploy --require-approval=never",
     "deploy-frontend": "ts-node src/publish-frontend.ts",
     "deploy-backend": "ts-node src/publish-backend.ts",
     "use-backend": "ts-node src/use-backend.ts"
