@@ -1,5 +1,4 @@
 import { execute } from "./util/execute";
-import { writeFileSync } from "fs";
 import { Config } from "./util/config";
 import { StackOutput, getStackOutput } from "./stackoutput";
 

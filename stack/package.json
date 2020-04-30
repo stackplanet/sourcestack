@@ -1,14 +1,10 @@
 {
   "name": "cdk-workshop",
   "version": "0.1.0",
-  "bin": {
-    "cdk-workshop": "bin/cdk-workshop.js"
-  },
   "scripts": {
-    "deploy": "npm run update-stack && npm run publish-frontend && npm run publish-backend",
-    "update-stack": "(cd ../backend && npm run build) && cdk deploy --require-approval=never",
-    "publish-frontend": "(cd ../frontend && npm run build) && ts-node src/publish-frontend.ts",
-    "publish-backend": "(cd ../backend && npm run build) && ts-node src/publish-backend.ts",
+    "deploy-stack": "cdk deploy --require-approval=never",
+    "deploy-frontend": "ts-node src/publish-frontend.ts",
+    "deploy-backend": "ts-node src/publish-backend.ts",
     "use-backend": "ts-node src/use-backend.ts"
   },
   "devDependencies": {

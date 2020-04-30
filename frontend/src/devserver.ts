@@ -16,5 +16,5 @@ const server = new ParcelProxyServer({
 let port = 1234;
 
 server.listen(port, () => {
-    console.log(`Server running on https://localhost:${port}`);
+    console.log(`Frontend server running on https://localhost:${port}`);
 });

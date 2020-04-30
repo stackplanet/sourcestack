@@ -1,15 +1,5 @@
 infra, frontend and backend
 
-
-- running locally
-    - Use get-stack-config in the publish scripts
-      - convert to StackConfig class
-        - getFromStack
-        - createBackendConfig
-    - Create a "use" script that populates the local config with a stack
-
-- debugging locally
-
 - Forgetting the = signs in "npm run update-stack --app=sunwiki --env=alpha" results in "true-true" being deployed!
 
 - make scripts cross-platform
