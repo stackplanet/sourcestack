@@ -29,8 +29,8 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
 
     frontend() {
-
         this.bucket = new S3.Bucket(this, Config.appEnv() + '-hosting-bucket', {
+            bucketName: Config.appEnv() + '-hosting-bucket',
             websiteIndexDocument: 'index.html',
             websiteErrorDocument: 'index.html',
             removalPolicy: cdk.RemovalPolicy.DESTROY,
@@ -45,7 +45,6 @@ export class ServerlessWikiStack extends cdk.Stack {
                 behaviors: [{ isDefaultBehavior: true }],
             }, {
                 customOriginSource: {
-                    // domainName: this.endpoint.domainName?.domainName as string,
                     domainName: `${this.endpoint.restApiId}.execute-api.${this.region}.${this.urlSuffix}`
                 },
                 originPath: `/${this.endpoint.deploymentStage.stageName}`,
@@ -75,6 +74,7 @@ export class ServerlessWikiStack extends cdk.Stack {
 
     backend() {
         let table = new dynamodb.Table(this, Config.appEnv() + '-pages', {
+            tableName: Config.appEnv() + '-pages',
             partitionKey: { name: 'path', type: dynamodb.AttributeType.STRING }
         });
         this.apiFunction = new lambda.Function(this, Config.appEnv() + '-api', {
@@ -88,10 +88,12 @@ export class ServerlessWikiStack extends cdk.Stack {
         });
         table.grantReadWriteData(this.apiFunction);
         this.endpoint = new apigw.LambdaRestApi(this, Config.appEnv() + '-endpoint', {
+            restApiName: Config.appEnv() + '-endpoint',
             handler: this.apiFunction
         })
 
         this.userPool = new cognito.UserPool(this, Config.appEnv() + '-user-pool', {
+            userPoolName: Config.appEnv() + '-userpool',
             selfSignUpEnabled: true,
             userVerification: {
                 emailSubject: 'Verify your email for our awesome app!',
