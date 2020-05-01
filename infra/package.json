@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "deploy-infra": "cdk deploy --require-approval=never",
-    "deploy-frontend": "ts-node src/publish-frontend.ts",
-    "deploy-backend": "ts-node src/publish-backend.ts",
+    "deploy-frontend": "ts-node src/deploy-frontend.ts",
+    "deploy-backend": "ts-node src/deploy-backend.ts",
     "use-backend": "ts-node src/use-backend.ts"
   },
   "devDependencies": {
