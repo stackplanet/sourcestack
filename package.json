@@ -1,15 +1,14 @@
 {
-  "name": "serverless-wiki-cdk",
-  "version": "1.0.0",
+  "name": "stak",
+  "version": "0.0.1",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "postinstall": "npm-run-all install-infra install-frontend install-backend",
     "install-infra": "npm install --prefix=infra",
     "install-frontend": "npm install --prefix=frontend",
     "install-backend": "npm install --prefix=backend",
     "start": "npm-run-all --parallel start-frontend start-backend",
-    "start-frontend": "npm run start --prefix=frontend", 
+    "start-frontend": "npm run start --prefix=frontend",
     "start-backend": "npm run start --prefix=backend",
     "build": "npm-run-all build-frontend build-backend",
     "build-frontend": "npm run build --prefix=frontend",
@@ -22,14 +21,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/martinpllu/serverless-wiki-cdk.git"
+    "url": "git+https://github.com/martinpllu/stak.git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/martinpllu/serverless-wiki-cdk/issues"
-  },
-  "homepage": "https://github.com/martinpllu/serverless-wiki-cdk#readme",
   "devDependencies": {
     "npm-run-all": "^4.1.5"
   }
