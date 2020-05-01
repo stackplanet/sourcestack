@@ -7,7 +7,6 @@ let jwkToPem = require('jwk-to-pem');
 (async () => {
     Config.ensureArgsSupplied();
     let stackOutputs = await getStackOutput(Config.appEnv());
-    await execute(`cd ../backend && npm run build`);
     await writeBackendConfig('../backend/dist', stackOutputs);
     await execute(`cd ../backend/dist && zip ../dist.zip *`);
     const functionName = stackOutputs.get(StackOutput.FunctionName);

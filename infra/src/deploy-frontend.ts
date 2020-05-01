@@ -8,7 +8,6 @@ import { StackOutput, getStackOutput } from "./stackoutput";
     let hostingBucket = stackOutputs.get(StackOutput.HostingBucket);
     let distributionId = stackOutputs.get(StackOutput.DistributionId);
     let distributionUri = stackOutputs.get(StackOutput.DistributionUri);
-    await execute(`cd ../frontend && npm run build`);
     await execute(`aws s3 sync --delete ../frontend/dist ${hostingBucket}`);
     await execute(`aws cloudfront create-invalidation --distribution-id ${distributionId} --paths "/*"`);
     console.log('Published ' + Config.appEnv() + ' to ' + distributionUri);
