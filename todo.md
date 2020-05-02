@@ -1,20 +1,19 @@
 - End to end create todo        
 
-- Forgetting the = signs in "npm run update-stack --app=sunwiki --env=alpha" results in "true-true" being deployed!
-
 - make scripts cross-platform
 - add login pages
 - git issues
     ssh -T git@github.com
     ssh: connect to host github.com port 22: No route to host
-- Run Config.ensureArgsSupplied before update-stack, perhaps as a separate "npm run check-args"
-  - consider moving env and app into config file?
 - rename req.user to req.jwtInfo or similar
 - Caching on Cloudfront for API Gateway - what is the best practice?
 - Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
 
 - document certificate thing: thisisunsafe
   - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
+
+
+- Warning if deploying a new environment
 
 # Post launch
 
