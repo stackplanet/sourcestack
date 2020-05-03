@@ -16,7 +16,8 @@ export function configureApp() {
     AuthHandler.init(BackendConfig.instance, app);
 
     app.get('/api/ping', async (req, res) => {
-        res.send('pong');
+        console.log('ping')
+        res.send('pongo');
     });
 
     app.get('/api/private/ping', async (req, res) => {

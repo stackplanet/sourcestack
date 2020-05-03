@@ -62,6 +62,6 @@
     "jsx": "react",
     "jsxFactory": "m"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "postcss.config.js"],
   "exclude": ["node_modules"]
 }

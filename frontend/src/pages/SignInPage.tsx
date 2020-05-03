@@ -8,52 +8,47 @@ export class SignInPage {
     username: string = '';
     password: string = '';
 
+    oncreate(){
+        document.getElementById('username').focus();
+    }
+
     view() {
+        let complete = this.complete();
         return <Page hideNavbar={true}>
-            <div class="container">
-            <div class="columns centerall">
-                <div class="column"></div>
-                <div class="column" {...bind(this)}>
-                    <h1 class="is-size-3 has-text-centered">Sign in</h1>
-                    <div class="field">
-                        <label class="label">Username</label>
-                        <div class="control">
-                            <input class="input" type="text" placeholder="Username" id="username" value={this.username} autofocus={true}></input>
+            <div class="flex justify-center">
+                <div class="w-full max-w-md pt-8">
+                    <h1 class="text-center text-2xl">Log in to staklist</h1>
+                    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" {...bind(this)}>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
                         </div>
-                    </div>
-                    <div class="field">
-                        <label class="label">Password</label>
-                        <div class="control">
-                            <input class="input" type="password" placeholder="Password" id="password" value={this.password} />
-                            
+                        <div class="mb-6">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+                            <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" onkeyup={() => {console.log('key')}}/>
+                            {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
                         </div>
-                    </div>
-                    
-                    <div class="field has-padding-top-10">
-                        <a class="button is-primary is-fullwidth" onclick={() => this.login()}>Sign in</a>
-                    </div>
-                    <div class="level has-padding-top-10">
-                        <div class="level-item has-text-centered">
-                            <a href="#">Forgot password?</a>
+                        <div class="flex items-center justify-between">
+                            <button disabled={!complete} class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline " type="button" onclick={() => this.login()}>
+                                Sign In
+                            </button>
+                            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                                Forgot Password?
+                            </a>
                         </div>
-                        
-                        <div class="level-item has-text-centered">
-                            <a href="#">Sign up</a>
-                        </div>
-                    </div>
-                    {AuthClient.user.loginError && <article class="message is-danger">
-                        <div class="message-body">
-                            {AuthClient.user.loginError}
-                        </div>    
-                    </article>}
+                    </form>
+
                 </div>
-                <div class="column"></div>
-            </div>
             </div>
         </Page>
     }
 
     async login() {
         await AuthClient.login(this.username, this.password);
+        // alert('Logging in with ' + this.username + ' ' + this.password)
+    }
+
+    complete() {
+        return this.username !== '' && this.password !== ''
     }
 }

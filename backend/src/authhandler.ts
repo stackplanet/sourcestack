@@ -48,6 +48,7 @@ export namespace AuthHandler {
         });
     
         app.post('/api/login', async (req, res) => {
+            console.log('Sigining ibn')
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
                 let authResponse = await cognito.adminInitiateAuth({

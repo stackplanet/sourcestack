@@ -1,4 +1,6 @@
-h1 {
-    color: red;
-    font-family: cursive;
-}
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
