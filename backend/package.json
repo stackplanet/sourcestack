@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build src/handler.ts --target=node --global handler -o handler.js --bundle-node-modules --no-source-maps",
-    "start": "ts-node src/devserver.ts"
+    "start": "ts-node-dev src/devserver.ts"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +28,7 @@
     "parcel": "^1.12.4",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-externals": "^0.4.0",
+    "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   },
   "externals": [

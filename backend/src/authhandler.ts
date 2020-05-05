@@ -48,7 +48,7 @@ export namespace AuthHandler {
         });
     
         app.post('/api/login', async (req, res) => {
-            console.log('Sigining ibn')
+            console.log('Signing in')
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
                 let authResponse = await cognito.adminInitiateAuth({
@@ -61,8 +61,8 @@ export namespace AuthHandler {
                     }
                 }).promise();
                 if (authResponse.AuthenticationResult === undefined){
-                    console.error('Invalid Cognito response');
                     res.status(500);
+                    res.send(<UserDetails>{loginError:'Invalid Cognito response ' + JSON.stringify(authResponse)});
                 }
                 else {
                     res.cookie('auth_token', authResponse.AuthenticationResult.AccessToken);

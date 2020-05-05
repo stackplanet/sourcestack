@@ -8,7 +8,7 @@ let jwkToPem = require('jwk-to-pem');
     Config.ensureArgsSupplied();
     console.log('Using backend ' + Config.appEnv())
     let stackOutputs = await getStackOutput(Config.appEnv());
-    await writeBackendConfig('../backend/', stackOutputs);
+    await writeBackendConfig('../backend/src', stackOutputs);
     console.log('Local server configured to use backend ' + Config.appEnv() + '. Please restart the server.');
 })();
 
