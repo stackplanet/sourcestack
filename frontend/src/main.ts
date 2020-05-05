@@ -1,22 +1,22 @@
 import m from 'mithril';
 import { HomePage } from './pages/homepage';
 import { FrontendConfig } from './frontendconfig';
-import { AuthClient } from './AuthClient';
-import { LoadingPage } from './pages/LoadingPage';
-import { SplashPage } from './pages/SplashPage';
-import { SignInPage } from './pages/SignInPage';
-import { UserHomePage } from './pages/UserHomePage';
+import { AuthClient } from './authclient';
+import { LoadingPage } from './pages/loadingpage';
+import { SplashPage } from './pages/splashpage';
+import { LoginPage } from './pages/loginpage';
+import { UserHomePage } from './pages/userhomepage';
 import './css/main.css';
 
 (async () => {
     
     await AuthClient.init();
 
-    m.route.set('/signin');
+    m.route.set('/login');
     m.route(document.body, '/splash', {
         '/loading': LoadingPage,
         '/splash': SplashPage,
-        '/signin': SignInPage,
+        '/login': LoginPage,
         '/home': UserHomePage,
     });
 

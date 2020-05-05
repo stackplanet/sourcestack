@@ -1,9 +1,9 @@
 import m from 'mithril';
-import { bind } from '../UiUtils';
-import { Page } from './Page';
-import { AuthClient } from '../AuthClient';
+import { bind } from '../uiutils';
+import { Page } from './page';
+import { AuthClient } from '../authclient';
 
-export class SignInPage {
+export class LoginPage {
 
     username: string = '';
     password: string = '';
