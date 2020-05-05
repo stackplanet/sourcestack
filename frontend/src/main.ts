@@ -20,11 +20,11 @@ import './css/main.css';
         '/home': UserHomePage,
     });
 
-    // if (AuthClient.user.userId){
-    //     m.route.set('/home');
-    // }
-    // else {
-    //     m.route.set('/splash');
-    // }
+    if (AuthClient.user.userId){
+        m.route.set('/home');
+    }
+    else {
+        m.route.set('/splash');
+    }
 
 })();

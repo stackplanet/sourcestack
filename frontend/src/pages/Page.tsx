@@ -11,7 +11,7 @@ class IAttrs {
 export class Page extends MithrilTsxComponent<IAttrs>{
 
     view(vnode: Vnode<any>) {
-        return <div>
+        return <div class="bg-gray-100 h-screen">
             {!vnode.attrs.hideNavbar && <Navbar />}
             <div>
                 {vnode.children}
