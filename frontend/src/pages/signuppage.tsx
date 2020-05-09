@@ -43,6 +43,8 @@ export class SignUpPage {
 
     async login() {
         await AuthClient.signup(this.email, this.password);
+        m.redraw();
+        
     }
 
     complete() {

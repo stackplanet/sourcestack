@@ -131,7 +131,7 @@ export namespace AuthHandler {
                 
             } catch (e){
                 console.log('Signup error', e)
-                res.status(400);
+                res.status(200);
                 res.send(<UserDetails>{loginError:e.message});
             }
         });

@@ -55,7 +55,7 @@ export class AuthClient {
             }
 
         });
-        m.route.set('/checkemail');
+        // m.route.set('/checkemail');
         m.redraw();
     }
 
