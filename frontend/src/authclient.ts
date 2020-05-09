@@ -21,6 +21,17 @@ export class AuthClient {
         m.route.set('/splash');
     }
 
+    static async forgotPassword(username: string){
+        await m.request({
+            url: '/api/forgotpassword',
+            method: 'POST',
+            body: {
+                username: username
+            }
+        });
+        AuthClient.user = {};
+    }
+
     static async login(username: string, password: string) {
         AuthClient.user = await m.request({
             url: 'api/login',
@@ -29,9 +40,26 @@ export class AuthClient {
                 username: username, password: password
             }
 
-        })
+        });
+
         m.route.set('/home');
         m.redraw();
     }
+
+    static async signup(username: string, password: string) {
+        AuthClient.user = await m.request({
+            url: 'api/signup',
+            method: 'POST',
+            body: {
+                username: username, password: password
+            }
+
+        });
+        m.route.set('/checkemail');
+        m.redraw();
+    }
+
+
+    
 
 }

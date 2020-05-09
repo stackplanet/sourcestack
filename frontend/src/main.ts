@@ -7,6 +7,9 @@ import { SplashPage } from './pages/splashpage';
 import { LoginPage } from './pages/loginpage';
 import { UserHomePage } from './pages/userhomepage';
 import './css/main.css';
+import { ForgotPasswordPage } from './pages/forgotpasswordpage';
+import { SignUpPage } from './pages/signuppage';
+import { CheckEmailPage } from './pages/checkemail';
 
 (async () => {
     
@@ -18,13 +21,16 @@ import './css/main.css';
         '/splash': SplashPage,
         '/login': LoginPage,
         '/home': UserHomePage,
+        '/forgotpassword': ForgotPasswordPage,
+        '/signup': SignUpPage,
+        '/checkemail': CheckEmailPage,
     });
 
-    if (AuthClient.user.userId){
-        m.route.set('/home');
-    }
-    else {
-        m.route.set('/splash');
-    }
+    // if (AuthClient.user.userId){
+    //     m.route.set('/home');
+    // }
+    // else {
+    //     m.route.set('/splash');
+    // }
 
 })();

@@ -7,7 +7,7 @@ import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
 import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
-import { VerificationEmailStyle } from '@aws-cdk/aws-cognito';
+import { VerificationEmailStyle, OAuthScope } from '@aws-cdk/aws-cognito';
 import { StackOutput } from './stackoutput';
 
 export class ServerlessWikiStack extends cdk.Stack {
@@ -91,15 +91,22 @@ export class ServerlessWikiStack extends cdk.Stack {
             restApiName: Config.appEnv() + '-endpoint',
             handler: this.apiFunction
         })
-
         this.userPool = new cognito.UserPool(this, Config.appEnv() + '-user-pool', {
             userPoolName: Config.appEnv() + '-userpool',
             selfSignUpEnabled: true,
+            signInAliases: {
+                email: true
+            },
+            autoVerify: {
+                email: true
+            },
+            // requiredAttributes: {
+            //     email: true
+            // },
             userVerification: {
                 emailSubject: 'Verify your email for our awesome app!',
-                emailBody: 'Hello {username}, Thanks for signing up to our awesome app! Your verification code is {####}',
-                emailStyle: VerificationEmailStyle.CODE,
-                smsMessage: 'Hello {username}, Thanks for signing up to our awesome app! Your verification code is {####}',
+                emailBody: 'Hello, thanks for signing up to our awesome app! {##Verify Email##}',
+                emailStyle: VerificationEmailStyle.LINK,
             }
         });
 
@@ -110,8 +117,27 @@ export class ServerlessWikiStack extends cdk.Stack {
                 refreshToken: true
             },
             generateSecret: false,
-            userPool: this.userPool
+            userPool: this.userPool,
+            oAuth: {
+                flows: {
+                    authorizationCodeGrant: true,
+                    implicitCodeGrant: true
+                },
+                scopes: [OAuthScope.OPENID, OAuthScope.COGNITO_ADMIN],
+                callbackUrls: ['https://localhost:1234']
+            }
         })
+
+        const cfnUserPoolClient = this.userPoolClient.node.defaultChild as cognito.CfnUserPoolClient;
+        cfnUserPoolClient.supportedIdentityProviders = ['COGNITO'];
+
+        new cognito.UserPoolDomain(this, Config.appEnv() + '-user-pool-domain', {
+            userPool: this.userPool,
+            cognitoDomain: {
+                domainPrefix: Config.appEnv()
+
+            }
+        });
 
     }
 
