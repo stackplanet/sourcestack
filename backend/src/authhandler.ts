@@ -94,17 +94,7 @@ export namespace AuthHandler {
         });
 
         app.post('/api/signup', async (req, res) => {
-
             let cognito = new AWS.CognitoIdentityServiceProvider();
-            console.log('Getting users')
-            try {
-                let users = await cognito.listUsers({
-                    UserPoolId: config.UserPoolId
-                }).promise();
-                console.log('SIGN UP!! ', users)
-            } catch (e){
-                console.log('OOPS', e)
-            }
             try {
                 let username = req.body.username;
                 let response = await cognito.adminCreateUser({
@@ -123,23 +113,21 @@ export namespace AuthHandler {
                         }
                     ],
                 }).promise();
-                console.log('Signup response', response)
+                // console.log('Signup response', response)
                 if (response.$response.httpResponse.statusCode !== 200){
                     res.status(500);
-                    // res.send(<UserDetails>{loginError:'Invalid Cognito response ' + JSON.stringify(response)});
+                    res.send(<UserDetails>{loginError:'Invalid Cognito response for create user' + JSON.stringify(response)});
                 }
-                let setPasswordResponse = await cognito.adminSetUserPassword({
+                response = await cognito.adminSetUserPassword({
                     UserPoolId: config.UserPoolId,
                     Username: username,
                     Password: req.body.password,
                     Permanent: true
                 }).promise();
-                console.log('Set password response', setPasswordResponse);
-                // await cognito.adminConfirmSignUp({
-                //     UserPoolId: config.UserPoolId,
-                //     Username: username
-                // }).promise();
-
+                if (response.$response.httpResponse.statusCode !== 200){
+                    res.status(500);
+                    res.send(<UserDetails>{loginError:'Invalid Cognito response for set user password' + JSON.stringify(response)});
+                }
                 
             } catch (e){
                 console.log('Signup error', e)
