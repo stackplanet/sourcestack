@@ -46,9 +46,9 @@ export namespace AuthHandler {
 
     export function init(config: BackendConfig, app: express.Express) {
 
-        app.use((req: express.Request, res: express.Response, next: any) => {
+        app.use(async (req: express.Request, res: express.Response, next: any) => {
             req.user = {};
-            const userId = getId(req, config);
+            const userId = await getId(req, config);
             if (userId) {
                 req.user.userId = userId;
             }
@@ -64,7 +64,7 @@ export namespace AuthHandler {
         });
 
         app.get('/api/user', async (req, res) => {
-            const userId = getId(req, config);
+            const userId = await getId(req, config);
             res.send({userId: userId} || {});
         });
 
@@ -139,7 +139,7 @@ export namespace AuthHandler {
 
     }
 
-    function getId(req: express.Request, config: BackendConfig) {
+    async function getId(req: express.Request, config: BackendConfig) {
         let token = req.cookies['auth_token'];
         if (!token) return null;
         let decoded = jwt.decode(token, { complete: true }) as any;
@@ -160,13 +160,12 @@ export namespace AuthHandler {
             return null;
         }
         let username = decoded['payload'].username;
-        return username;
-        // let cognito = new AWS.CognitoIdentityServiceProvider();
-        // let user = await cognito.adminGetUser({
-        //     UserPoolId: config.UserPoolId,
-        //     Username: username
-        // }).promise();
-        // return user.UserAttributes?.find((s) => {s.Name == 'email'})?.Value;
+        let cognito = new AWS.CognitoIdentityServiceProvider();
+        let user = await cognito.adminGetUser({
+            UserPoolId: config.UserPoolId,
+            Username: username
+        }).promise();
+        return user.UserAttributes?.find((s) => {return s.Name == 'email'})?.Value;
     }
 
 
