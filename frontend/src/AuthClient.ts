@@ -55,11 +55,23 @@ export class AuthClient {
             }
 
         });
+        console.log('signup', AuthClient.user)
         // m.route.set('/checkemail');
         m.redraw();
     }
 
+    static async confirmEmail(username: string, code: string) {
+        AuthClient.user = await m.request({
+            url: 'api/confirmemail',
+            method: 'POST',
+            body: {
+                username: username, code: code
+            }
 
+        });
+        // m.route.set('/checkemail');
+        m.redraw();
+    }
     
 
 }

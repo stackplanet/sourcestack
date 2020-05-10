@@ -10,6 +10,7 @@ import './css/main.css';
 import { ForgotPasswordPage } from './pages/forgotpasswordpage';
 import { SignUpPage } from './pages/signuppage';
 import { CheckEmailPage } from './pages/checkemail';
+import { EnterCodePage } from './pages/entercodepage';
 
 (async () => {
     
@@ -24,6 +25,7 @@ import { CheckEmailPage } from './pages/checkemail';
         '/forgotpassword': ForgotPasswordPage,
         '/signup': SignUpPage,
         '/checkemail': CheckEmailPage,
+        '/entercode': EnterCodePage,
     });
 
     // if (AuthClient.user.userId){

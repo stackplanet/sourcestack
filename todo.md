@@ -1,4 +1,8 @@
+- change username to email and userId to email
+
 - End to end create todo        
+
+
 
 - make scripts cross-platform
 - add login pages
@@ -26,6 +30,12 @@
 Keep the faith on the custom auth
     https://github.com/aws-amplify/amplify-js/issues/3436
         "All cognito session tokens id, access and refresh tokens are being persisted into localstorage. This goes against all industry security best practice of storing sensitive infomation in signed httponly cookies."
+
+    Lots and lots of noise about amplify using localstorage - keep on implementing this!
+
+    Any use of the Amplify client-side auth will result in using localstorage
+
+
 
 I like to understand what everything does and be able to change it
 
