@@ -7,7 +7,7 @@ export default class Navbar {
         return <nav>
           <div class="container mx-auto px-6 py-2 flex justify-between items-center">
             <a class="font-bold text-2xl lg:text-4xl" href="#">
-              staklist
+              staklist!!
             </a>
             <div class="block lg:hidden">
               <button class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-gray-500 appearance-none focus:outline-none">
@@ -18,10 +18,18 @@ export default class Navbar {
               </button>
             </div>
             <div class="hidden lg:block">
-              <ul class="inline-flex">
-                <li><a class="px-4 font-bold" href="#!/login">Log in</a></li>
-                <li><a class="px-4 hover:text-gray-800" href="#">Register</a></li>
-              </ul>
+                {AuthClient.user.userId ?
+                    <ul class="inline-flex">
+                        <li>{AuthClient.user.userId}</li>
+                        <li><a class="px-4 hover:text-gray-800" href="#" onclick={this.logout}>Log out</a></li>
+                    </ul>
+                :
+                    <ul class="inline-flex">
+                        
+                        <li><a class="px-4 font-bold" href="#!/login">Log in</a></li>
+                        <li><a class="px-4 hover:text-gray-800" href="#!/signup">Register</a></li>
+                    </ul>
+                }
             </div>
           </div>
         </nav>
@@ -84,6 +92,11 @@ export default class Navbar {
         //         </div>
         //     </div>
         // </nav>
+    }
+
+    async logout(){
+        await AuthClient.logout();
+        m.route.set('/splash');
     }
 
 }

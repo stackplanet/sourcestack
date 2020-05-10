@@ -9,7 +9,6 @@ export class AuthClient {
         AuthClient.user = await m.request({
             url: '/api/user'
         });
-        console.log(AuthClient.user)
     }
 
     static async logout(){
@@ -18,7 +17,6 @@ export class AuthClient {
             method: 'POST'
         })
         AuthClient.user = {};
-        m.route.set('/splash');
     }
 
     static async forgotPassword(username: string){
@@ -41,9 +39,6 @@ export class AuthClient {
             }
 
         });
-
-        m.route.set('/home');
-        m.redraw();
     }
 
     static async signup(username: string, password: string) {
@@ -55,9 +50,7 @@ export class AuthClient {
             }
 
         });
-        console.log('signup', AuthClient.user)
-        // m.route.set('/checkemail');
-        m.redraw();
+        AuthClient.user.password = password; // Needed at the confirmEmail stage, to log the user in
     }
 
     static async confirmEmail(username: string, code: string) {
@@ -65,12 +58,9 @@ export class AuthClient {
             url: 'api/confirmemail',
             method: 'POST',
             body: {
-                username: username, code: code
+                username: username, password: AuthClient.user.password, code: code
             }
-
         });
-        // m.route.set('/checkemail');
-        m.redraw();
     }
     
 

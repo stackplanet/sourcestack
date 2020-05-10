@@ -17,6 +17,33 @@ declare global {
 
 export namespace AuthHandler {
 
+    async function login(req: express.Request, res: express.Response, config: BackendConfig){
+        let cognito = new AWS.CognitoIdentityServiceProvider();
+            try {
+                let authResponse = await cognito.adminInitiateAuth({
+                    UserPoolId: config.UserPoolId,
+                    ClientId: config.UserPoolClientId,
+                    AuthFlow: 'ADMIN_NO_SRP_AUTH',
+                    AuthParameters: {
+                        USERNAME: req.body.username,
+                        PASSWORD: req.body.password
+                    }
+                }).promise();
+                if (authResponse.AuthenticationResult === undefined){
+                    res.status(500);
+                    res.send(<UserDetails>{loginError:'Invalid Cognito response from initiate auth: ' + JSON.stringify(authResponse)});
+                }
+                else {
+                    res.cookie('auth_token', authResponse.AuthenticationResult.AccessToken);
+                    res.cookie('refresh_token', authResponse.AuthenticationResult.RefreshToken);
+                    res.send(<UserDetails>{userId: req.body.username});
+                }
+
+            } catch (e){
+                res.send(<UserDetails>{loginError:e.message});
+            }
+    }
+
     export function init(config: BackendConfig, app: express.Express) {
 
         app.use((req: express.Request, res: express.Response, next: any) => {
@@ -48,32 +75,7 @@ export namespace AuthHandler {
         });
     
         app.post('/api/login', async (req, res) => {
-            console.log('Signing in')
-            let cognito = new AWS.CognitoIdentityServiceProvider();
-            try {
-                let authResponse = await cognito.adminInitiateAuth({
-                    UserPoolId: config.UserPoolId,
-                    ClientId: config.UserPoolClientId,
-                    AuthFlow: 'ADMIN_NO_SRP_AUTH',
-                    AuthParameters: {
-                        USERNAME: req.body.username,
-                        PASSWORD: req.body.password
-                    }
-                }).promise();
-                if (authResponse.AuthenticationResult === undefined){
-                    res.status(500);
-                    // res.send(<UserDetails>{loginError:'Invalid Cognito response ' + JSON.stringify(authResponse)});
-                }
-                else {
-                    res.cookie('auth_token', authResponse.AuthenticationResult.AccessToken);
-                    res.cookie('refresh_token', authResponse.AuthenticationResult.RefreshToken);
-                    res.send(<UserDetails>{userId: req.body.username});
-                }
-
-            } catch (e){
-                res.status(400);
-                res.send(<UserDetails>{loginError:e.message});
-            }
+            login(req, res, config);
         });
 
         app.post('/api/forgotpassword', async (req, res) => {
@@ -85,7 +87,7 @@ export namespace AuthHandler {
                 }).promise();
                 if (response.$response.httpResponse.statusCode !== 200){
                     res.status(500);
-                    // res.send(<UserDetails>{loginError:'Invalid Cognito response ' + JSON.stringify(response)});
+                    res.send(<UserDetails>{loginError:'Invalid Cognito response from reset password: ' + JSON.stringify(response)});
                 }
             } catch (e){
                 res.status(400);
@@ -106,49 +108,10 @@ export namespace AuthHandler {
                     res.status(500);
                     res.send(<UserDetails>{loginError:'Invalid Cognito response for signup' + JSON.stringify(response)});
                 }
-                console.log('signup OK')
                 res.status(200);
                 res.send(<UserDetails>{userId: username});
-                // let response = await cognito.adminCreateUser({
-                //     UserPoolId: config.UserPoolId,
-                //     Username: username,
-                //     TemporaryPassword: req.body.password,
-                //     // MessageAction: 'SUPPRESS',
-                //     UserAttributes: [
-                //         {
-                //             Name: 'email', 
-                //             Value: req.body.username
-                //         },
-                //         {
-                //             Name: 'name', /* required */
-                //             Value: username
-                //         }
-                //     ],
-                // }).promise();
-                // console.log('Signup response', response)
-                // if (response.$response.httpResponse.statusCode !== 200){
-                //     res.status(500);
-                //     res.send(<UserDetails>{loginError:'Invalid Cognito response for create user' + JSON.stringify(response)});
-                // }
-                // let code = "";
-                // cognito.confirmSignUp({
-                //     Username: username,
-                //     ConfirmationCode: code,
-                //     ClientId: config.UserPoolClientId
-                // })
-                // response = await cognito.adminSetUserPassword({
-                //     UserPoolId: config.UserPoolId,
-                //     Username: username,
-                //     Password: req.body.password,
-                //     Permanent: true
-                // }).promise();
-                // if (response.$response.httpResponse.statusCode !== 200){
-                //     res.status(500);
-                //     res.send(<UserDetails>{loginError:'Invalid Cognito response for set user password' + JSON.stringify(response)});
-                // }
                 
             } catch (e){
-                console.log('Signup error!!!    ', e)
                 res.status(200);
                 res.send(<UserDetails>{loginError:e.message});
             }
@@ -167,22 +130,14 @@ export namespace AuthHandler {
                     res.status(500);
                     res.send(<UserDetails>{loginError:'Invalid Cognito response for confirm code' + JSON.stringify(response)});
                 }
-                res.status(200);
-                res.send(<UserDetails>{userId: username});
+                login(req, res, config);
             } catch (e){
-                console.log('Confirm code error', e)
                 res.status(200);
                 res.send(<UserDetails>{loginError:e.message});
             }
         });
 
     }
-
-    
-
-    
-
-    
 
     function getId(req: express.Request, config: BackendConfig) {
         let token = req.cookies['auth_token'];
@@ -204,7 +159,14 @@ export namespace AuthHandler {
             // }
             return null;
         }
-        return decoded['payload'].username;
+        let username = decoded['payload'].username;
+        return username;
+        // let cognito = new AWS.CognitoIdentityServiceProvider();
+        // let user = await cognito.adminGetUser({
+        //     UserPoolId: config.UserPoolId,
+        //     Username: username
+        // }).promise();
+        // return user.UserAttributes?.find((s) => {s.Name == 'email'})?.Value;
     }
 
 

@@ -16,7 +16,7 @@ import { EnterCodePage } from './pages/entercodepage';
     
     await AuthClient.init();
 
-    m.route.set('/login');
+    // m.route.set('/login');
     m.route(document.body, '/splash', {
         '/loading': LoadingPage,
         '/splash': SplashPage,

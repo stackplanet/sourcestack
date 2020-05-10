@@ -41,8 +41,12 @@ export class EnterCodePage {
 
     async login() {
         await AuthClient.confirmEmail(AuthClient.user.userId, this.code);
-        m.redraw();
-        
+        if (!AuthClient.user.loginError){
+            m.route.set('/userhomepage');
+        }
+        else {
+            m.redraw();
+        }
     }
 
     complete() {

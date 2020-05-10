@@ -25,7 +25,7 @@ export class LoginPage {
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" onkeyup={() => {console.log('key')}}/>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"/>
                             {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
                             <a class="text-sm text-blue-500" href="/#!/forgotpassword">Forgot your password?</a>
                         </div>
@@ -45,8 +45,13 @@ export class LoginPage {
     }
 
     async signup() {
-        await AuthClient.signup(this.email, this.password);
-        // alert('Logging in with ' + this.email + ' ' + this.password)
+        await AuthClient.login(this.email, this.password);
+        if (!AuthClient.user.loginError){
+            m.route.set('/home');
+        }
+        else {
+            m.redraw();
+        }
     }
 
     complete() {

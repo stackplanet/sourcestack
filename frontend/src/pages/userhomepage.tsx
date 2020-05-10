@@ -18,7 +18,8 @@ export class UserHomePage {
 
     view() {
         return <Page>
-            <h1>TODOs</h1>
+            <h1>Welcome {AuthClient.user.userId}</h1>
+            {/* <h1>TODOs</h1>
             <table>
                 {this.results.map((t:Todo) => <tr>
                     <td>{t.created}</td>
@@ -28,7 +29,7 @@ export class UserHomePage {
                 </tr>)}
 
             </table>
-            <button onclick={() => this.createTodo()}>Create</button>
+            <button onclick={() => this.createTodo()}>Create</button> */}
         </Page>
     }
 
