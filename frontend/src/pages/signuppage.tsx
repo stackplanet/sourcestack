@@ -47,7 +47,7 @@ export class SignUpPage {
             m.redraw();
         }
         else {
-            m.route.set('/entercode');
+            m.route.set('/confirmsignup');
         }
         
     }

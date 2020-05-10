@@ -3,7 +3,7 @@ import { bind } from '../uiutils';
 import { Page } from './page';
 import { AuthClient } from '../authclient';
 
-export class EnterCodePage {
+export class ConfirmSignupPage {
 
     code = '';
 
@@ -40,9 +40,9 @@ export class EnterCodePage {
     }
 
     async login() {
-        await AuthClient.confirmEmail(AuthClient.user.userId, this.code);
+        await AuthClient.confirmSignup(AuthClient.user.userId, this.code);
         if (!AuthClient.user.loginError){
-            m.route.set('/userhomepage');
+            m.route.set('/home');
         }
         else {
             m.redraw();

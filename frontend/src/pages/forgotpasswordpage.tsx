@@ -39,6 +39,12 @@ export class ForgotPasswordPage {
 
     async resetpassword() {
         await AuthClient.forgotPassword(this.email);
+        if (!AuthClient.user.loginError){
+            m.route.set('/confirmforgotpassword');
+        }
+        else {
+            m.redraw();
+        }
     }
 
     complete() {

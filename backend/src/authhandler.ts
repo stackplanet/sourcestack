@@ -30,7 +30,6 @@ export namespace AuthHandler {
                     }
                 }).promise();
                 if (authResponse.AuthenticationResult === undefined){
-                    res.status(500);
                     res.send(<UserDetails>{loginError:'Invalid Cognito response from initiate auth: ' + JSON.stringify(authResponse)});
                 }
                 else {
@@ -71,7 +70,7 @@ export namespace AuthHandler {
         app.post('/api/logout', async (req, res) => {
             res.clearCookie('auth_token');
             res.clearCookie('refresh_token');
-            res.send(200);
+            res.sendStatus(200);
         });
     
         app.post('/api/login', async (req, res) => {
@@ -81,19 +80,57 @@ export namespace AuthHandler {
         app.post('/api/forgotpassword', async (req, res) => {
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
-                let response = await cognito.adminResetUserPassword({
+                let response = await cognito.forgotPassword({
+                    ClientId: config.UserPoolClientId,
                     Username: req.body.username,
-                    UserPoolId: config.UserPoolId
                 }).promise();
                 if (response.$response.httpResponse.statusCode !== 200){
-                    res.status(500);
                     res.send(<UserDetails>{loginError:'Invalid Cognito response from reset password: ' + JSON.stringify(response)});
                 }
+                
             } catch (e){
-                res.status(400);
                 res.send(<UserDetails>{loginError:e.message});
             }
         });
+
+        app.post('/api/forgotpassword', async (req, res) => {
+            console.log('diuhdhdhdiuiuh')
+            let cognito = new AWS.CognitoIdentityServiceProvider();
+            try {
+                let username = req.body.username;
+                let response = await cognito.forgotPassword({
+                    ClientId: config.UserPoolClientId,
+                    Username: username,
+                }).promise();
+                if (response.$response.httpResponse.statusCode !== 200){
+                    res.send(<UserDetails>{loginError:'Invalid Cognito response from reset password: ' + JSON.stringify(response)});
+                }
+                res.send(<UserDetails>{userId: username});
+            } catch (e){
+                res.send(<UserDetails>{loginError:e.message});
+            }
+        });
+
+
+        app.post('/api/confirmforgotpassword', async (req, res) => {
+            let cognito = new AWS.CognitoIdentityServiceProvider();
+            try {
+                let username = req.body.username;
+                let response = await cognito.confirmForgotPassword({
+                    Username: username,
+                    Password: req.body.password,
+                    ConfirmationCode: req.body.code,
+                    ClientId: config.UserPoolClientId
+                }).promise();
+                if (response.$response.httpResponse.statusCode !== 200){
+                    res.send(<UserDetails>{loginError:'Invalid Cognito response for confirm forgot password' + JSON.stringify(response)});
+                }
+                login(req, res, config);
+            } catch (e){
+                res.send(<UserDetails>{loginError:e.message});
+            }
+        });
+
 
         app.post('/api/signup', async (req, res) => {
             let cognito = new AWS.CognitoIdentityServiceProvider();
@@ -105,19 +142,16 @@ export namespace AuthHandler {
                     Password: req.body.password
                 }).promise();
                 if (response.$response.httpResponse.statusCode !== 200){
-                    res.status(500);
                     res.send(<UserDetails>{loginError:'Invalid Cognito response for signup' + JSON.stringify(response)});
                 }
-                res.status(200);
                 res.send(<UserDetails>{userId: username});
                 
             } catch (e){
-                res.status(200);
                 res.send(<UserDetails>{loginError:e.message});
             }
         });
 
-        app.post('/api/confirmemail', async (req, res) => {
+        app.post('/api/confirmsignup', async (req, res) => {
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
                 let username = req.body.username;
@@ -127,12 +161,10 @@ export namespace AuthHandler {
                     ClientId: config.UserPoolClientId
                 }).promise();
                 if (response.$response.httpResponse.statusCode !== 200){
-                    res.status(500);
                     res.send(<UserDetails>{loginError:'Invalid Cognito response for confirm code' + JSON.stringify(response)});
                 }
                 login(req, res, config);
             } catch (e){
-                res.status(200);
                 res.send(<UserDetails>{loginError:e.message});
             }
         });

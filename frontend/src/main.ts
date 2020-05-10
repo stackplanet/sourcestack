@@ -10,7 +10,8 @@ import './css/main.css';
 import { ForgotPasswordPage } from './pages/forgotpasswordpage';
 import { SignUpPage } from './pages/signuppage';
 import { CheckEmailPage } from './pages/checkemail';
-import { EnterCodePage } from './pages/entercodepage';
+import { ConfirmSignupPage } from './pages/confirmsignuppage';
+import { ConfirmForgotPasswordPage } from './pages/confirmforgotpasswordpage';
 
 (async () => {
     
@@ -22,10 +23,11 @@ import { EnterCodePage } from './pages/entercodepage';
         '/splash': SplashPage,
         '/login': LoginPage,
         '/home': UserHomePage,
-        '/forgotpassword': ForgotPasswordPage,
         '/signup': SignUpPage,
+        '/confirmsignup': ConfirmSignupPage,
         '/checkemail': CheckEmailPage,
-        '/entercode': EnterCodePage,
+        '/forgotpassword': ForgotPasswordPage,
+        '/confirmforgotpassword': ConfirmForgotPasswordPage,
     });
 
     // if (AuthClient.user.userId){

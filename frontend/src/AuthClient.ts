@@ -27,7 +27,7 @@ export class AuthClient {
                 username: username
             }
         });
-        AuthClient.user = {};
+        AuthClient.user.userId = username;
     }
 
     static async login(username: string, password: string) {
@@ -50,15 +50,25 @@ export class AuthClient {
             }
 
         });
-        AuthClient.user.password = password; // Needed at the confirmEmail stage, to log the user in
+        AuthClient.user.password = password; // Needed at the confirmSignup stage, to log the user in
     }
 
-    static async confirmEmail(username: string, code: string) {
+    static async confirmSignup(username: string, code: string) {
         AuthClient.user = await m.request({
-            url: 'api/confirmemail',
+            url: 'api/confirmsignup',
             method: 'POST',
             body: {
                 username: username, password: AuthClient.user.password, code: code
+            }
+        });
+    }
+
+    static async confirmForgotPassword(username: string, code: string, password: string) {
+        AuthClient.user = await m.request({
+            url: 'api/confirmforgotpassword',
+            method: 'POST',
+            body: {
+                username: username, password: password, code: code
             }
         });
     }
