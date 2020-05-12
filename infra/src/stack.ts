@@ -24,6 +24,7 @@ export class ServerlessWikiStack extends cdk.Stack {
         Config.ensureArgsSupplied();
         console.log(Config.appEnv())
         this.backend();
+        this.cognito();
         this.frontend();
         this.outputs();
     }
@@ -91,6 +92,11 @@ export class ServerlessWikiStack extends cdk.Stack {
             restApiName: Config.appEnv() + '-endpoint',
             handler: this.apiFunction
         })
+        
+
+    }
+
+    cognito(){
         this.userPool = new cognito.UserPool(this, Config.appEnv() + '-user-pool', {
             userPoolName: Config.appEnv() + '-userpool',
             selfSignUpEnabled: true,
@@ -135,7 +141,6 @@ export class ServerlessWikiStack extends cdk.Stack {
 
             }
         });
-
     }
 
     outputs() {
