@@ -87,7 +87,7 @@ export namespace AuthHandler {
                 if (response.$response.httpResponse.statusCode !== 200){
                     res.send(<UserDetails>{loginError:'Invalid Cognito response from reset password: ' + JSON.stringify(response)});
                 }
-                
+                res.send(<UserDetails>{userId: req.body.username});
             } catch (e){
                 res.send(<UserDetails>{loginError:e.message});
             }
