@@ -100,9 +100,6 @@ export class ServerlessWikiStack extends cdk.Stack {
             autoVerify: {
                 email: true
             },
-            // requiredAttributes: {
-            //     email: true
-            // },
             userVerification: {
                 emailSubject: 'Verify your email for our awesome app!',
                 emailBody: `Hello, thanks for signing up to our awesome app! Here is your code: '{####}'`,
