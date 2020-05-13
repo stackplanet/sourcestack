@@ -1,3 +1,7 @@
+password generated wrongly as Password is ${Token[TOKEN.22]}
+
+
+
 - change username to email and userId to email
 
 - End to end create todo        

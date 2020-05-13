@@ -8,7 +8,8 @@ export enum StackOutput {
     EndpointUrl = 'EndpointUrl',
     UserPoolId = 'UserPoolId',
     UserPoolClientId = 'UserPoolClientId',
-    DatabaseArn = 'DatabaseArn' 
+    DatabaseArn = 'DatabaseArn',
+    DatabaseSecretArn = 'DatabaseSecretArn'
 }
 
 

@@ -108,13 +108,13 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
 
     database(){
-        const databaseUsername = 'movies-database';
 
         this.databaseCredentialsSecret = new secretsManager.Secret(this, 'DBCredentialsSecret', {
-        secretName: `${Config.appEnv()}-credentials`,
-        generateSecretString: {
-            secretStringTemplate: JSON.stringify({
-            username: databaseUsername,
+            
+            secretName: `${Config.appEnv()}-credentials`,
+            generateSecretString: {
+                secretStringTemplate: JSON.stringify({
+                username: 'root',
             }),
             excludePunctuation: true,
             includeSpace: false,
@@ -200,6 +200,7 @@ export class ServerlessWikiStack extends cdk.Stack {
         new cdk.CfnOutput(this, StackOutput.FunctionName, {value: this.apiFunction.functionName});
         new cdk.CfnOutput(this, StackOutput.EndpointUrl, {value: this.endpoint.url});
         new cdk.CfnOutput(this, StackOutput.DatabaseArn, {value: this.getDatabaseArn()});
+        new cdk.CfnOutput(this, StackOutput.DatabaseSecretArn, {value: this.databaseCredentialsSecret.secretArn});
 
     }
 
