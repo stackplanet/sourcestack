@@ -5,6 +5,8 @@ import dynamodb = require('@aws-cdk/aws-dynamodb');
 import cognito = require('@aws-cdk/aws-cognito');
 import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
+import * as rds from '@aws-cdk/aws-rds';
+import * as secretsManager from '@aws-cdk/aws-secretsmanager';
 import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
 import { VerificationEmailStyle, OAuthScope } from '@aws-cdk/aws-cognito';
@@ -18,11 +20,14 @@ export class ServerlessWikiStack extends cdk.Stack {
     userPool: cognito.UserPool;
     userPoolClient: cognito.UserPoolClient;
     apiFunction: lambda.Function;
+    databaseCredentialsSecret: secretsManager.Secret;
+    rdsCluster: rds.CfnDBCluster;
 
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
         Config.ensureArgsSupplied();
         console.log(Config.appEnv())
+        this.database();
         this.backend();
         this.cognito();
         this.frontend();
@@ -84,7 +89,9 @@ export class ServerlessWikiStack extends cdk.Stack {
             runtime: lambda.Runtime.NODEJS_10_X,
             handler: 'handler.handler',
             environment: {
-                TABLE_NAME: table.tableName
+                TABLE_NAME: table.tableName,
+                DB_SECRET_ARN: this.databaseCredentialsSecret.secretArn,
+                DB_ARN: this.getDatabaseArn()
             }
         });
         table.grantReadWriteData(this.apiFunction);
@@ -93,6 +100,47 @@ export class ServerlessWikiStack extends cdk.Stack {
             handler: this.apiFunction
         })
         
+
+    }
+
+    getDatabaseArn(){
+        return `arn:aws:rds:${this.region}:${this.account}:cluster:${this.rdsCluster.dbClusterIdentifier}`;
+    }
+
+    database(){
+        const databaseUsername = 'movies-database';
+
+        this.databaseCredentialsSecret = new secretsManager.Secret(this, 'DBCredentialsSecret', {
+        secretName: `${Config.appEnv()}-credentials`,
+        generateSecretString: {
+            secretStringTemplate: JSON.stringify({
+            username: databaseUsername,
+            }),
+            excludePunctuation: true,
+            includeSpace: false,
+            passwordLength: 32,
+            excludeCharacters: '"@/\\',
+            generateStringKey: 'password'
+        }
+        });
+
+        const isDev = true;
+        this.rdsCluster = new rds.CfnDBCluster(this, `${Config.appEnv()}-cluster`, {
+            dbClusterIdentifier: `${Config.appEnv()}-cluster`,
+            engineMode: 'serverless',
+            engine: 'aurora',
+            enableHttpEndpoint: true,
+            databaseName: 'main',
+            masterUsername: 'root',
+            masterUserPassword: this.databaseCredentialsSecret.secretValueFromJson('password').toString(),
+            backupRetentionPeriod: isDev ? 1 : 30,
+            deletionProtection: !isDev,
+            scalingConfiguration: {
+                autoPause: true,
+                maxCapacity: isDev ? 8 : 8,
+                minCapacity: 1,
+                secondsUntilAutoPause: isDev ? 3600 : 10800,
+            }});
 
     }
 
@@ -151,6 +199,8 @@ export class ServerlessWikiStack extends cdk.Stack {
         new cdk.CfnOutput(this, StackOutput.UserPoolClientId, {value: this.userPoolClient.userPoolClientId});
         new cdk.CfnOutput(this, StackOutput.FunctionName, {value: this.apiFunction.functionName});
         new cdk.CfnOutput(this, StackOutput.EndpointUrl, {value: this.endpoint.url});
+        new cdk.CfnOutput(this, StackOutput.DatabaseArn, {value: this.getDatabaseArn()});
+
     }
 
 }

@@ -7,7 +7,8 @@ export enum StackOutput {
     FunctionName = 'FunctionName',
     EndpointUrl = 'EndpointUrl',
     UserPoolId = 'UserPoolId',
-    UserPoolClientId = 'UserPoolClientId' 
+    UserPoolClientId = 'UserPoolClientId',
+    DatabaseArn = 'DatabaseArn' 
 }
 
 
