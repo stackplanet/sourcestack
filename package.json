@@ -18,6 +18,7 @@
     "deploy-backend": "npm run deploy-backend --prefix=infra",
     "deploy-infra": "npm run deploy-infra --prefix=infra",
     "migrate-database": "npm run migrate-database --prefix=infra",
+    "kick-database": "npm run kick-database --prefix=infra",
     "use-backend": "npm run use-backend --prefix=infra"
   },
   "repository": {
