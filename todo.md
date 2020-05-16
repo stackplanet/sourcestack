@@ -4,6 +4,7 @@
 - CRUD functionality for app
 - sns for sending forgot password emails
 - domain name
+- consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 
 
 - change username to email and userId to email

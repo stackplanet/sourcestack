@@ -33,8 +33,8 @@ export class SignUpPage {
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Confirm password</label>
                             <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="confirmPassword" type="password" placeholder="******************"/>
                             {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
-                            {!this.passwordsMatch() && <p class="text-red-500 text-xs italic">Passwords do not match</p>}
-                            {!PasswordValidator.passwordValid(this.password) && <p class="text-red-500 text-xs italic">{PasswordValidator.passwordPolicy()}</p>}
+                            {this.password && this.confirmPassword && !this.passwordsMatch() && <p class="text-red-500 text-xs italic">Passwords do not match</p>}
+                            {this.password && !PasswordValidator.passwordValid(this.password) && <p class="text-red-500 text-xs italic">{PasswordValidator.passwordPolicy()}</p>}
                         </div>
                         <div class="flex items-center justify-between mb-4">
                             <button disabled={!complete} class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button" onclick={() => this.login()}>
