@@ -155,9 +155,16 @@ export class ServerlessWikiStack extends cdk.Stack {
                 email: true
             },
             userVerification: {
-                emailSubject: 'Verify your email for our awesome app!',
-                emailBody: `Hello, thanks for signing up to our awesome app! Here is your code: '{####}'`,
+                emailSubject: 'Verify your email for ' + Config.app(),
+                emailBody: `Your verification code is: <h1>{####}</h1>`,
                 emailStyle: VerificationEmailStyle.CODE,
+            },
+            passwordPolicy: {
+                minLength: 8,
+                requireDigits: true,
+                requireLowercase: true,
+                requireUppercase: true,
+                requireSymbols: false
             }
         });
 

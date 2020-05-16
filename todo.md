@@ -1,5 +1,9 @@
-password generated wrongly as Password is ${Token[TOKEN.22]}
-
+- How to factor out common styles   
+- Change app name from todo to staklist
+- prove e2e database connectivity
+- CRUD functionality for app
+- sns for sending forgot password emails
+- domain name
 
 
 - change username to email and userId to email

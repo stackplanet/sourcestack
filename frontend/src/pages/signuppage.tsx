@@ -2,11 +2,13 @@ import m from 'mithril';
 import { bind } from '../uiutils';
 import { Page } from './page';
 import { AuthClient } from '../authclient';
+import { PasswordValidator } from './passwordvalidator';
 
 export class SignUpPage {
 
     email: string = '';
     password: string = '';
+    confirmPassword: string = '';
 
     oncreate(){
         document.getElementById('email').focus();
@@ -25,8 +27,14 @@ export class SignUpPage {
                         </div>
                         <div class="mb-4">
                             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" onkeyup={() => {console.log('key')}}/>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************"/>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Confirm password</label>
+                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="confirmPassword" type="password" placeholder="******************"/>
                             {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
+                            {!this.passwordsMatch() && <p class="text-red-500 text-xs italic">Passwords do not match</p>}
+                            {!PasswordValidator.passwordValid(this.password) && <p class="text-red-500 text-xs italic">{PasswordValidator.passwordPolicy()}</p>}
                         </div>
                         <div class="flex items-center justify-between mb-4">
                             <button disabled={!complete} class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button" onclick={() => this.login()}>
@@ -53,6 +61,12 @@ export class SignUpPage {
     }
 
     complete() {
-        return this.email !== '' && this.password !== ''
+        return this.passwordsMatch() && PasswordValidator.passwordValid(this.password) && this.email !== '' && this.password !== ''
     }
+
+    passwordsMatch(){
+        return this.password === this.confirmPassword;
+    }
+
+
 }
