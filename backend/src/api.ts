@@ -28,7 +28,17 @@ export function configureApp() {
 
     app.get('/api/todos', async (req, res) => {
         await DataApi.query(res, 'select * from todos');
-   });
+    });
+
+    app.post('/api/todo', async (req, res) => {
+        await DataApi.query(res, `insert into todos (userid, value, status) 
+            values (:userid, :value, :status)`, req.body);
+    });
+
+    app.delete('/api/todo', async (req, res) => {
+        console.log('Deleting ' + req.query.id)
+        await DataApi.query(res, `delete from todos where id=(:id)`, {id: req.query.id});
+    });
 
     return app;
 }

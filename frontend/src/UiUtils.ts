@@ -5,3 +5,8 @@ export function bind(data) {
         }
     };
 };
+
+
+export function targetValue(e: Event){
+    return (e.target as HTMLInputElement).value;
+}

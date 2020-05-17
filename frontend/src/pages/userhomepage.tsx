@@ -2,41 +2,51 @@ import m from 'mithril';
 import { Page } from "./page";
 import { AuthClient } from '../authclient';
 import { Todo} from '../todo'
+import { Button } from '../components/button';
+import { LabelledInput } from '../components/labelledinput';
+import { targetValue } from '../uiutils';
 
 export class UserHomePage {
 
     results:Todo[] = [];
+    hoveredTodo: Todo;
+    newTodo: string;
 
-    // https://github.com/MithrilJS/mithril.js/issues/2426
     async oninit() {
-        // this.results = await m.request({
-        //     url: '/api/todos'
-        // })
-        this.results = [];
-        m.redraw();
+        await this.refresh();
     }
 
     view() {
         return <Page>
-            <h1>Welcome {AuthClient.user.userId}</h1>
-            {/* <h1>TODOs</h1>
+            <LabelledInput id="newTodo" type="text" label="What needs done?" placeholder="New item" onchange={() => this.createTodo()}/>
             <table>
-                {this.results.map((t:Todo) => <tr>
+                {this.results.map((t:Todo) => <tr onmouseover={() => this.hoveredTodo = t}>
+                    <td>{t.id}</td>
                     <td>{t.created}</td>
                     <td>{t.status}</td>
                     <td>{t.value}</td>
                     <td>{t.userid}</td>
+                    {t === this.hoveredTodo && <td><button onclick={() => this.deleteTodo(t)}>delete</button></td>}
                 </tr>)}
 
             </table>
-            <button onclick={() => this.createTodo()}>Create</button> */}
+            {/* <Button label="create" callback={() => this.createTodo()}/> */}
         </Page>
     }
 
+    async deleteTodo(todo:Todo){
+        await m.request({
+            method: 'DELETE',
+            url: '/api/todo?id=' + todo.id,
+        });
+        await this.refresh();
+    }
+
     async createTodo(){
+        let input = document.getElementById('newTodo') as HTMLInputElement;
         let todo:Todo = {
-            value: 'Todo ' + new Date().getTime(),
-            userid: AuthClient.user.userId,
+            value: input.value,
+            userid: AuthClient.user.userId, // TODO - move this to server side
             created: new Date(),
             status: 'new'
         }
@@ -45,6 +55,12 @@ export class UserHomePage {
             url: '/api/todo',
             body: todo
         });
+        input.value = '';
+        this.newTodo = undefined;
+        await this.refresh();
+    }
+
+    async refresh(){
         this.results = await m.request({
             url: '/api/todos'
         })
