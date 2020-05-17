@@ -9,7 +9,6 @@ import { UserHomePage } from './pages/userhomepage';
 import './css/main.css';
 import { ForgotPasswordPage } from './pages/forgotpasswordpage';
 import { SignUpPage } from './pages/signuppage';
-import { CheckEmailPage } from './pages/checkemail';
 import { ConfirmSignupPage } from './pages/confirmsignuppage';
 import { ConfirmForgotPasswordPage } from './pages/confirmforgotpasswordpage';
 
@@ -25,7 +24,6 @@ import { ConfirmForgotPasswordPage } from './pages/confirmforgotpasswordpage';
         '/home': UserHomePage,
         '/signup': SignUpPage,
         '/confirmsignup': ConfirmSignupPage,
-        '/checkemail': CheckEmailPage,
         '/forgotpassword': ForgotPasswordPage,
         '/confirmforgotpassword': ConfirmForgotPasswordPage,
     });
