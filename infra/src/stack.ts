@@ -1,7 +1,6 @@
 import cdk = require('@aws-cdk/core');
 import lambda = require('@aws-cdk/aws-lambda');
 import apigw = require('@aws-cdk/aws-apigateway');
-import dynamodb = require('@aws-cdk/aws-dynamodb');
 import cognito = require('@aws-cdk/aws-cognito');
 import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
@@ -79,28 +78,20 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
 
     backend() {
-        let table = new dynamodb.Table(this, Config.appEnv() + '-pages', {
-            tableName: Config.appEnv() + '-pages',
-            partitionKey: { name: 'path', type: dynamodb.AttributeType.STRING }
-        });
         this.apiFunction = new lambda.Function(this, Config.appEnv() + '-api', {
             functionName: Config.appEnv() + '-api',
             code: lambda.Code.asset('../backend/dist'),
             runtime: lambda.Runtime.NODEJS_10_X,
             handler: 'handler.handler',
             environment: {
-                TABLE_NAME: table.tableName,
                 DB_SECRET_ARN: this.databaseCredentialsSecret.secretArn,
                 DB_ARN: this.getDatabaseArn()
             }
         });
-        table.grantReadWriteData(this.apiFunction);
         this.endpoint = new apigw.LambdaRestApi(this, Config.appEnv() + '-endpoint', {
             restApiName: Config.appEnv() + '-endpoint',
             handler: this.apiFunction
         })
-        
-
     }
 
     getDatabaseArn(){
