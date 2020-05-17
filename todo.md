@@ -1,8 +1,6 @@
-- Get login working e2e in alpha on cloud
-  - Bug - no error when signing in as non-existent user in cloud
+- Bug - no error when signing in as non-existent user in cloud
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
-- prove e2e database connectivity
 - CRUD functionality for app
 - sns for sending forgot password emails
 - sort out migrations and hoook them into deploy

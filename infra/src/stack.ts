@@ -84,8 +84,7 @@ export class ServerlessWikiStack extends cdk.Stack {
             runtime: lambda.Runtime.NODEJS_10_X,
             handler: 'handler.handler',
             environment: {
-                DB_SECRET_ARN: this.databaseCredentialsSecret.secretArn,
-                DB_ARN: this.getDatabaseArn()
+                
             }
         });
         this.apiFunction.addToRolePolicy(new IAM.PolicyStatement({

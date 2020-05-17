@@ -5,6 +5,7 @@ import cookieParser = require('cookie-parser');
 
 import { AuthHandler } from './authhandler';
 import { BackendConfig } from './backendconfig';
+import { DataApi } from './dataapi';
 
 export function configureApp() {
     const app = express();
@@ -14,6 +15,7 @@ export function configureApp() {
     app.use(bodyParser.urlencoded({ extended: true }));
     BackendConfig.init();
     AuthHandler.init(BackendConfig.instance, app);
+    DataApi.init();
 
     app.get('/api/ping', async (req, res) => {
         console.log('ping')
@@ -23,6 +25,10 @@ export function configureApp() {
     app.get('/api/private/ping', async (req, res) => {
         res.send('pong');
     })
+
+    app.get('/api/todos', async (req, res) => {
+        await DataApi.query(res, 'select * from todos');
+   });
 
     return app;
 }

@@ -17,12 +17,14 @@ let jwkToPem = require('jwk-to-pem');
 
 export async function writeBackendConfig(dir: string, stackOutputs: Map<StackOutput, string>){
     let userPoolId = stackOutputs.get(StackOutput.UserPoolId);
-    const userPoolClientId = stackOutputs.get(StackOutput.UserPoolClientId);
+    let userPoolClientId = stackOutputs.get(StackOutput.UserPoolClientId);
     let backendConfig = {
         app: Config.app(),
         env: Config.env(),
         UserPoolId: userPoolId, 
         UserPoolClientId: userPoolClientId,
+        DatabaseArn: stackOutputs.get(StackOutput.DatabaseArn),
+        DatabaseSecretArn: stackOutputs.get(StackOutput.DatabaseSecretArn),
         kidToPems: await getKidToPems(userPoolId as string)
     }
     writeFileSync(dir + '/backend-config.json', JSON.stringify(backendConfig, null, 2));
