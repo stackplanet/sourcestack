@@ -4,13 +4,13 @@ import { FrontendConfig } from './frontendconfig';
 import { AuthClient } from './authclient';
 import { LoadingPage } from './pages/loadingpage';
 import { SplashPage } from './pages/splashpage';
-import { LoginPage } from './pages/loginpage';
+import { LoginPage } from './pages/login/loginpage';
 import { UserHomePage } from './pages/userhomepage';
 import './css/main.css';
-import { ForgotPasswordPage } from './pages/forgotpasswordpage';
-import { SignUpPage } from './pages/signuppage';
-import { ConfirmSignupPage } from './pages/confirmsignuppage';
-import { ConfirmForgotPasswordPage } from './pages/confirmforgotpasswordpage';
+import { SignUpPage } from './pages/login/signuppage';
+import { ConfirmSignupPage } from './pages/login/confirmsignuppage';
+import { ConfirmForgotPasswordPage } from './pages/login/confirmforgotpasswordpage';
+import { ForgotPasswordPage } from './pages/login/forgotpasswordpage';
 
 (async () => {
     

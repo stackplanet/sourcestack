@@ -1,6 +1,6 @@
 import { MithrilTsxComponent } from "mithril-tsx-component";
 import m, { Vnode } from "mithril";
-import { Page } from "./page";
+import { Page } from "../page";
 
 interface Attrs {
     title: string;

@@ -1,10 +1,9 @@
 import m from 'mithril';
-import { bind } from '../uiutils';
-import { Page } from './page';
-import { AuthClient } from '../authclient';
-import { LabelledInput } from '../components/labelledinput';
-import { Button } from '../components/button';
-import { LoginPanel } from '../components/loginpanel';
+import { LoginPanel } from '../../components/login/loginpanel';
+import { bind } from '../../uiutils';
+import { LabelledInput } from '../../components/labelledinput';
+import { AuthClient } from '../../authclient';
+import { Button } from '../../components/button';
 
 export class ForgotPasswordPage {
 

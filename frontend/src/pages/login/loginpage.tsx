@@ -1,10 +1,9 @@
 import m from 'mithril';
-import { bind } from '../uiutils';
-import { Page } from './page';
-import { AuthClient } from '../authclient';
-import { LabelledInput } from '../components/labelledinput';
-import { Button } from '../components/button';
-import { LoginPanel } from '../components/loginpanel';
+import { bind } from '../../uiutils';
+import { AuthClient } from '../../authclient';
+import { LabelledInput } from '../../components/labelledinput';
+import { Button } from '../../components/button';
+import { LoginPanel } from '../../components/login/loginpanel';
 
 export class LoginPage {
 
