@@ -2,6 +2,8 @@ import m from 'mithril';
 import { bind } from '../uiutils';
 import { Page } from './page';
 import { AuthClient } from '../authclient';
+import { LabelledInput } from '../components/labelledinput';
+import { Button } from '../components/button';
 
 export class ConfirmSignupPage {
 
@@ -22,14 +24,11 @@ export class ConfirmSignupPage {
                             <p>We've sent a six-digit code to your email address. Please enter the code below:</p>
                         </div>
                         <div class="mb-4">
-                            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Code</label>
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline" id="code" type="code" placeholder="******************"/>
+                            <LabelledInput label="Code" id="code" type="text" placeholder="******"/>    
                             {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
                         </div>
                         <div class="flex items-center justify-between mb-4">
-                            <button disabled={!complete} class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button" onclick={() => this.login()}>
-                                OK
-                            </button>
+                            <Button label="OK" disabled={!this.complete()} callback={() => this.login()}/>
                         </div>
                         
                     </form>

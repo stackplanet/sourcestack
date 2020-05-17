@@ -1,4 +1,4 @@
-- How to factor out common styles   
+- Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Change app name from todo to staklist
 - prove e2e database connectivity
 - CRUD functionality for app
