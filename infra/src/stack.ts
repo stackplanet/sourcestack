@@ -27,8 +27,8 @@ export class ServerlessWikiStack extends cdk.Stack {
         Config.ensureArgsSupplied();
         console.log(Config.appEnv())
         this.database();
-        this.backend();
         this.cognito();
+        this.backend();
         this.frontend();
         this.outputs();
     }
@@ -88,9 +88,14 @@ export class ServerlessWikiStack extends cdk.Stack {
                 DB_ARN: this.getDatabaseArn()
             }
         });
+        this.apiFunction.addToRolePolicy(new IAM.PolicyStatement({
+            actions: ['cognito-idp:*'],
+            resources: [this.userPool.userPoolArn]
+        }));
         this.endpoint = new apigw.LambdaRestApi(this, Config.appEnv() + '-endpoint', {
             restApiName: Config.appEnv() + '-endpoint',
-            handler: this.apiFunction
+            handler: this.apiFunction,
+            proxy: true
         })
     }
 
