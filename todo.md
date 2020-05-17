@@ -1,8 +1,10 @@
+- "loginError":"User: arn:aws:sts::851426144384:assumed-role/staklist-alpha-staklistalphaapiServiceRole17F21B1B-1NVTA0BHU87RM/staklist-alpha-api is not authorized to perform: cognito-idp:AdminInitiateAuth on resource: arn:aws:cognito-idp:eu-west-1:851426144384:userpool/eu-west-1_LxPDIJqFT"}
+- 
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
-- Change app name from todo to staklist
 - prove e2e database connectivity
 - CRUD functionality for app
 - sns for sending forgot password emails
+- sort out migrations and hoook them into deploy
 - domain name
 - consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 
