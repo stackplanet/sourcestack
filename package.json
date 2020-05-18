@@ -10,6 +10,8 @@
     "start": "npm-run-all --parallel start-frontend start-backend",
     "start-frontend": "npm run start --prefix=frontend",
     "start-backend": "npm run start --prefix=backend",
+    "debug": "npm-run-all --parallel start-frontend debug-backend",
+    "debug-backend": "npm run debug --prefix=backend",
     "build": "npm-run-all build-frontend build-backend",
     "build-frontend": "npm run build --prefix=frontend",
     "build-backend": "npm run build --prefix=backend",

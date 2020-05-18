@@ -10,7 +10,7 @@
 - Move to HTTP API, see https://github.com/aws/aws-cdk/issues/5362
 - test on mobile
 - change username to email and userId to email
-
+- jest tests
 - End to end create todo        
 
 

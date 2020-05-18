@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "parcel build src/handler.ts --target=node --global handler -o handler.js --bundle-node-modules --no-source-maps",
-    "start": "ts-node-dev src/devserver.ts"
+    "start": "ts-node-dev src/devserver.ts",
+    "debug": "ts-node-dev --inspect -- src/devserver.ts"
   },
   "author": "",
   "license": "ISC",
