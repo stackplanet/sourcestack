@@ -2,15 +2,14 @@ import m from 'mithril';
 import { Page } from "./page";
 import { AuthClient } from '../authclient';
 import { Todo} from '../todo'
-import { Button } from '../components/button';
-import { LabelledInput } from '../components/labelledinput';
-import { targetValue } from '../uiutils';
+import { WithSpinner } from '../components/withspinner';
 
 export class UserHomePage {
 
     results:Todo[] = [];
     hoveredTodo: Todo;
     newTodo: string;
+    loading = true;
 
     async oninit() {
         await this.refresh();
@@ -19,14 +18,16 @@ export class UserHomePage {
     view() {
         return <Page>
             <input id="newTodo" class="w-full h-20 px-5 text-xl" type="text" placeholder="What needs to be done?" onchange={() => this.createTodo()}/>
-            <ul>
-                {this.results.map((t:Todo) => <li class="h-20 border-b-2 w-full hover:bg-gray-200 flex items-center px-5 text-xl justify-between"
-                    onmouseover={() => this.hoveredTodo = t}>
-                    <div>{t.value}</div> 
-                    <button class="focus:outline-none" onclick={() => this.deleteTodo(t)}>×</button>
-                </li>)}
+            <WithSpinner loading={this.loading}>
+                <ul>
+                    {this.results.map((t:Todo) => <li class="h-20 border-b-2 w-full hover:bg-gray-200 flex items-center px-5 text-xl justify-between"
+                        onmouseover={() => this.hoveredTodo = t}>
+                        <div>{t.value}</div> 
+                        <button class="focus:outline-none" onclick={() => this.deleteTodo(t)}>×</button>
+                    </li>)}
 
-            </ul>
+                </ul>
+            </WithSpinner>
         </Page>
     }
 
@@ -57,10 +58,14 @@ export class UserHomePage {
     }
 
     async refresh(){
+        this.loading = true;
+        m.redraw()
         this.results = await m.request({
             url: '/api/todos'
         })
+        this.loading = false;
         m.redraw();
+        document.getElementById('newTodo').focus();
     }
 
 }

@@ -26,7 +26,7 @@ export class LoginPage {
                     <a class="text-sm text-blue-500" href="/#!/forgotpassword">Forgot your password?</a>
                 </div>
                 <div class="mb-4">
-                    <Button label="Log in" disabled={!this.complete()} callback={() => this.signup()}/>
+                    <Button label="Log in" id="ok" disabled={!this.complete()} callback={() => this.signup()}/>
                 </div>
                 <div class="text-center text-sm">
                     Need an account? <a href="/#!/signup" class="text-blue-500">Sign up</a>

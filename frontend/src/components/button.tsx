@@ -12,6 +12,8 @@ interface Attrs {
 
 export class Button extends MithrilTsxComponent<Attrs> {
 
+    callback: () => any;
+
     view(vnode: Vnode<Attrs>) {
         let a = vnode.attrs;
         return <button disabled={a.disabled} class="disabled:opacity-50 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" 

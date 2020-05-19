@@ -1,5 +1,6 @@
 import { Page } from './page';
 import m from 'mithril';
+import { AuthClient } from '../authclient';
 
 export class SplashPage {
 
@@ -13,9 +14,16 @@ export class SplashPage {
                     <h3 class="text-2xl mb-8 text-gray-200">
                         Built with <a class="text-blue-300 text-" href="https://github.com/martinpllu/stak">stak</a>
                     </h3>
+                    {AuthClient.user.userId ? 
+                    <a href="#!/home" class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
+                        Your list
+                    </a>
+                    :
                     <a href="#!/login" class="bg-white font-bold rounded-full py-4 px-8 shadow-lg uppercase tracking-wider">
                         Log in
                     </a>
+                    }
+                    
                 </div>
             </div>
         </Page>

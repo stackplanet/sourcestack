@@ -12,11 +12,11 @@ export class AuthClient {
     }
 
     static async logout(){
+        AuthClient.user = {};
         await m.request({
             url: '/api/logout',
             method: 'POST'
         })
-        AuthClient.user = {};
     }
 
     static async forgotPassword(username: string){
