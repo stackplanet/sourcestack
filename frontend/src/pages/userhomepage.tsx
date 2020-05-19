@@ -18,19 +18,15 @@ export class UserHomePage {
 
     view() {
         return <Page>
-            <LabelledInput id="newTodo" type="text" label="What needs done?" placeholder="New item" onchange={() => this.createTodo()}/>
-            <table>
-                {this.results.map((t:Todo) => <tr onmouseover={() => this.hoveredTodo = t}>
-                    <td>{t.id}</td>
-                    <td>{t.created}</td>
-                    <td>{t.status}</td>
-                    <td>{t.value}</td>
-                    <td>{t.userid}</td>
-                    {t === this.hoveredTodo && <td><button onclick={() => this.deleteTodo(t)}>delete</button></td>}
-                </tr>)}
+            <input id="newTodo" class="w-full h-20 px-5 text-xl" type="text" placeholder="What needs to be done?" onchange={() => this.createTodo()}/>
+            <ul>
+                {this.results.map((t:Todo) => <li class="h-20 border-b-2 w-full hover:bg-gray-200 flex items-center px-5 text-xl justify-between"
+                    onmouseover={() => this.hoveredTodo = t}>
+                    <div>{t.value}</div> 
+                    <button class="focus:outline-none" onclick={() => this.deleteTodo(t)}>×</button>
+                </li>)}
 
-            </table>
-            {/* <Button label="create" callback={() => this.createTodo()}/> */}
+            </ul>
         </Page>
     }
 

@@ -27,7 +27,7 @@ export function configureApp() {
     })
 
     app.get('/api/todos', async (req, res) => {
-        await DataApi.query(res, 'select * from todos');
+        await DataApi.query(res, 'select * from todos order by created desc');
     });
 
     app.post('/api/todo', async (req, res) => {

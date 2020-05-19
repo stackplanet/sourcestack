@@ -1,4 +1,3 @@
-- Debugging the api
 - Bug - no error when signing in as non-existent user in cloud
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
@@ -12,7 +11,7 @@
 - change username to email and userId to email
 - jest tests
 - End to end create todo        
-
+- Use refresh token
 
 - make scripts cross-platform
 - git issues
