@@ -1,4 +1,4 @@
-import m, { Vnode } from 'mithril';
+import m from 'mithril';
 import { AuthClient } from '../authclient';
 
 export default class Navbar {
@@ -21,7 +21,8 @@ export default class Navbar {
                 {AuthClient.user.userId ?
                     <ul class="inline-flex">
                         <li>{AuthClient.user.userId}</li>
-                        <li><a class="px-4 hover:text-gray-800" href="#" onclick={this.logout}>Log out</a></li>
+
+                        <li><a class="px-4 bg-gray-500 ml-5 p-2 text-white rounded" href="#" onclick={this.logout}>Log out</a></li>
                     </ul>
                 :
                     <ul class="inline-flex">

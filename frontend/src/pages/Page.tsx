@@ -1,5 +1,5 @@
 import m, { Vnode } from 'mithril';
-import Navbar from '../components/Navbar';
+import Navbar from '../components/navbar';
 import { MithrilTsxComponent } from 'mithril-tsx-component';
 
 class IAttrs {
