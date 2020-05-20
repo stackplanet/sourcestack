@@ -1,17 +1,15 @@
-- Bug - no error when signing in as non-existent user in cloud
-- Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
-- Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
-- CRUD functionality for app
 - sns for sending forgot password emails
 - sort out migrations and hoook them into deploy
 - domain name
-- consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 - Move to HTTP API, see https://github.com/aws/aws-cdk/issues/5362
-- test on mobile
 - change username to email and userId to email
 - jest tests
 - End to end create todo        
 - Use refresh token
+- consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
+- Bug - no error when signing in as non-existent user in cloud
+- Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
+- Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
 
 - make scripts cross-platform
 - git issues

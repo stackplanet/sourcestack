@@ -13,7 +13,7 @@ export class LoginPanel extends MithrilTsxComponent<Attrs> {
             <div class="flex justify-center">
                 <div class="w-full max-w-md pt-8">
                     <h1 class="text-center text-2xl mb-4">{vnode.attrs.title}</h1>
-                    <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                    <form class="bg-white lg:shadow-md rounded px-8 pt-6 pb-8 mb-4">
                         {vnode.children}
                     </form>
                 </div>
