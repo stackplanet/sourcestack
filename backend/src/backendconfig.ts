@@ -2,6 +2,8 @@ import { readFileSync, existsSync } from "fs";
 
 export interface BackendConfig {
 
+    app: string;
+    env: string;
     UserPoolId: string;
     UserPoolClientId: string;
     kidToPems: any;

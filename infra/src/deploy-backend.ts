@@ -1,31 +1,28 @@
 import { execute } from "./util/execute";
 import { writeFileSync } from "fs";
 import { Config } from "./util/config";
-import { StackOutput, getStackOutput } from "./stackoutput";
+import { fromStack, StackOutput } from "./stackoutput";
+import {BackendConfig} from '../../backend/src/backendconfig';
 let jwkToPem = require('jwk-to-pem');
 
 (async () => {
     Config.ensureArgsSupplied();
-    let stackOutputs = await getStackOutput(Config.appEnv());
-    await writeBackendConfig('../backend/dist', stackOutputs);
+    let stackOutputs = await fromStack(Config.appEnv());
+    writeFileSync('../backend/dist/backend-config.json', JSON.stringify(stackOutputs, null, 2));
     await execute(`cd ../backend/dist && zip ../dist.zip *`);
-    const functionName = stackOutputs.get(StackOutput.FunctionName);
-    await execute(`aws lambda --region eu-west-1 update-function-code --function-name ${functionName} --zip-file fileb://../backend/dist.zip`);
-    console.log('Published ' + functionName);
+    await execute(`aws lambda --region eu-west-1 update-function-code --function-name ${stackOutputs.FunctionName} --zip-file fileb://../backend/dist.zip`);
+    console.log('Published ' + stackOutputs.FunctionName);
 })();
 
-
-export async function writeBackendConfig(dir: string, stackOutputs: Map<StackOutput, string>){
-    let userPoolId = stackOutputs.get(StackOutput.UserPoolId);
-    let userPoolClientId = stackOutputs.get(StackOutput.UserPoolClientId);
-    let backendConfig = {
+export async function writeBackendConfig(dir: string, stackOutput: StackOutput){
+    let backendConfig: BackendConfig = {
         app: Config.app(),
         env: Config.env(),
-        UserPoolId: userPoolId, 
-        UserPoolClientId: userPoolClientId,
-        DatabaseArn: stackOutputs.get(StackOutput.DatabaseArn),
-        DatabaseSecretArn: stackOutputs.get(StackOutput.DatabaseSecretArn),
-        kidToPems: await getKidToPems(userPoolId as string)
+        UserPoolId: stackOutput.UserPoolId, 
+        UserPoolClientId: stackOutput.UserPoolClientId,
+        DatabaseArn: stackOutput.DatabaseArn,
+        DatabaseSecretArn: stackOutput.DatabaseSecretArn,
+        kidToPems: await getKidToPems(stackOutput.UserPoolId)
     }
     writeFileSync(dir + '/backend-config.json', JSON.stringify(backendConfig, null, 2));
 }

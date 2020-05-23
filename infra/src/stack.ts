@@ -194,16 +194,18 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
 
     outputs() {
-        new cdk.CfnOutput(this, StackOutput.DistributionUri, {value: 'https://' + this.distribution.domainName});
-        new cdk.CfnOutput(this, StackOutput.DistributionId, {value: this.distribution.distributionId});
-        new cdk.CfnOutput(this, StackOutput.HostingBucket, {value: 's3://' + this.bucket.bucketName});
-        new cdk.CfnOutput(this, StackOutput.UserPoolId, {value: this.userPool.userPoolId});
-        new cdk.CfnOutput(this, StackOutput.UserPoolClientId, {value: this.userPoolClient.userPoolClientId});
-        new cdk.CfnOutput(this, StackOutput.FunctionName, {value: this.apiFunction.functionName});
-        new cdk.CfnOutput(this, StackOutput.EndpointUrl, {value: this.endpoint.url});
-        new cdk.CfnOutput(this, StackOutput.DatabaseArn, {value: this.getDatabaseArn()});
-        new cdk.CfnOutput(this, StackOutput.DatabaseSecretArn, {value: this.databaseCredentialsSecret.secretArn});
-
+        let outputs: StackOutput = {
+            DistributionUri: 'https://' + this.distribution.domainName,
+            DistributionId: this.distribution.distributionId,
+            HostingBucket: 's3://' + this.bucket.bucketName,
+            UserPoolId: this.userPool.userPoolId,
+            UserPoolClientId: this.userPoolClient.userPoolClientId,
+            FunctionName: this.apiFunction.functionName,
+            EndpointUrl: this.endpoint.url,
+            DatabaseArn: this.getDatabaseArn(),
+            DatabaseSecretArn: this.databaseCredentialsSecret.secretArn
+        }
+        Object.keys(outputs).forEach((k) => new cdk.CfnOutput(this, k, {value: outputs[k as keyof StackOutput]}));
     }
 
 }

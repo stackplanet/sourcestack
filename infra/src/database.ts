@@ -1,5 +1,5 @@
 import { Config } from "./util/config";
-import { getStackOutput, StackOutput } from "./stackoutput";
+import { fromStack, StackOutput, readStackOutputFile } from "./stackoutput";
 
 export namespace Database {
 
@@ -14,12 +14,10 @@ export namespace Database {
 
     export async function connect(){
         Config.ensureArgsSupplied();
-        let stackOutputs = await getStackOutput(Config.appEnv());
-        let databaseArn = stackOutputs.get(StackOutput.DatabaseArn);
-        let databaseSecretArn = stackOutputs.get(StackOutput.DatabaseSecretArn);
+        let stackOutputs = readStackOutputFile();
         return require('data-api-client')({
-            secretArn: databaseSecretArn,
-            resourceArn: databaseArn,
+            secretArn: stackOutputs.DatabaseSecretArn,
+            resourceArn: stackOutputs.DatabaseArn,
             database: 'main',
             options: {
                 maxRetries: 10,

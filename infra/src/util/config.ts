@@ -16,7 +16,7 @@ export class Config {
     }
 
     static env(){
-        return process.env.npm_config_env;
+        return process.env.npm_config_env as string;
     }
 
     static app(){
