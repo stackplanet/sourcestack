@@ -7,12 +7,9 @@ export namespace Database {
         console.log(sql);
         let res = await conn.query(sql, {
             continueAfterTimeout: true,
-            username: 'root',
-            httpOptions: {
-                connectTimeout: 120000
-            }
+            username: 'root'
         });
-        console.log(res);
+        return res.records; 
     }
 
     export async function connect(){
@@ -23,7 +20,14 @@ export namespace Database {
         return require('data-api-client')({
             secretArn: databaseSecretArn,
             resourceArn: databaseArn,
-            database: 'main'
+            database: 'main',
+            options: {
+                maxRetries: 10,
+                retryDelayOptions: {base: 5000},
+                httpOptions: {
+                    connectTimeout: 120000
+                }
+            }
         });
     }
 
