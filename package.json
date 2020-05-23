@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
+    "foo": "echo hello",
     "postinstall": "npm-run-all install-infra install-frontend install-backend",
     "install-infra": "npm install --prefix=infra",
     "install-frontend": "npm install --prefix=frontend",
@@ -15,7 +16,7 @@
     "build": "npm-run-all build-frontend build-backend",
     "build-frontend": "npm run build --prefix=frontend",
     "build-backend": "npm run build --prefix=backend",
-    "deploy": "npm-run-all deploy-infra deploy-frontend deploy-backend",
+    "deploy": "npm-run-all deploy-infra deploy-frontend deploy-backend migrate-database",
     "deploy-frontend": "npm run deploy-frontend --prefix=infra",
     "deploy-backend": "npm run deploy-backend --prefix=infra",
     "deploy-infra": "npm run deploy-infra --prefix=infra",
