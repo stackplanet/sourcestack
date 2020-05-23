@@ -1,35 +1,42 @@
-- sns for sending forgot password emails
+- Documentation
+
 - sort out migrations and hoook them into deploy
+- sns for sending forgot password emails
 - domain name
-- Move to HTTP API, see https://github.com/aws/aws-cdk/issues/5362
+- rename req.user to req.jwtInfo or similar
+- Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
 - change username to email and userId to email
 - jest tests
 - End to end create todo        
 - Use refresh token
+- Ensure that dataapi only inits once in lambda
 - consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 - Bug - no error when signing in as non-existent user in cloud
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
 
+# After launch
+
 - make scripts cross-platform
+- Move to HTTP API, see https://github.com/aws/aws-cdk/issues/5362
+  - https://aws.amazon.com/blogs/compute/building-better-apis-http-apis-now-generally-available/
+  - Not GA in CDK yet, see https://github.com/aws/aws-cdk/issues/5301
+- Caching on Cloudfront for API Gateway - what is the best practice?
+- Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
 - git issues
     ssh -T git@github.com
     ssh: connect to host github.com port 22: No route to host
-- rename req.user to req.jwtInfo or similar
-- Caching on Cloudfront for API Gateway - what is the best practice?
-- Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
 
 - document certificate thing: thisisunsafe
   - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
+  - why does this not happen for RA webpack server?
 
 
 - Warning if deploying a new environment
 
 # Post launch
 
-- https://aws.amazon.com/blogs/compute/building-better-apis-http-apis-now-generally-available/
-  - Not GA in CDK yet, see https://github.com/aws/aws-cdk/issues/5301
-
+- 
 
 # Notes
 
