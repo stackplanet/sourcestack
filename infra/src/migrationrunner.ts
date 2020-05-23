@@ -26,7 +26,7 @@ export class MigrationRunner {
             console.log('Running ' + sql)
             await this.conn.transaction()
                 .query(sql)
-                // .query(`insert into ${MigrationRunner.TABLE_NAME} (id, statement) values :id :statement`, {id: id, statement: sql})
+                .query(`insert into ${MigrationRunner.TABLE_NAME} (id, statement) values (:id, :sql)`, {id: id, sql: sql})
                 .rollback((e:any,status:any) => {console.error(`Failed to apply migration ${id}: error ${e}, status ${status}`)})
                 .commit();
             console.log(id + ': successfully applied');

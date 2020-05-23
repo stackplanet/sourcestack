@@ -1,5 +1,6 @@
 - Documentation
 
+- something more lightweight than npm run?
 - sort out migrations and hoook them into deploy
 - sns for sending forgot password emails
 - domain name
