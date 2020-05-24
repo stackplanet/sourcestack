@@ -43,5 +43,5 @@ export function readStackOutputFile(){
 }
 
 export function writeStackOutputFile(stackOutput: StackOutput){
-    writeFileSync(file, JSON.stringify(stackOutput));
+    writeFileSync(file, JSON.stringify(stackOutput, null, 2));
 }
