@@ -10,6 +10,7 @@ import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMetho
 import { Config } from './util/config';
 import { VerificationEmailStyle, OAuthScope } from '@aws-cdk/aws-cognito';
 import { StackOutput } from './stackoutput';
+import { Duration } from '@aws-cdk/core';
 
 export class ServerlessWikiStack extends cdk.Stack {
 
@@ -42,6 +43,7 @@ export class ServerlessWikiStack extends cdk.Stack {
         });
         let oai = new OriginAccessIdentity(this, Config.appEnv() + '-oai');
         this.distribution = new CloudFrontWebDistribution(this, Config.appEnv() + '-distribution', {
+            comment: Config.appEnv() + ' distribution',
             originConfigs: [{
                 s3OriginSource: {
                     s3BucketSource: this.bucket,
@@ -55,7 +57,18 @@ export class ServerlessWikiStack extends cdk.Stack {
                 originPath: `/${this.endpoint.deploymentStage.stageName}`,
                 behaviors: [{
                     pathPattern: '/api/*',
-                    allowedMethods: CloudFrontAllowedMethods.ALL
+                    allowedMethods: CloudFrontAllowedMethods.ALL,
+                    defaultTtl: Duration.millis(0),
+                    maxTtl: Duration.millis(0),
+                    minTtl: Duration.millis(0),
+                    forwardedValues: {
+                        queryString: true,
+                        cookies: {
+                            forward: 'all'
+                        },
+                        // This doesn't work - bug in CDK?
+                        // headers: ['*'],
+                    }
                 }]
             }]
         });
@@ -90,6 +103,14 @@ export class ServerlessWikiStack extends cdk.Stack {
         this.apiFunction.addToRolePolicy(new IAM.PolicyStatement({
             actions: ['cognito-idp:*'],
             resources: [this.userPool.userPoolArn]
+        }));
+        this.apiFunction.addToRolePolicy(new IAM.PolicyStatement({
+            actions: ['rds-data:ExecuteStatement'],
+            resources: [this.getDatabaseArn()]
+        }));
+        this.apiFunction.addToRolePolicy(new IAM.PolicyStatement({
+            actions: ['secretsmanager:GetSecretValue'],
+            resources: [this.databaseCredentialsSecret.secretArn]
         }));
         this.endpoint = new apigw.LambdaRestApi(this, Config.appEnv() + '-endpoint', {
             restApiName: Config.appEnv() + '-endpoint',

@@ -1,13 +1,24 @@
+clodfront api stuff seems to be working - see if I can set the headers to *
+
+
+- Can't configure query params to go through without breaking other things
+
+
 - Documentation
 
+
+- build frontend and backend when deploying
+- get per-user todos
 - something more lightweight than npm run?
 - sns for sending forgot password emails
 - domain name
+- cookie policy/privacy policy for staklist
 - rename req.user to req.jwtInfo or similar
 - Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
 - change username to email and userId to email
 - jest tests
 - Use refresh token
+- sensible stack traces/source maps for lambda?
 - Ensure that dataapi only inits once in lambda
 - consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 - fail migrations if statement has changed
