@@ -25,11 +25,11 @@ import './css/main.css';
         '/confirmforgotpassword': ConfirmForgotPasswordPage,
     });
 
-    // if (AuthClient.user.userId){
-    //     m.route.set('/home');
-    // }
-    // else {
-    //     m.route.set('/splash');
-    // }
+    if (AuthClient.user.userId){
+        m.route.set('/home');
+    }
+    else {
+        m.route.set('/splash');
+    }
 
 })();
