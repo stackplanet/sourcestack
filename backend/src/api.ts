@@ -6,12 +6,14 @@ import cookieParser = require('cookie-parser');
 import { AuthHandler } from './authhandler';
 import { BackendConfig } from './backendconfig';
 import { DataApi } from './dataapi';
+import compression = require('compression');
 
 export function configureApp() {
     const app = express();
     app.use(json());
     app.use(cookieParser());
     app.use(bodyParser.json());
+    app.use(compression());
     app.use(bodyParser.urlencoded({ extended: true }));
     BackendConfig.init();
     AuthHandler.init(BackendConfig.instance, app);
@@ -19,7 +21,7 @@ export function configureApp() {
 
     app.get('/api/ping', async (req, res) => {
         console.log('ping')
-        res.send('pongo');
+        res.send('pong');
     });
 
     app.get('/api/private/ping', async (req, res) => {
