@@ -32,6 +32,7 @@ export class ServerlessWikiStack extends cdk.Stack {
         this.cognito();
         this.backend();
         this.frontend();
+        this.outputs();
     }
     
     frontend() {

@@ -1,5 +1,6 @@
 - Documentation
 - something more lightweight than npm run?
+- build when deploying
 - sns for sending forgot password emails
 - cookie policy/privacy policy for staklist
 - rename req.user to req.jwtInfo or similar
