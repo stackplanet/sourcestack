@@ -17,7 +17,7 @@ export class UserHomePage {
 
     view() {
         return <Page>
-            <input id="newTodo" class="w-full h-20 px-5 text-xl" type="text" placeholder="What needs to be done?" onchange={() => this.createTodo()}/>
+            <input id="newTodo" autocomplete="no" class="w-full h-20 px-5 text-xl" type="text" placeholder="What needs to be done?" onchange={() => this.createTodo()}/>
             <WithSpinner loading={this.loading}>
                 <ul>
                     {this.results.map((t:Todo) => <li class="h-20 border-b-2 w-full hover:bg-gray-200 flex items-center px-5 text-xl justify-between"
