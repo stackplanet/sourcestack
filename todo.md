@@ -1,7 +1,6 @@
 - Documentation
 - something more lightweight than npm run?
 - sns for sending forgot password emails
-- domain name
 - cookie policy/privacy policy for staklist
 - rename req.user to req.jwtInfo or similar
 - Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?

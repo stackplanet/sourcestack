@@ -5,8 +5,9 @@ import cognito = require('@aws-cdk/aws-cognito');
 import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
 import * as rds from '@aws-cdk/aws-rds';
+import * as route53 from '@aws-cdk/aws-route53';
 import * as secretsManager from '@aws-cdk/aws-secretsmanager';
-import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods } from '@aws-cdk/aws-cloudfront';
+import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods, SSLMethod } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
 import { VerificationEmailStyle, OAuthScope } from '@aws-cdk/aws-cognito';
 import { StackOutput } from './stackoutput';
@@ -31,10 +32,10 @@ export class ServerlessWikiStack extends cdk.Stack {
         this.cognito();
         this.backend();
         this.frontend();
-        this.outputs();
     }
-
+    
     frontend() {
+        
         this.bucket = new S3.Bucket(this, Config.appEnv() + '-hosting-bucket', {
             bucketName: Config.appEnv() + '-hosting-bucket',
             websiteIndexDocument: 'index.html',
@@ -44,6 +45,11 @@ export class ServerlessWikiStack extends cdk.Stack {
         let oai = new OriginAccessIdentity(this, Config.appEnv() + '-oai');
         this.distribution = new CloudFrontWebDistribution(this, Config.appEnv() + '-distribution', {
             comment: Config.appEnv() + ' distribution',
+            aliasConfiguration: {
+                names: [Config.env() + '.' + Config.domain()],
+                acmCertRef: Config.certificateArn(),
+                sslMethod: SSLMethod.SNI
+            },
             originConfigs: [{
                 s3OriginSource: {
                     s3BucketSource: this.bucket,
@@ -72,6 +78,18 @@ export class ServerlessWikiStack extends cdk.Stack {
                 }]
             }]
         });
+        if (Config.domain()){
+            new route53.CfnRecordSet(this, Config.appEnv() + '-recordset', {
+                hostedZoneName: Config.domain() + '.',
+                name: Config.env() + '.' + Config.domain(),
+                type: 'A',
+                aliasTarget: {
+                    // See https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html
+                    hostedZoneId: 'Z2FDTNDATAQYW2',
+                    dnsName: this.distribution.domainName
+                }
+            })
+        }
         this.bucket.addToResourcePolicy(new IAM.PolicyStatement({
             effect: IAM.Effect.ALLOW,
             resources: [

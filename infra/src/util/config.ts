@@ -20,12 +20,29 @@ export class Config {
     }
 
     static app(){
-        let appConfig = require('../../../app.json')
-        return appConfig.name;
+        return this.loadConfig().name;
     }
 
     static appEnv(){
         return this.app() + '-' + this.env();
     }
+
+    static hostedZoneId(){
+        return this.loadConfig().hostedZoneId;
+    }
+
+    static domain(){
+        return this.loadConfig().domain;
+    }
+
+    static certificateArn(){
+        return this.loadConfig().certificateArn;
+    }
+
+    private static loadConfig(){
+        return require('../../../app.json');
+    }
+
+
 
 }
