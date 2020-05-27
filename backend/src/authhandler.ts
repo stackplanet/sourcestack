@@ -33,8 +33,8 @@ export namespace AuthHandler {
                     res.send(<UserDetails>{loginError:'Invalid Cognito response from initiate auth: ' + JSON.stringify(authResponse)});
                 }
                 else {
-                    res.cookie('auth_token', authResponse.AuthenticationResult.AccessToken);
-                    res.cookie('refresh_token', authResponse.AuthenticationResult.RefreshToken);
+                    res.cookie('auth_token', authResponse.AuthenticationResult.AccessToken, {httpOnly: true, secure: true});
+                    res.cookie('refresh_token', authResponse.AuthenticationResult.RefreshToken, {httpOnly: true, secure: true});
                     res.send(<UserDetails>{userId: req.body.username});
                 }
 

@@ -1,7 +1,11 @@
-- Documentation
-- something more lightweight than npm run?
-- build when deploying
 - sns for sending forgot password emails
+- BYODB
+- Documentation
+- something more lightweight than npm run? maybe wrapper script or yarn?
+  - see https://classic.yarnpkg.com/en/docs/cli/run/
+- build when deploying
+- allow an external database to be used
+- consider postgres and look at https://github.com/adelsz/pgtyped and https://news.ycombinator.com/item?id=23302549
 - cookie policy/privacy policy for staklist
 - rename req.user to req.jwtInfo or similar
 - Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
@@ -15,7 +19,8 @@
 - Bug - no error when signing in as non-existent user in cloud
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
-
+- Test on IE and other browsers
+- 
 # After launch
 
 - make scripts cross-platform
