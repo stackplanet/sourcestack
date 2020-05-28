@@ -1,5 +1,5 @@
 import m from 'mithril';
-import { Page } from "./page";
+import { Page } from "../components/page";
 import { AuthClient } from '../authclient';
 import { Todo} from '../todo'
 import { WithSpinner } from '../components/withspinner';

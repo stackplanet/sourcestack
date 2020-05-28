@@ -1,4 +1,4 @@
-import { Page } from './page';
+import { Page } from '../components/page';
 import m from 'mithril';
 import { AuthClient } from '../authclient';
 

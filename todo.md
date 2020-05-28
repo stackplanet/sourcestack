@@ -6,7 +6,7 @@
 - build when deploying
 - allow an external database to be used
 - consider postgres and look at https://github.com/adelsz/pgtyped and https://news.ycombinator.com/item?id=23302549
-- cookie policy/privacy policy for staklist
+- cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - rename req.user to req.jwtInfo or similar
 - Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
 - change username to email and userId to email
