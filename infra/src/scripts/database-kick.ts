@@ -1,4 +1,4 @@
-import { Database } from "../database";
+import { Database } from "../util/database";
 import { Config } from "../util/config";
 
 (async () => {

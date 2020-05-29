@@ -1,4 +1,4 @@
-import { Database } from "../database";
+import { Database } from "../util/database";
 
 (async () => {
     let conn = await Database.connect();

@@ -1,5 +1,5 @@
-import { Config } from "./util/config";
-import { readStackOutputFile } from "./stackoutput";
+import { Config } from "./config";
+import { readStackOutputFile } from "../stackoutput";
 
 export namespace Database {
 
