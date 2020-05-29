@@ -1,6 +1,6 @@
-import { execute } from "./util/execute";
-import { Config } from "./util/config";
-import { fromStack } from "./stackoutput";
+import { execute } from "../util/execute";
+import { Config } from "../util/config";
+import { fromStack } from "../stackoutput";
 
 (async () => {
     Config.ensureArgsSupplied();

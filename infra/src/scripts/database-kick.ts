@@ -1,5 +1,5 @@
-import { Database } from "./database";
-import { Config } from "./util/config";
+import { Database } from "../database";
+import { Config } from "../util/config";
 
 (async () => {
     let conn = await Database.connect();

@@ -1,3 +1,5 @@
+- per-application schemas and migration tables
+
 - sns for sending forgot password emails
 - BYODB
 - Documentation

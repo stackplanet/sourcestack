@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "scripts": {
     "deploy-infra": "cdk deploy --require-approval=never",
-    "deploy-frontend": "ts-node src/deploy-frontend.ts",
-    "deploy-backend": "ts-node src/deploy-backend.ts",
-    "kick-database": "ts-node src/kick-database.ts",
-    "query": "ts-node src/query.ts",
-    "migrate-database": "ts-node src/migrate-database.ts",
-    "use-backend": "ts-node src/use-backend.ts"
+    "deploy-frontend": "ts-node src/scripts/deploy-frontend.ts",
+    "deploy-backend": "ts-node src/scripts/deploy-backend.ts",
+    "database-kick": "ts-node src/scripts/database-kick.ts",
+    "database-query": "ts-node src/scripts/database-query.ts",
+    "database-migrate": "ts-node src/scripts/database-migrate.ts",
+    "use-backend": "ts-node src/scripts/use-backend.ts"
   },
   "devDependencies": {
     "@types/node": "8.10.45",

@@ -1,8 +1,8 @@
-import { execute } from "./util/execute";
+import { execute } from "../util/execute";
 import { writeFileSync } from "fs";
-import { Config } from "./util/config";
-import { fromStack, StackOutput } from "./stackoutput";
-import {BackendConfig} from '../../backend/src/backendconfig';
+import { Config } from "../util/config";
+import { fromStack, StackOutput } from "../stackoutput";
+import {BackendConfig} from '../../../backend/src/backendconfig';
 let jwkToPem = require('jwk-to-pem');
 
 (async () => {

@@ -1,5 +1,5 @@
-import { Config } from "./util/config";
-import { fromStack, writeStackOutputFile } from "./stackoutput";
+import { Config } from "../util/config";
+import { fromStack, writeStackOutputFile } from "../stackoutput";
 import { writeBackendConfig } from "./deploy-backend";
 
 (async () => {

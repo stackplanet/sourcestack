@@ -2,6 +2,7 @@ import { CloudFormation } from "aws-sdk";
 import { readFileSync, writeFileSync, existsSync } from "fs";
 
 export interface StackOutput {
+
     DistributionUri: string,
     DistributionId: string;
     HostingBucket: string;
@@ -11,6 +12,7 @@ export interface StackOutput {
     UserPoolClientId: string;
     DatabaseArn: string;
     DatabaseSecretArn: string;
+    
 }
 
 

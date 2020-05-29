@@ -1,4 +1,4 @@
-import { MigrationRunner } from "./migrationrunner";
+import { MigrationRunner } from "../migrationrunner";
 
 (async () => {
 
