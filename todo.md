@@ -5,7 +5,6 @@
 - Documentation
 - something more lightweight than npm run? maybe wrapper script or yarn?
   - see https://classic.yarnpkg.com/en/docs/cli/run/
-- build when deploying
 - allow an external database to be used
 - consider postgres and look at https://github.com/adelsz/pgtyped and https://news.ycombinator.com/item?id=23302549
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/

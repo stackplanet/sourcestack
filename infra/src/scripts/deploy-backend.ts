@@ -7,6 +7,7 @@ let jwkToPem = require('jwk-to-pem');
 
 (async () => {
     Config.ensureArgsSupplied();
+    await execute(`cd ../backend && npm run build`);
     let stackOutputs = await fromStack(Config.appEnv());
     writeBackendConfig('../backend/dist', stackOutputs);
     await execute(`cd ../backend/dist && zip ../dist.zip *`);
