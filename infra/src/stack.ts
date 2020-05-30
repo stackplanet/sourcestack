@@ -36,7 +36,6 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
     
     frontend() {
-        
         this.bucket = new S3.Bucket(this, Config.appEnv() + '-hosting-bucket', {
             bucketName: Config.appEnv() + '-hosting-bucket',
             websiteIndexDocument: 'index.html',
@@ -85,8 +84,7 @@ export class ServerlessWikiStack extends cdk.Stack {
                 name: Config.env() + '.' + Config.domain(),
                 type: 'A',
                 aliasTarget: {
-                    // See https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-route53-aliastarget.html
-                    hostedZoneId: 'Z2FDTNDATAQYW2',
+                    hostedZoneId: 'Z2FDTNDATAQYW2', // cloudfront.net
                     dnsName: this.distribution.domainName
                 }
             })
@@ -143,9 +141,7 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
 
     database(){
-
         this.databaseCredentialsSecret = new secretsManager.Secret(this, 'DBCredentialsSecret', {
-            
             secretName: `${Config.appEnv()}-credentials`,
             generateSecretString: {
                 secretStringTemplate: JSON.stringify({
@@ -158,8 +154,7 @@ export class ServerlessWikiStack extends cdk.Stack {
             generateStringKey: 'password'
         }
         });
-
-        const isDev = true;
+        const production = Config.env() === 'production';
         this.rdsCluster = new rds.CfnDBCluster(this, `${Config.appEnv()}-cluster`, {
             dbClusterIdentifier: `${Config.appEnv()}-cluster`,
             engineMode: 'serverless',
@@ -168,15 +163,15 @@ export class ServerlessWikiStack extends cdk.Stack {
             databaseName: 'main',
             masterUsername: 'root',
             masterUserPassword: this.databaseCredentialsSecret.secretValueFromJson('password').toString(),
-            backupRetentionPeriod: isDev ? 1 : 30,
-            deletionProtection: !isDev,
+            backupRetentionPeriod: Config.isProduction() ? 30 : 1,
+            deletionProtection: Config.isProduction(),
             scalingConfiguration: {
-                autoPause: true,
-                maxCapacity: isDev ? 8 : 8,
+                // autoPause: !Config.isProduction(),
+                autoPause: true, // You might want to replace this with the line above - check pricing first!
+                maxCapacity: Config.isProduction() ? 8 : 4,
                 minCapacity: 1,
-                secondsUntilAutoPause: isDev ? 3600 : 10800,
+                secondsUntilAutoPause: Config.isProduction() ? 10800 : 3600,
             }});
-
     }
 
     cognito(){
@@ -249,7 +244,6 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
 
 }
-
 
 const app = new cdk.App();
 new ServerlessWikiStack(app, Config.appEnv());

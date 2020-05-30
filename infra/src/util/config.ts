@@ -39,6 +39,10 @@ export class Config {
         return this.loadConfig().certificateArn;
     }
 
+    static isProduction(){
+        return this.env() === 'production';
+    }
+
     private static loadConfig(){
         return require('../../../app.json');
     }
