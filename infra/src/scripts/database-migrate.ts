@@ -9,9 +9,7 @@ import { MigrationRunner } from "../util/migrationrunner";
         \`userid\` varchar(100) not null,
         \`value\` varchar(1000) not null,
         \`created\` datetime not null default current_timestamp,
-        \`status\` varchar(20) not null,
         primary key (\`id\`)
     );`);
-    
 })();
 

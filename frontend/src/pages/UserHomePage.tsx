@@ -44,8 +44,7 @@ export class UserHomePage {
         let todo:Todo = {
             value: input.value,
             userid: AuthClient.user.userId, // TODO - move this to server side
-            created: new Date(),
-            status: 'new'
+            created: new Date()
         }
         await m.request({
             method: 'POST',

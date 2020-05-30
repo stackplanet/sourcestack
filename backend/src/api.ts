@@ -32,8 +32,8 @@ export function configureApp() {
     });
 
     app.post('/api/todo', async (req, res) => {
-        await DataApi.query(res, `insert into todos (userid, value, status) 
-            values (:userid, :value, :status)`, req.body);
+        await DataApi.query(res, `insert into todos (userid, value) 
+            values (:userid, :value)`, req.body);
     });
 
     app.delete('/api/todo', async (req, res) => {
