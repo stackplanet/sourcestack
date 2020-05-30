@@ -20,7 +20,6 @@ export function configureApp() {
     DataApi.init();
 
     app.get('/api/ping', async (req, res) => {
-        console.log('ping')
         res.send('pong');
     });
 
