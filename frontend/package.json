@@ -1,6 +1,6 @@
 {
-    "name": "webapp",
-    "version": "1.0.0",
+    "name": "frontend",
+    "version": "0.0.1",
     "description": "Web App",
     "dependencies": {
         "bulma": "^0.8.2",

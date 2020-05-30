@@ -1,6 +1,6 @@
 {
-  "name": "lambda",
-  "version": "1.0.0",
+  "name": "backend",
+  "version": "0.0.1",
   "description": "",
   "main": "hello.js",
   "scripts": {
