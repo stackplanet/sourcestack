@@ -13,7 +13,6 @@ export namespace Database {
     }
 
     export async function connect(){
-        Config.ensureArgsSupplied();
         let stackOutputs = readStackOutputFile();
         return require('data-api-client')({
             secretArn: stackOutputs.DatabaseSecretArn,

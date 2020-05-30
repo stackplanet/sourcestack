@@ -3,11 +3,10 @@ import { fromStack, writeStackOutputFile } from "../stackoutput";
 import { writeBackendConfig } from "./deploy-backend";
 
 (async () => {
-    Config.ensureArgsSupplied();
-    console.log('Using backend ' + Config.appEnv())
-    let stackOutputs = await fromStack(Config.appEnv());
+    console.log('Using backend ' + Config.instance.appEnv)
+    let stackOutputs = await fromStack(Config.instance.appEnv);
     await writeBackendConfig('../backend/src', stackOutputs);
     writeStackOutputFile(stackOutputs);
-    console.log('Local server configured to use backend ' + Config.appEnv() + '. Please restart the server.');
+    console.log('Local server configured to use backend ' + Config.instance.appEnv + '. Please restart the server.');
 })();
 

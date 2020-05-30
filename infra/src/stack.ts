@@ -26,8 +26,7 @@ export class ServerlessWikiStack extends cdk.Stack {
 
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
-        Config.ensureArgsSupplied();
-        console.log(Config.appEnv())
+        console.log(Config.instance.appEnv)
         this.database();
         this.cognito();
         this.backend();
@@ -36,18 +35,18 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
     
     frontend() {
-        this.bucket = new S3.Bucket(this, Config.appEnv() + '-hosting-bucket', {
-            bucketName: Config.appEnv() + '-hosting-bucket',
+        this.bucket = new S3.Bucket(this, Config.instance.appEnv + '-hosting-bucket', {
+            bucketName: Config.instance.appEnv + '-hosting-bucket',
             websiteIndexDocument: 'index.html',
             websiteErrorDocument: 'index.html',
             removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
-        let oai = new OriginAccessIdentity(this, Config.appEnv() + '-oai');
-        this.distribution = new CloudFrontWebDistribution(this, Config.appEnv() + '-distribution', {
-            comment: Config.appEnv() + ' distribution',
+        let oai = new OriginAccessIdentity(this, Config.instance.appEnv + '-oai');
+        this.distribution = new CloudFrontWebDistribution(this, Config.instance.appEnv + '-distribution', {
+            comment: Config.instance.appEnv + ' distribution',
             aliasConfiguration: {
-                names: [Config.env() + '.' + Config.domain()],
-                acmCertRef: Config.certificateArn(),
+                names: [Config.instance.env + '.' + Config.instance.domain],
+                acmCertRef: Config.instance.certificateArn,
                 sslMethod: SSLMethod.SNI
             },
             originConfigs: [{
@@ -78,10 +77,10 @@ export class ServerlessWikiStack extends cdk.Stack {
                 }]
             }]
         });
-        if (Config.domain()){
-            new route53.CfnRecordSet(this, Config.appEnv() + '-recordset', {
-                hostedZoneName: Config.domain() + '.',
-                name: Config.env() + '.' + Config.domain(),
+        if (Config.instance.domain){
+            new route53.CfnRecordSet(this, Config.instance.appEnv + '-recordset', {
+                hostedZoneName: Config.instance.domain + '.',
+                name: Config.instance.env + '.' + Config.instance.domain,
                 type: 'A',
                 aliasTarget: {
                     hostedZoneId: 'Z2FDTNDATAQYW2', // cloudfront.net
@@ -108,8 +107,8 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
 
     backend() {
-        this.apiFunction = new lambda.Function(this, Config.appEnv() + '-api', {
-            functionName: Config.appEnv() + '-api',
+        this.apiFunction = new lambda.Function(this, Config.instance.appEnv + '-api', {
+            functionName: Config.instance.appEnv + '-api',
             code: lambda.Code.asset('../backend/dist'),
             runtime: lambda.Runtime.NODEJS_10_X,
             handler: 'handler.handler',
@@ -129,8 +128,8 @@ export class ServerlessWikiStack extends cdk.Stack {
             actions: ['secretsmanager:GetSecretValue'],
             resources: [this.databaseCredentialsSecret.secretArn]
         }));
-        this.endpoint = new apigw.LambdaRestApi(this, Config.appEnv() + '-endpoint', {
-            restApiName: Config.appEnv() + '-endpoint',
+        this.endpoint = new apigw.LambdaRestApi(this, Config.instance.appEnv + '-endpoint', {
+            restApiName: Config.instance.appEnv + '-endpoint',
             handler: this.apiFunction,
             proxy: true
         })
@@ -142,7 +141,7 @@ export class ServerlessWikiStack extends cdk.Stack {
 
     database(){
         this.databaseCredentialsSecret = new secretsManager.Secret(this, 'DBCredentialsSecret', {
-            secretName: `${Config.appEnv()}-credentials`,
+            secretName: `${Config.instance.appEnv}-credentials`,
             generateSecretString: {
                 secretStringTemplate: JSON.stringify({
                 username: 'root',
@@ -154,29 +153,29 @@ export class ServerlessWikiStack extends cdk.Stack {
             generateStringKey: 'password'
         }
         });
-        const production = Config.env() === 'production';
-        this.rdsCluster = new rds.CfnDBCluster(this, `${Config.appEnv()}-cluster`, {
-            dbClusterIdentifier: `${Config.appEnv()}-cluster`,
+        const production = Config.instance.production;
+        this.rdsCluster = new rds.CfnDBCluster(this, `${Config.instance.appEnv}-cluster`, {
+            dbClusterIdentifier: `${Config.instance.appEnv}-cluster`,
             engineMode: 'serverless',
             engine: 'aurora',
             enableHttpEndpoint: true,
             databaseName: 'main',
             masterUsername: 'root',
             masterUserPassword: this.databaseCredentialsSecret.secretValueFromJson('password').toString(),
-            backupRetentionPeriod: Config.isProduction() ? 30 : 1,
-            deletionProtection: Config.isProduction(),
+            backupRetentionPeriod: production ? 30 : 1,
+            deletionProtection: production,
             scalingConfiguration: {
-                // autoPause: !Config.isProduction(),
+                // autoPause: !production,
                 autoPause: true, // You might want to replace this with the line above - check pricing first!
-                maxCapacity: Config.isProduction() ? 8 : 4,
+                maxCapacity: production ? 8 : 4,
                 minCapacity: 1,
-                secondsUntilAutoPause: Config.isProduction() ? 10800 : 3600,
+                secondsUntilAutoPause: production ? 10800 : 3600,
             }});
     }
 
     cognito(){
-        this.userPool = new cognito.UserPool(this, Config.appEnv() + '-user-pool', {
-            userPoolName: Config.appEnv() + '-userpool',
+        this.userPool = new cognito.UserPool(this, Config.instance.appEnv + '-user-pool', {
+            userPoolName: Config.instance.appEnv + '-userpool',
             selfSignUpEnabled: true,
             signInAliases: {
                 email: true
@@ -185,7 +184,7 @@ export class ServerlessWikiStack extends cdk.Stack {
                 email: true
             },
             userVerification: {
-                emailSubject: 'Verify your email for ' + Config.app(),
+                emailSubject: 'Verify your email for ' + Config.instance.app,
                 emailBody: `Your verification code is: <h1>{####}</h1>`,
                 emailStyle: VerificationEmailStyle.CODE,
             },
@@ -198,8 +197,8 @@ export class ServerlessWikiStack extends cdk.Stack {
             }
         });
 
-        this.userPoolClient = new cognito.UserPoolClient(this, Config.appEnv() + 'user-pool-client', {
-            userPoolClientName: Config.appEnv() + 'user-pool-client',
+        this.userPoolClient = new cognito.UserPoolClient(this, Config.instance.appEnv + 'user-pool-client', {
+            userPoolClientName: Config.instance.appEnv + 'user-pool-client',
             authFlows: {
                 adminUserPassword: true,
                 refreshToken: true
@@ -219,10 +218,10 @@ export class ServerlessWikiStack extends cdk.Stack {
         const cfnUserPoolClient = this.userPoolClient.node.defaultChild as cognito.CfnUserPoolClient;
         cfnUserPoolClient.supportedIdentityProviders = ['COGNITO'];
 
-        new cognito.UserPoolDomain(this, Config.appEnv() + '-user-pool-domain', {
+        new cognito.UserPoolDomain(this, Config.instance.appEnv + '-user-pool-domain', {
             userPool: this.userPool,
             cognitoDomain: {
-                domainPrefix: Config.appEnv()
+                domainPrefix: Config.instance.appEnv
 
             }
         });
@@ -246,4 +245,4 @@ export class ServerlessWikiStack extends cdk.Stack {
 }
 
 const app = new cdk.App();
-new ServerlessWikiStack(app, Config.appEnv());
+new ServerlessWikiStack(app, Config.instance.appEnv);

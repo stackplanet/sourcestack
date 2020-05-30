@@ -1,7 +1,5 @@
 Add --nuke to database-migrate
 
-- Rename app.json to stak.json and introduce interface
-
 - per-application schemas and migration tables
 - remove /api from the endpoints - this is a given
 
@@ -9,15 +7,13 @@ Add --nuke to database-migrate
 - Change /todos endpoint to private
 - BYODB
 - Documentation
-- something more lightweight than npm run? maybe wrapper script or yarn?
-  - see https://classic.yarnpkg.com/en/docs/cli/run/
 - allow an external database to be used
 - consider postgres and look at https://github.com/adelsz/pgtyped and https://news.ycombinator.com/item?id=23302549
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - rename req.user to req.jwtInfo or similar
 - Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
 - change username to email and userId to email
-- jest tests
+- End to end tests
 - Add 'allowedEnvs' to stak.json
 - Use refresh token
 - sensible stack traces/source maps for lambda?

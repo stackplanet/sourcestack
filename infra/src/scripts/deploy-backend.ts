@@ -6,9 +6,8 @@ import {BackendConfig} from '../../../backend/src/backendconfig';
 let jwkToPem = require('jwk-to-pem');
 
 (async () => {
-    Config.ensureArgsSupplied();
     await execute(`cd ../backend && npm run build`);
-    let stackOutputs = await fromStack(Config.appEnv());
+    let stackOutputs = await fromStack(Config.instance.appEnv);
     writeBackendConfig('../backend/dist', stackOutputs);
     await execute(`cd ../backend/dist && zip ../dist.zip *`);
     await execute(`aws lambda --region eu-west-1 update-function-code --function-name ${stackOutputs.FunctionName} --zip-file fileb://../backend/dist.zip`);
@@ -17,8 +16,8 @@ let jwkToPem = require('jwk-to-pem');
 
 export async function writeBackendConfig(dir: string, stackOutput: StackOutput){
     let backendConfig: BackendConfig = {
-        app: Config.app(),
-        env: Config.env(),
+        app: Config.instance.app,
+        env: Config.instance.env,
         UserPoolId: stackOutput.UserPoolId, 
         UserPoolClientId: stackOutput.UserPoolClientId,
         DatabaseArn: stackOutput.DatabaseArn,
