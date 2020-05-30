@@ -10,7 +10,7 @@ export class DataApi {
         DataApi.dataApi = require('data-api-client')({
             secretArn: config.DatabaseSecretArn,
             resourceArn: config.DatabaseArn,
-            database: 'main'
+            database: config.app
         });
     }
 

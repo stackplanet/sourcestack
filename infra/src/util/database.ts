@@ -1,14 +1,9 @@
-import { Config } from "./config";
 import { readStackOutputFile } from "../stackoutput";
 
 export namespace Database {
 
-    export async function query(conn:any, sql: string){
-        console.log(sql);
-        let res = await conn.query(sql, {
-            continueAfterTimeout: true,
-            username: 'root'
-        });
+    export async function query(conn:any, sql: string, params?: any){
+        let res = await conn.query(sql, params);
         return res.records; 
     }
 

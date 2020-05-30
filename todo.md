@@ -1,8 +1,7 @@
-Add --nuke to database-migrate
-
-- per-application schemas and migration tables
+- move to file-based migrations
 - remove /api from the endpoints - this is a given
 
+- add allowedEnvironments to app.json
 - sns for sending forgot password emails
 - Change /todos endpoint to private
 - BYODB
@@ -14,6 +13,7 @@ Add --nuke to database-migrate
 - Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
 - change username to email and userId to email
 - End to end tests
+- Tests for migrations
 - Add 'allowedEnvs' to stak.json
 - Use refresh token
 - sensible stack traces/source maps for lambda?
