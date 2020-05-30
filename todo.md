@@ -1,6 +1,10 @@
+- Rename app.json to stak.json and introduce interface
+
 - per-application schemas and migration tables
+- remove /api from the endpoints - this is a given
 
 - sns for sending forgot password emails
+- Change /todos endpoint to private
 - BYODB
 - Documentation
 - something more lightweight than npm run? maybe wrapper script or yarn?
@@ -12,6 +16,7 @@
 - Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
 - change username to email and userId to email
 - jest tests
+- Add 'allowedEnvs' to stak.json
 - Use refresh token
 - sensible stack traces/source maps for lambda?
 - Ensure that dataapi only inits once in lambda
@@ -21,6 +26,10 @@
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
 - Test on IE and other browsers
+
+
+
+
 - 
 # After launch
 
@@ -46,6 +55,8 @@
 - 
 
 # Notes
+
+1 ACU/h is $0.07 in London, so $52/m
 
 Keep the faith on the custom auth
     https://github.com/aws-amplify/amplify-js/issues/3436
