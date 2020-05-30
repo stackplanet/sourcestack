@@ -1,3 +1,5 @@
+Add --nuke to database-migrate
+
 - Rename app.json to stak.json and introduce interface
 
 - per-application schemas and migration tables

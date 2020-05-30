@@ -50,7 +50,7 @@ This will take a while to complete, as CDK creates resources including the datab
 
 The script outputs `App running at https://xxxxxxx.cloudfront.net`. We'll learn later how to add your own domain name. 
 
-### Get the app running locally
+## Get the app running locally
 
 TODO - rename use-backend
 
@@ -59,21 +59,21 @@ TODO - rename use-backend
 
 Once the app has started, go to https://localhost:1234
 
-### Make a UI change
+## Make a UI change
 
 - Open `frontend/src/pages/splashpage.tsx` and change the title text.
 - You'll see the updated text at https://localhost:1234.
 - Run `npm run deploy-frontend --env=alpha`
 - You'll now see the updated text in the alpha environment.
 
-### Make an API change
+## Make an API change
 
 - Open `backend/src/api.ts` and change the text returned by the `/ping` endpoint.
 - You'll see the updated text at https://localhost:1234/api/ping.
 - Run `npm run deploy-api --env=alpha`
 - You'll now see the updated text in the alpha environment.
 
-### Make an infrastructure change
+## Make an infrastructure change
 
 - Open `infra/src/stack.ts`, find the `cognito()` function and change the text for `emailSubject`
 - Run `npm run deploy-infra --env=alpha`
@@ -81,8 +81,29 @@ Once the app has started, go to https://localhost:1234
 
 > Note that `npm run deploy` can be used to build and deploy the complete app (ui, api and infratructure). The `deploy-ui`, `deploy-api` and `deploy-infra` commands provide a faster route to deploy if only a part of the application has changed.
 
-### Make a database change
+## Run SQL against the database
 
+- Run `npm run database-query --env=alpha --query="insert into todos (userid, value) values ('jimbob', 'Wash dishes')"`
+- Run `npm run database-query --env=alpha --query="select * from todos"`
+
+## Add a database migration
+
+- Edit `infra/src/scripts/database-migrate.ts` and add a migration, e.g.
+  
+       await runner.run(2, `alter table todos add \`status\` varchar(20) default 'new'`);
+       
+- Run `npm run database-migrate --env=alpha` to run the migration. Note that migrations are also run as part of `npm run deploy`
+- Run `npm run database-query --env=alpha --query="desc todos"` and you should see the new column listed.
+
+## Debug the API locally
+
+Here's how to do this in VS Code:
+
+- Stop the `npm run start` process you started earlier (Ctrl-C)
+- In VS Code, run `Debug: Toggle Auto Attach` and ensure that *Auto Attach: On* appears in the status bar.
+- In the VS Code Terminal view, cd to the `stak` directory and run `npm run debug`
+- Open `backend/src/api.ts` and put a breakpoint in the `/ping` endpoint.
+- Go to https://localhost:1234/api/ping, and the VS Code debugger should open at the breakpoint.
 
 
 ## View logs
