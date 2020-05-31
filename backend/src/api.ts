@@ -44,16 +44,12 @@ export function configureApp() {
         res.send('pong');
     });
 
-    app.get('/api/private/ping', async (req, res) => {
-        res.send('pong');
-    })
-
-    app.get('/api/todos', async (req, res) => {
+    app.get('/api/private/todos', async (req, res) => {
         let result = await TodoItem.primaryKey.query({hash: req.user.userId as string});
         res.send(result.records.map(t => t.serialize()));
     });
 
-    app.post('/api/todo', async (req, res) => {
+    app.post('/api/private/todo', async (req, res) => {
         let todo = new TodoItem();
         todo.userId = req.user.userId as string;
         todo.taskId = new Date().getTime();
@@ -62,7 +58,7 @@ export function configureApp() {
         res.sendStatus(200);
     });
 
-    app.delete('/api/todo', async (req, res) => {
+    app.delete('/api/private/todo', async (req, res) => {
         await TodoItem.primaryKey.delete(req.user.userId as string, parseInt(req.query.id as string));
         res.sendStatus(200);
     });

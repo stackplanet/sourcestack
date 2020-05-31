@@ -7,12 +7,9 @@ dynamodb
 
 - End to end testing
 
-- move to file-based migrations
-- remove /api from the endpoints - this is a given
 
 - add allowedEnvironments to app.json
 - sns for sending forgot password emails
-- Change /todos endpoint to private
 - Documentation
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - rename req.user to req.jwtInfo or similar

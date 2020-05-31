@@ -34,7 +34,7 @@ export class UserHomePage {
     async deleteTodo(todo:Todo){
         await m.request({
             method: 'DELETE',
-            url: '/api/todo?id=' + todo.taskId,
+            url: '/api/private/todo?id=' + todo.taskId,
         });
         await this.refresh();
     }
@@ -47,7 +47,7 @@ export class UserHomePage {
         }
         await m.request({
             method: 'POST',
-            url: '/api/todo',
+            url: '/api/private/todo',
             body: todo
         });
         input.value = '';
@@ -59,7 +59,7 @@ export class UserHomePage {
         this.loading = true;
         m.redraw()
         this.results = await m.request({
-            url: '/api/todos'
+            url: '/api/private/todos'
         })
         this.loading = false;
         m.redraw();
