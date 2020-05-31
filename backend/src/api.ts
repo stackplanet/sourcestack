@@ -50,7 +50,7 @@ export function configureApp() {
 
     app.get('/api/todos', async (req, res) => {
         let result = await TodoItem.primaryKey.query({hash: req.user.userId as string});
-        res.send(result.records.map(t => {return {userId: t.userId, taskId: t.taskId, title: t.title}}));
+        res.send(result.records.map(t => t.serialize()));
     });
 
     app.post('/api/todo', async (req, res) => {
@@ -63,7 +63,6 @@ export function configureApp() {
     });
 
     app.delete('/api/todo', async (req, res) => {
-        // TODO make taskId a url param
         await TodoItem.primaryKey.delete(req.user.userId as string, parseInt(req.query.id as string));
         res.sendStatus(200);
     });
