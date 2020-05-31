@@ -1,25 +1,28 @@
+dynamodb
+    Raise ticket for 
+        res.send(result.records.map(t => {return {userId: t.userId, taskId: t.taskId, title: t.title}}));
+
+
+
+
+- End to end testing
+
 - move to file-based migrations
 - remove /api from the endpoints - this is a given
 
 - add allowedEnvironments to app.json
 - sns for sending forgot password emails
 - Change /todos endpoint to private
-- BYODB
 - Documentation
-- allow an external database to be used
-- consider postgres and look at https://github.com/adelsz/pgtyped and https://news.ycombinator.com/item?id=23302549
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - rename req.user to req.jwtInfo or similar
 - Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
 - change username to email and userId to email
-- End to end tests
-- Tests for migrations
-- Add 'allowedEnvs' to stak.json
+- Add 'allowedEnvs' to app.json
 - Use refresh token
 - sensible stack traces/source maps for lambda?
 - Ensure that dataapi only inits once in lambda
 - consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
-- fail migrations if statement has changed
 - Bug - no error when signing in as non-existent user in cloud
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"

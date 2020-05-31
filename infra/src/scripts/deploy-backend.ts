@@ -20,8 +20,6 @@ export async function writeBackendConfig(dir: string, stackOutput: StackOutput){
         env: Config.instance.env,
         UserPoolId: stackOutput.UserPoolId, 
         UserPoolClientId: stackOutput.UserPoolClientId,
-        DatabaseArn: stackOutput.DatabaseArn,
-        DatabaseSecretArn: stackOutput.DatabaseSecretArn,
         kidToPems: await getKidToPems(stackOutput.UserPoolId)
     }
     writeFileSync(dir + '/backend-config.json', JSON.stringify(backendConfig, null, 2));

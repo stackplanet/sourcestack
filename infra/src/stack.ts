@@ -2,11 +2,10 @@ import cdk = require('@aws-cdk/core');
 import lambda = require('@aws-cdk/aws-lambda');
 import apigw = require('@aws-cdk/aws-apigateway');
 import cognito = require('@aws-cdk/aws-cognito');
+import dynamodb = require('@aws-cdk/aws-dynamodb');
 import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
-import * as rds from '@aws-cdk/aws-rds';
 import * as route53 from '@aws-cdk/aws-route53';
-import * as secretsManager from '@aws-cdk/aws-secretsmanager';
 import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods, SSLMethod } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
 import { VerificationEmailStyle, OAuthScope } from '@aws-cdk/aws-cognito';
@@ -21,13 +20,10 @@ export class ServerlessWikiStack extends cdk.Stack {
     userPool: cognito.UserPool;
     userPoolClient: cognito.UserPoolClient;
     apiFunction: lambda.Function;
-    databaseCredentialsSecret: secretsManager.Secret;
-    rdsCluster: rds.CfnDBCluster;
 
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
         console.log(Config.instance.appEnv)
-        this.database();
         this.cognito();
         this.backend();
         this.frontend();
@@ -107,71 +103,32 @@ export class ServerlessWikiStack extends cdk.Stack {
     }
 
     backend() {
+        let tableName = Config.instance.appEnv + '-todos';
         this.apiFunction = new lambda.Function(this, Config.instance.appEnv + '-api', {
             functionName: Config.instance.appEnv + '-api',
             code: lambda.Code.asset('../backend/dist'),
             runtime: lambda.Runtime.NODEJS_10_X,
             handler: 'handler.handler',
             environment: {
-                
             }
         });
         this.apiFunction.addToRolePolicy(new IAM.PolicyStatement({
             actions: ['cognito-idp:*'],
             resources: [this.userPool.userPoolArn]
         }));
-        this.apiFunction.addToRolePolicy(new IAM.PolicyStatement({
-            actions: ['rds-data:ExecuteStatement'],
-            resources: [this.getDatabaseArn()]
-        }));
-        this.apiFunction.addToRolePolicy(new IAM.PolicyStatement({
-            actions: ['secretsmanager:GetSecretValue'],
-            resources: [this.databaseCredentialsSecret.secretArn]
-        }));
         this.endpoint = new apigw.LambdaRestApi(this, Config.instance.appEnv + '-endpoint', {
             restApiName: Config.instance.appEnv + '-endpoint',
             handler: this.apiFunction,
             proxy: true
         })
-    }
-
-    getDatabaseArn(){
-        return `arn:aws:rds:${this.region}:${this.account}:cluster:${this.rdsCluster.dbClusterIdentifier}`;
-    }
-
-    database(){
-        this.databaseCredentialsSecret = new secretsManager.Secret(this, 'DBCredentialsSecret', {
-            secretName: `${Config.instance.appEnv}-credentials`,
-            generateSecretString: {
-                secretStringTemplate: JSON.stringify({
-                username: 'root',
-            }),
-            excludePunctuation: true,
-            includeSpace: false,
-            passwordLength: 32,
-            excludeCharacters: '"@/\\',
-            generateStringKey: 'password'
-        }
+        let table = new dynamodb.Table(this, tableName, {
+            tableName: tableName,
+            partitionKey: { name: 'userId', type: dynamodb.AttributeType.STRING },
+            sortKey: { name: 'taskId', type: dynamodb.AttributeType.NUMBER }
         });
-        const production = Config.instance.production;
-        this.rdsCluster = new rds.CfnDBCluster(this, `${Config.instance.appEnv}-cluster`, {
-            dbClusterIdentifier: `${Config.instance.appEnv}-cluster`,
-            engineMode: 'serverless',
-            engine: 'aurora',
-            enableHttpEndpoint: true,
-            databaseName: 'main',
-            masterUsername: 'root',
-            masterUserPassword: this.databaseCredentialsSecret.secretValueFromJson('password').toString(),
-            backupRetentionPeriod: production ? 30 : 1,
-            deletionProtection: production,
-            scalingConfiguration: {
-                // autoPause: !production,
-                autoPause: true, // You might want to replace this with the line above - check pricing first!
-                maxCapacity: production ? 8 : 4,
-                minCapacity: 1,
-                secondsUntilAutoPause: production ? 10800 : 3600,
-            }});
+        table.grantReadWriteData(this.apiFunction);
     }
+
 
     cognito(){
         this.userPool = new cognito.UserPool(this, Config.instance.appEnv + '-user-pool', {
@@ -236,8 +193,6 @@ export class ServerlessWikiStack extends cdk.Stack {
             UserPoolClientId: this.userPoolClient.userPoolClientId,
             FunctionName: this.apiFunction.functionName,
             EndpointUrl: this.endpoint.url,
-            DatabaseArn: this.getDatabaseArn(),
-            DatabaseSecretArn: this.databaseCredentialsSecret.secretArn
         }
         Object.keys(outputs).forEach((k) => new cdk.CfnOutput(this, k, {value: outputs[k as keyof StackOutput]}));
     }

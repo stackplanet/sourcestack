@@ -12,7 +12,7 @@ A running version of the example todo list app can be found at [staklist.net](ht
 - Fast builds and fast incremental deployments.
 - Run and debug all of your application code locally, with hot reloading.
 - Adaptable login UI backed by Amazon Cognito.
-- Simple database migration mechanism.
+- A curated set of libraries and build tools that all play nicely together.
 
 ## Technology choices
 
@@ -20,7 +20,7 @@ Stak is really just a flexible template that you can use as a starting point for
 
 - The front end uses [Mithril](https://mithril.js.org) and [Tailwind CSS](https://tailwindcss.com), but could be adapted to use React, Vue, Bootstrap, Bulma etc if you prefer.
 - Express is used to provide a rest API, but you could replace this with GraphQL if that's your thing. TODO - what would you use?
-- [Aurora Serverless](https://aws.amazon.com/rds/aurora/serverless/) is used as a relational data store, but you can use DynamoDB, FaunaDB or something else. 
+- DynamoDB is the data store, but you can use Aurora, FaunaDB or something else (I have a fork which uses Aurora Serverless - contact me if you're interested).
 
 ## Limitations
 

@@ -10,9 +10,6 @@ export interface StackOutput {
     EndpointUrl: string;
     UserPoolId: string;
     UserPoolClientId: string;
-    DatabaseArn: string;
-    DatabaseSecretArn: string;
-    
 }
 
 
@@ -32,8 +29,6 @@ export async function fromStack(stackName: string): Promise<StackOutput> {
         EndpointUrl: output('EndpointUrl'),
         UserPoolId: output('UserPoolId'),
         UserPoolClientId: output('UserPoolClientId'),
-        DatabaseArn: output('DatabaseArn'),
-        DatabaseSecretArn: output('DatabaseSecretArn'),
     }
 }   
 

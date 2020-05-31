@@ -7,8 +7,6 @@ export interface BackendConfig {
     UserPoolId: string;
     UserPoolClientId: string;
     kidToPems: any;
-    DatabaseArn: string;
-    DatabaseSecretArn: string;
 }
 
 export namespace BackendConfig {

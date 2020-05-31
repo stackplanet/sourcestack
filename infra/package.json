@@ -5,9 +5,6 @@
     "deploy-infra": "cdk deploy --require-approval=never",
     "deploy-frontend": "ts-node src/scripts/deploy-frontend.ts",
     "deploy-backend": "ts-node src/scripts/deploy-backend.ts",
-    "database-kick": "ts-node src/scripts/database-kick.ts",
-    "database-query": "ts-node src/scripts/database-query.ts",
-    "database-migrate": "ts-node src/scripts/database-migrate.ts",
     "use-backend": "ts-node src/scripts/use-backend.ts"
   },
   "devDependencies": {
@@ -23,7 +20,6 @@
     "@aws-cdk/aws-dynamodb": "^1.41.0",
     "@aws-cdk/aws-iam": "^1.41.0",
     "@aws-cdk/aws-lambda": "^1.41.0",
-    "@aws-cdk/aws-rds": "^1.41.0",
     "@aws-cdk/aws-route53": "^1.41.0",
     "@aws-cdk/aws-s3": "^1.41.0",
     "@aws-cdk/aws-s3-deployment": "^1.41.0",

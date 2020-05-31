@@ -16,13 +16,10 @@
     "build": "npm-run-all build-frontend build-backend",
     "build-frontend": "npm run build --prefix=frontend",
     "build-backend": "npm run build --prefix=backend",
-    "deploy": "npm-run-all deploy-infra deploy-frontend deploy-backend database-migrate",
+    "deploy": "npm-run-all deploy-infra deploy-frontend deploy-backend",
     "deploy-frontend": "npm run deploy-frontend --prefix=infra",
     "deploy-backend": "npm run deploy-backend --prefix=infra",
     "deploy-infra": "npm run deploy-infra --prefix=infra",
-    "database-migrate": "npm run database-migrate --prefix=infra",
-    "database-kick": "npm run database-kick --prefix=infra",
-    "database-query": "npm run database-query --prefix=infra",
     "use-backend": "npm run use-backend --prefix=infra"
   },
   "repository": {

@@ -22,7 +22,7 @@ export class UserHomePage {
                 <ul>
                     {this.results.map((t:Todo) => <li class="h-20 border-b-2 w-full hover:bg-gray-200 flex items-center px-5 text-xl justify-between"
                         onmouseover={() => this.hoveredTodo = t}>
-                        <div>{t.value}</div> 
+                        <div>{t.title}</div> 
                         <button class="focus:outline-none" onclick={() => this.deleteTodo(t)}>×</button>
                     </li>)}
 
@@ -34,7 +34,7 @@ export class UserHomePage {
     async deleteTodo(todo:Todo){
         await m.request({
             method: 'DELETE',
-            url: '/api/todo?id=' + todo.id,
+            url: '/api/todo?id=' + todo.taskId,
         });
         await this.refresh();
     }
@@ -42,9 +42,8 @@ export class UserHomePage {
     async createTodo(){
         let input = document.getElementById('newTodo') as HTMLInputElement;
         let todo:Todo = {
-            value: input.value,
-            userid: AuthClient.user.userId, // TODO - move this to server side
-            created: new Date()
+            title: input.value,
+            userId: AuthClient.user.userId, // TODO - move this to server side
         }
         await m.request({
             method: 'POST',
