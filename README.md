@@ -111,6 +111,16 @@ Edit `app.json` and change `name` to the application name that you want, e.g.
 
 ## Create a new environment
 
+- The set of allowed environments is configured in `app.json`:
+
+        {
+            ...
+            "environments" : ["alpha","beta","production"]
+            ... 
+        }
+
+- This prevents typos from creating new environments, e.g. `npm run deploy --env=aphla` would result in an error.
+- To create a new environment, ensure that your environment name is in the list in `app.json` and then run `npm run deploy --env=<myenvironment>`
 
 ## Add a custom domain name 
 

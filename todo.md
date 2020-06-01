@@ -1,16 +1,16 @@
-dynamodb
-    Raise ticket for 
-        res.send(result.records.map(t => {return {userId: t.userId, taskId: t.taskId, title: t.title}}));
-
-
-- Document app.json and allow comments in it
-- Production deploys should go to the root domain
 
 - End to end testing
-  - Productio deploy
+  - Production deploys should go to the root domain
+  - Production deploy
+- Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
+
+- document certificate thing: thisisunsafe
+  - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
+  - why does this not happen for RA webpack server?
+
+
 
 - Use config pattern for backend-config
-- add allowedEnvironments to app.json
 - Documentation
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - rename req.user to req.jwtInfo or similar
@@ -35,17 +35,11 @@ dynamodb
   - https://aws.amazon.com/blogs/compute/building-better-apis-http-apis-now-generally-available/
   - Not GA in CDK yet, see https://github.com/aws/aws-cdk/issues/5301
 - Caching on Cloudfront for API Gateway - what is the best practice?
-- Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
 - git issues
     ssh -T git@github.com
     ssh: connect to host github.com port 22: No route to host
 
-- document certificate thing: thisisunsafe
-  - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
-  - why does this not happen for RA webpack server?
 - Fix email domain: noreply@staklist.net via amazonses.com 
-
-- Warning if deploying a new environment
 
 
 # Notes
