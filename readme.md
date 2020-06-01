@@ -112,7 +112,7 @@ Edit `app.json` and change `name` to the application name that you want, e.g.
 
 ## Add a custom domain name 
 
-- See [Use a custom domain](//readme-domain.md)
+- See [Use a custom domain](./readme-domain.md)
 
 
 ## 
