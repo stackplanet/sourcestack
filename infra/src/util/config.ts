@@ -1,3 +1,4 @@
+import { existsSync } from "fs";
 
 export class Config {
     
@@ -22,7 +23,8 @@ export class Config {
             console.error('Missing equals sign, please use --env=<environment>');
             process.exit(1);
         }
-        let config = require('../../../app.json');
+        let configFileName = process.env.STAK_CONFIG_FILE_NAME || 'app.json';
+        let config = require('../../../' + configFileName);
         this.app = config.name;
         if (this.app === undefined){
             console.error('App name not found in stak.json');

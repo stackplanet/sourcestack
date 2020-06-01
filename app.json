@@ -1,6 +1,3 @@
 {
-    "name" : "staklist",
-    "domain": "staklist.net",
-    "certificateArn": "arn:aws:acm:us-east-1:851426144384:certificate/a7664aa3-be5c-4c2c-967d-330cd7d83cca",
-    "cognitoEmailArn": "arn:aws:ses:eu-west-1:851426144384:identity/noreply@staklist.net"
+    "name" : "staklist"
 }

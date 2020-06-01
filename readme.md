@@ -25,7 +25,7 @@ Stak is really just a flexible template that you can use as a starting point for
 
 - The front end uses [Mithril](https://mithril.js.org) and [Tailwind CSS](https://tailwindcss.com), but could be adapted to use React, Vue, Bootstrap, Bulma etc if you prefer.
 - Express is used to provide a rest API, but you could replace this with GraphQL if that's your thing. TODO - what would you use?
-- DynamoDB is the data store, but you can use Aurora, FaunaDB or something else (I have a fork which uses Aurora Serverless - contact me if you're interested).
+- DynamoDB is the data store, but you can use Aurora, FaunaDB or something else (I have a fork that uses Aurora Serverless - contact me if you're interested).
 
 ## Limitations
 

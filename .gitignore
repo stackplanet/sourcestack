@@ -9,3 +9,4 @@ frontend/server.key
 
 backend/src/backend-config.json
 infra/current-stack.json
+app-override.json
