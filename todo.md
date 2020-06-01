@@ -3,22 +3,21 @@ dynamodb
         res.send(result.records.map(t => {return {userId: t.userId, taskId: t.taskId, title: t.title}}));
 
 
-
+- Document app.json and allow comments in it
+- Production deploys should go to the root domain
 
 - End to end testing
+  - Productio deploy
 
-
+- Use config pattern for backend-config
 - add allowedEnvironments to app.json
-- sns for sending forgot password emails
 - Documentation
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - rename req.user to req.jwtInfo or similar
 - Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
 - change username to email and userId to email
-- Add 'allowedEnvs' to app.json
 - Use refresh token
 - sensible stack traces/source maps for lambda?
-- Ensure that dataapi only inits once in lambda
 - consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 - Bug - no error when signing in as non-existent user in cloud
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
@@ -44,13 +43,10 @@ dynamodb
 - document certificate thing: thisisunsafe
   - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
   - why does this not happen for RA webpack server?
-
+- Fix email domain: noreply@staklist.net via amazonses.com 
 
 - Warning if deploying a new environment
 
-# Post launch
-
-- 
 
 # Notes
 

@@ -8,7 +8,7 @@ import * as IAM from '@aws-cdk/aws-iam';
 import * as route53 from '@aws-cdk/aws-route53';
 import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods, SSLMethod } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
-import { VerificationEmailStyle, OAuthScope } from '@aws-cdk/aws-cognito';
+import { VerificationEmailStyle, OAuthScope, CfnUserPool } from '@aws-cdk/aws-cognito';
 import { StackOutput } from './stackoutput';
 import { Duration } from '@aws-cdk/core';
 
@@ -41,7 +41,7 @@ export class ServerlessWikiStack extends cdk.Stack {
         this.distribution = new CloudFrontWebDistribution(this, Config.instance.appEnv + '-distribution', {
             comment: Config.instance.appEnv + ' distribution',
             aliasConfiguration: {
-                names: [Config.instance.env + '.' + Config.instance.domain],
+                names: [this.domainForEnvironment()],
                 acmCertRef: Config.instance.certificateArn,
                 sslMethod: SSLMethod.SNI
             },
@@ -76,7 +76,7 @@ export class ServerlessWikiStack extends cdk.Stack {
         if (Config.instance.domain){
             new route53.CfnRecordSet(this, Config.instance.appEnv + '-recordset', {
                 hostedZoneName: Config.instance.domain + '.',
-                name: Config.instance.env + '.' + Config.instance.domain,
+                name: this.domainForEnvironment(),
                 type: 'A',
                 aliasTarget: {
                     hostedZoneId: 'Z2FDTNDATAQYW2', // cloudfront.net
@@ -151,9 +151,18 @@ export class ServerlessWikiStack extends cdk.Stack {
                 requireLowercase: true,
                 requireUppercase: true,
                 requireSymbols: false
-            }
-        });
+            },
 
+        });
+        if (Config.instance.cognitoEmailArn){
+            const cfnUserPool = this.userPool.node.defaultChild as CfnUserPool;
+            cfnUserPool.emailConfiguration = {
+                emailSendingAccount: 'DEVELOPER',
+                replyToEmailAddress: 'noreply@' + Config.instance.domain,
+                from: 'noreply@' + Config.instance.domain,
+                sourceArn: Config.instance.cognitoEmailArn
+            };
+        }
         this.userPoolClient = new cognito.UserPoolClient(this, Config.instance.appEnv + 'user-pool-client', {
             userPoolClientName: Config.instance.appEnv + 'user-pool-client',
             authFlows: {
@@ -182,6 +191,11 @@ export class ServerlessWikiStack extends cdk.Stack {
 
             }
         });
+    }
+
+    domainForEnvironment(){
+        if (Config.instance.production) return Config.instance.domain;
+        else return Config.instance.env + '.' + Config.instance.domain;
     }
 
     outputs() {

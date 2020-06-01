@@ -9,6 +9,7 @@ export class Config {
     hostedZoneId: string;
     domain: string;
     certificateArn: string;
+    cognitoEmailArn: string;
     production: boolean;
 
     private constructor(){
