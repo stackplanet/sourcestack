@@ -16,11 +16,13 @@
     "build": "npm-run-all build-ui build-api",
     "build-ui": "npm run build --prefix=ui",
     "build-api": "npm run build --prefix=api",
-    "deploy": "npm-run-all build-api deploy-infra deploy-ui deploy-api",
+    "deploy": "npm-run-all build-api deploy-infra deploy-ui deploy-api stack-uri",
     "deploy-ui": "npm run deploy-ui --prefix=infra",
     "deploy-api": "npm run deploy-api --prefix=infra",
     "deploy-infra": "npm run deploy-infra --prefix=infra",
     "use-datastore": "npm run use-datastore --prefix=infra",
+    "stack-uri": "npm run stack-uri --prefix=infra",
+    "stack-outputs": "npm run stack-outputs --prefix=infra",
     "test-stak-scripts": "ts-node infra/test/test-scripts.ts"
   },
   "repository": {

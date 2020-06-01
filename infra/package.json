@@ -5,6 +5,8 @@
     "deploy-infra": "cdk deploy --require-approval=never",
     "deploy-ui": "ts-node src/scripts/deploy-ui.ts",
     "deploy-api": "ts-node src/scripts/deploy-api.ts",
+    "stack-uri": "ts-node src/scripts/stack-uri.ts",
+    "stack-outputs": "ts-node src/scripts/stack-outputs.ts",
     "use-datastore": "ts-node src/scripts/use-datastore.ts",
     "test-all": "ts-node test/test.ts"
   },
