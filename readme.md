@@ -35,7 +35,7 @@ Stak is really just a flexible template that you can use as a starting point for
 
 ## Deploy the app to your AWS account
 
-> **WARNING - this will create resources including an Aurora Serverless database in your AWS account.** Charges should be minimal for test workloads, but please be sure that you understand the pricing of these resources as per https://aws.amazon.com/pricing.
+> **WARNING - this will create resources in your AWS account.** Charges should be minimal for test workloads, but please be sure that you understand the pricing of these resources as per https://aws.amazon.com/pricing.
 
 Prerequisites:
 
@@ -49,9 +49,7 @@ Run the following commands:
 - `npm install`
 - `npm run deploy --env=alpha # Create a test environment called 'alpha' and build/deploy the application code to it`
 
-TODO - Is kick-database required here?
-
-This will take a while to complete, as CDK creates resources including the database and Cloudformation distribution.
+This will take a while to complete, as CDK creates resources including the Cloudformation distribution.
 
 The script outputs `App running at https://xxxxxxx.cloudfront.net`. We'll learn later how to add your own domain name. 
 
@@ -86,20 +84,6 @@ Once the app has started, go to https://localhost:1234
 
 > Note that `npm run deploy` can be used to build and deploy the complete app (ui, api and infratructure). The `deploy-ui`, `deploy-api` and `deploy-infra` commands provide a faster route to deploy if only a part of the application has changed.
 
-## Run SQL against the database
-
-- Run `npm run database-query --env=alpha --query="insert into todos (userid, value) values ('jimbob', 'Wash dishes')"`
-- Run `npm run database-query --env=alpha --query="select * from todos"`
-
-## Add a database migration
-
-- Edit `infra/src/scripts/database-migrate.ts` and add a migration, e.g.
-  
-       await runner.run(2, `alter table todos add \`status\` varchar(20) default 'new'`);
-       
-- Run `npm run database-migrate --env=alpha` to run the migration. Note that migrations are also run as part of `npm run deploy`
-- Run `npm run database-query --env=alpha --query="desc todos"` and you should see the new column listed.
-
 ## Debug the API locally
 
 Here's how to do this in VS Code:
@@ -113,11 +97,23 @@ Here's how to do this in VS Code:
 
 ## View logs
 
+## Change the application name
 
+Edit `app.json` and change `name` to the application name that you want, e.g.
+
+        {
+            ...
+            "name" : "myamazingapp"
+            ... 
+        }
 
 ## Create a new environment
 
-...
+
+## Add a custom domain name 
+
+- See [Use a custom domain](//readme-domain.md)
+
 
 ## 
 
