@@ -12,6 +12,7 @@ A running version of the example todo list app can be found at [staklist.net](ht
 
 ## Features
 
+
 - Typescript everywhere - UI, API and infrastructure (using [AWS CDK](https://aws.amazon.com/cdk/)).
 - Fast builds and fast incremental deployments.
 - Run and debug all of your application code locally, with hot reloading.
@@ -41,6 +42,7 @@ Prerequisites:
 
 - AWS account
 - Node etc
+- 
 
 Run the following commands:
 
