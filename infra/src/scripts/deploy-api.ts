@@ -8,7 +8,7 @@ let jwkToPem = require('jwk-to-pem');
 (async () => {
     await execute(`cd ../api && npm run build`);
     let stackOutputs = await fromStack(Config.instance.appEnv);
-    writeBackendConfig('../api/dist', stackOutputs);
+    await writeBackendConfig('../api/dist', stackOutputs);
     await execute(`cd ../api/dist && zip ../dist.zip *`);
     await execute(`aws lambda --region eu-west-1 update-function-code --function-name ${stackOutputs.FunctionName} --zip-file fileb://../api/dist.zip`);
     console.log('Published ' + stackOutputs.FunctionName);

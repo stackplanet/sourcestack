@@ -6,7 +6,7 @@ import dynamodb = require('@aws-cdk/aws-dynamodb');
 import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
 import * as route53 from '@aws-cdk/aws-route53';
-import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods, SSLMethod } from '@aws-cdk/aws-cloudfront';
+import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods, SSLMethod, CloudFrontWebDistributionProps } from '@aws-cdk/aws-cloudfront';
 import { Config } from './util/config';
 import { VerificationEmailStyle, OAuthScope, CfnUserPool } from '@aws-cdk/aws-cognito';
 import { StackOutput } from './stackoutput';
@@ -38,13 +38,13 @@ export class ServerlessWikiStack extends cdk.Stack {
             removalPolicy: cdk.RemovalPolicy.DESTROY,
         });
         let oai = new OriginAccessIdentity(this, Config.instance.appEnv + '-oai');
-        this.distribution = new CloudFrontWebDistribution(this, Config.instance.appEnv + '-distribution', {
+        let distributionProps: CloudFrontWebDistributionProps = {
             comment: Config.instance.appEnv + ' distribution',
-            aliasConfiguration: {
+            aliasConfiguration: Config.instance.domain ? {
                 names: [this.domainForEnvironment()],
                 acmCertRef: Config.instance.certificateArn,
                 sslMethod: SSLMethod.SNI
-            },
+            } : undefined,
             originConfigs: [{
                 s3OriginSource: {
                     s3BucketSource: this.bucket,
@@ -72,7 +72,8 @@ export class ServerlessWikiStack extends cdk.Stack {
                     }
                 }]
             }]
-        });
+        }
+        this.distribution = new CloudFrontWebDistribution(this, Config.instance.appEnv + '-distribution', distributionProps);
         if (Config.instance.domain){
             new route53.CfnRecordSet(this, Config.instance.appEnv + '-recordset', {
                 hostedZoneName: Config.instance.domain + '.',

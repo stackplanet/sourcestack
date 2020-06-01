@@ -5,7 +5,8 @@
     "deploy-infra": "cdk deploy --require-approval=never",
     "deploy-ui": "ts-node src/scripts/deploy-ui.ts",
     "deploy-api": "ts-node src/scripts/deploy-api.ts",
-    "use-datastore": "ts-node src/scripts/use-datastore.ts"
+    "use-datastore": "ts-node src/scripts/use-datastore.ts",
+    "test-all": "ts-node test/test.ts"
   },
   "devDependencies": {
     "@types/node": "^8.10.45",
@@ -27,11 +28,13 @@
     "@aws-cdk/aws-sns-subscriptions": "^1.41.0",
     "@aws-cdk/aws-sqs": "^1.41.0",
     "@aws-cdk/core": "^1.41.0",
+    "@types/rimraf": "^3.0.0",
     "aws-cdk": "^1.41.0",
     "aws-sdk": "^2.683.0",
     "child_process": "^1.0.2",
     "data-api-client": "^1.0.1",
     "jwk-to-pem": "^2.0.3",
-    "module": "^1.2.5"
+    "module": "^1.2.5",
+    "rimraf": "^3.0.2"
   }
 }

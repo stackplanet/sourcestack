@@ -14,7 +14,7 @@ export class Config {
     production: boolean;
     
     private constructor(){
-        let APP_ENV_REGEX = /^[a-zA-Z_-]+$/;
+        let APP_ENV_REGEX = /^[a-zA-Z0-9_-]+$/;
         this.env = process.env.npm_config_env as string;
         if (this.env === undefined){
             this.fatal('Usage: --env=myEnvironment');

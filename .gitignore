@@ -9,4 +9,4 @@ ui/server.key
 
 api/src/backend-config.json
 infra/current-stack.json
-app-override.json
+*-override.json

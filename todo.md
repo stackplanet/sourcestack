@@ -1,3 +1,7 @@
+- npm run stack-outputs --key DistributionUri
+- Add DistributionUri output to the end of deploy script
+- Add logging instructions using FunctionName output
+
 
 
 - Fix hardwired refs to eu-west-1
@@ -44,6 +48,8 @@
 
 - Fix email domain: noreply@staklist.net via amazonses.com 
 
+
+- Could it be a code generator, e.g. stak create-app --ui=react --database=aurora-serverless
 
 # Notes
 
