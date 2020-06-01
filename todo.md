@@ -1,4 +1,7 @@
 
+
+- Fix hardwired refs to eu-west-1
+- Diagram
 - End to end testing
   - Production deploys should go to the root domain
   - Production deploy
@@ -8,7 +11,7 @@
   - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
   - why does this not happen for RA webpack server?
 
-
+- Do you need to generate server.cert etc? Try cloning a fresh copy of the repo and running.
 
 - Use config pattern for backend-config
 - Documentation

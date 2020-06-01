@@ -2,11 +2,11 @@
 infra/*.out.json
 node_modules
 .DS_Store
-backend/backend-config.json
+api/backend-config.json
 
-frontend/server.cert
-frontend/server.key
+ui/server.cert
+ui/server.key
 
-backend/src/backend-config.json
+api/src/backend-config.json
 infra/current-stack.json
 app-override.json

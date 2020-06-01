@@ -35,7 +35,7 @@ export async function fromStack(stackName: string): Promise<StackOutput> {
 const file = 'current-stack.json';
 
 export function readStackOutputFile(){
-    if (!existsSync(file)) throw new Error(`File ${file} not found. Please run use-backend.`)
+    if (!existsSync(file)) throw new Error(`File ${file} not found. Please run use-datastore.`)
     return JSON.parse(readFileSync(file).toString()) as StackOutput;
 }
 

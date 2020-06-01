@@ -16,7 +16,7 @@ export namespace BackendConfig {
     export function init(){
         const filename = __dirname + '/backend-config.json';
         if (!existsSync(filename)){
-            throw new Error(filename + ' not found. Please ensure that you have run "npm run publish-backend"')
+            throw new Error(filename + ' not found. Please ensure that you have run "npm run use-datastore"')
         }
         let file = readFileSync(filename);
         let config = JSON.parse(file.toString());

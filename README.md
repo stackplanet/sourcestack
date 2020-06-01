@@ -57,23 +57,21 @@ The script outputs `App running at https://xxxxxxx.cloudfront.net`. We'll learn 
 
 ## Get the app running locally
 
-TODO - rename use-backend
-
-- `npm run use-backend --env=alpha # Configure your local app to use the database and Cognito user pool in the alpha environment`
+- `npm run use-datastore --env=alpha # Configure your local app to use the database and Cognito user pool in the alpha environment`
 - `npm run start`
 
 Once the app has started, go to https://localhost:1234
 
 ## Make a UI change
 
-- Open `frontend/src/pages/splashpage.tsx` and change the title text.
+- Open `ui/src/pages/splashpage.tsx` and change the title text.
 - You'll see the updated text at https://localhost:1234.
-- Run `npm run deploy-frontend --env=alpha`
+- Run `npm run deploy-ui --env=alpha`
 - You'll now see the updated text in the alpha environment.
 
 ## Make an API change
 
-- Open `backend/src/api.ts` and change the text returned by the `/ping` endpoint.
+- Open `api/src/api.ts` and change the text returned by the `/ping` endpoint.
 - You'll see the updated text at https://localhost:1234/api/ping.
 - Run `npm run deploy-api --env=alpha`
 - You'll now see the updated text in the alpha environment.
@@ -93,7 +91,7 @@ Here's how to do this in VS Code:
 - Stop the `npm run start` process you started earlier (Ctrl-C)
 - In VS Code, run `Debug: Toggle Auto Attach` and ensure that *Auto Attach: On* appears in the status bar.
 - In the VS Code Terminal view, cd to the `stak` directory and run `npm run debug`
-- Open `backend/src/api.ts` and put a breakpoint in the `/ping` endpoint.
+- Open `api/src/api.ts` and put a breakpoint in the `/ping` endpoint.
 - Go to https://localhost:1234/api/ping, and the VS Code debugger should open at the breakpoint.
 
 
@@ -125,9 +123,6 @@ Edit `app.json` and change `name` to the application name that you want, e.g.
 ## Add a custom domain name 
 
 - See [Use a custom domain](./readme-domain.md)
-
-
-## 
 
 
 # Docs TODO

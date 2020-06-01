@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "scripts": {
     "deploy-infra": "cdk deploy --require-approval=never",
-    "deploy-frontend": "ts-node src/scripts/deploy-frontend.ts",
-    "deploy-backend": "ts-node src/scripts/deploy-backend.ts",
-    "use-backend": "ts-node src/scripts/use-backend.ts"
+    "deploy-ui": "ts-node src/scripts/deploy-ui.ts",
+    "deploy-api": "ts-node src/scripts/deploy-api.ts",
+    "use-datastore": "ts-node src/scripts/use-datastore.ts"
   },
   "devDependencies": {
     "@types/node": "^8.10.45",
