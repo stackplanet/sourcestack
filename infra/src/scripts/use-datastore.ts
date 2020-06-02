@@ -1,6 +1,6 @@
 import { Config } from "../util/config";
 import { fromStack, writeStackOutputFile } from "../stackoutput";
-import { writeBackendConfig } from "./deploy-backend";
+import { writeBackendConfig } from "./deploy-api";
 
 (async () => {
     let stackOutputs = await fromStack(Config.instance.appEnv);
