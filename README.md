@@ -1,17 +1,16 @@
-# stak - an adaptable template for a full-stack serverless Typescript web app
+# Adaptable template for a full-stack serverless Typescript web app
 
 **stak** is a fully featured serverless web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
-I created it as an alternative to AWS Amplify, which is a nice tool but 
+A lot of full-stack AWS apps these days use the [Amplify framework](https://aws.amazon.com/amplify), which is a nice tool but [doesn't quite meet my requirements](./readme-vs-amplify.md). 
 
-Focus on local testing...
+Many full-stack AWS apps these days use the [Amplify framework](https://aws.amazon.com/amplify). Amplify tries to simplify development by hiding the configuration of underlying infrastructure. This is great for getting started but often leads to problems when your requirements no longer match the framework's assumptions. 
 
+stak is designed to give you full control over all aspects of the application and infrastructure, with a focus on a slick "out of the box" local development experience.
 
 A running version of the example todo list app can be found at [staklist.net](https://staklist.net)
 
-
 ## Features
-
 
 - Typescript everywhere - UI, API and infrastructure (using [AWS CDK](https://aws.amazon.com/cdk/)).
 - Fast builds and fast incremental deployments.
@@ -32,6 +31,7 @@ Stak is really just a flexible template that you can use as a starting point for
 
 - Early stage, looking for feedback/help
 - Only tested on Max OSX Catalina so far. Linux should work but not tested yet. Let me know if you'd like Windows support. 
+- Focus on REST APIs - GraphQL not in scope.
 - Link to roadmap
 
 ## Deploy the app to your AWS account

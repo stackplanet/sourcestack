@@ -30,6 +30,7 @@
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
 - Test on IE and other browsers
+- Cross platform scripts: https://github.com/shelljs/shx
 
 
 
@@ -37,6 +38,7 @@
 - 
 # After launch
 
+- Extract generic components and make it more of a reusable tool
 - make scripts cross-platform
 - Move to HTTP API, see https://github.com/aws/aws-cdk/issues/5362
   - https://aws.amazon.com/blogs/compute/building-better-apis-http-apis-now-generally-available/
