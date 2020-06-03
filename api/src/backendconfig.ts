@@ -6,7 +6,7 @@ export interface BackendConfig {
     env: string;
     UserPoolId: string;
     UserPoolClientId: string;
-    kidToPems: any;
+    identityProviderKeys: any;
 }
 
 export namespace BackendConfig {

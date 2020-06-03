@@ -20,18 +20,18 @@ export async function writeBackendConfig(dir: string, stackOutput: StackOutput){
         env: Config.instance.env,
         UserPoolId: stackOutput.UserPoolId, 
         UserPoolClientId: stackOutput.UserPoolClientId,
-        kidToPems: await getKidToPems(stackOutput.UserPoolId)
+        identityProviderKeys: await getCognitoKeys(stackOutput.UserPoolId)
     }
     writeFileSync(dir + '/backend-config.json', JSON.stringify(backendConfig, null, 2));
 }
 
-async function getKidToPems(userPoolId: string){
+async function getCognitoKeys(userPoolId: string){
     let curlOutput = await execute(`curl -s https://cognito-idp.eu-west-1.amazonaws.com/${userPoolId}/.well-known/jwks.json`)
     let jwks = JSON.parse(curlOutput.stdout);
-    let kidToPems:any = {};
+    let publicKeys:any = {};
     for (let key of jwks.keys){
         let pem = jwkToPem(key);
-        kidToPems[key.kid] = pem;
+        publicKeys[key.kid] = pem;
     }
-    return kidToPems;
+    return publicKeys;
 }

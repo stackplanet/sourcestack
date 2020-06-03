@@ -176,7 +176,7 @@ export namespace AuthHandler {
         let decoded = jwt.decode(token, { complete: true }) as any;
         if (!decoded) return null;
         let kid = decoded['header']['kid'];
-        let pem = config.kidToPems[kid];
+        let pem = config.identityProviderKeys[kid];
         if (!pem) return null;
         try {
             let issuer = `https://cognito-idp.eu-west-1.amazonaws.com/${config.UserPoolId}`;
