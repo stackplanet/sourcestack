@@ -1,5 +1,4 @@
 import { CloudFormation } from "aws-sdk";
-import { readFileSync, writeFileSync, existsSync } from "fs";
 
 export interface StackOutput {
 
@@ -31,14 +30,3 @@ export async function fromStack(stackName: string): Promise<StackOutput> {
         UserPoolClientId: output('UserPoolClientId'),
     }
 }   
-
-const file = 'current-stack.json';
-
-export function readStackOutputFile(){
-    if (!existsSync(file)) throw new Error(`File ${file} not found. Please run use-datastore.`)
-    return JSON.parse(readFileSync(file).toString()) as StackOutput;
-}
-
-export function writeStackOutputFile(stackOutput: StackOutput){
-    writeFileSync(file, JSON.stringify(stackOutput, null, 2));
-}
