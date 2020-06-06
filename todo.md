@@ -1,7 +1,11 @@
+
+
 - npm run stack-outputs --key DistributionUri
 - Add DistributionUri output to the end of deploy script
 - Add logging instructions using FunctionName output
 
+
+- Forking https://help.github.com/en/github/getting-started-with-github/fork-a-repo
 
 
 - Fix hardwired refs to eu-west-1
