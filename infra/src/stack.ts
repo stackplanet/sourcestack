@@ -12,7 +12,7 @@ import { VerificationEmailStyle, OAuthScope, CfnUserPool } from '@aws-cdk/aws-co
 import { StackOutput } from './stackoutput';
 import { Duration } from '@aws-cdk/core';
 
-export class ServerlessWikiStack extends cdk.Stack {
+export class Stack extends cdk.Stack {
 
     bucket: S3.Bucket;
     distribution: CloudFrontWebDistribution;
@@ -215,4 +215,4 @@ export class ServerlessWikiStack extends cdk.Stack {
 }
 
 const app = new cdk.App();
-new ServerlessWikiStack(app, Config.instance.appEnv);
+new Stack(app, Config.instance.appEnv);
