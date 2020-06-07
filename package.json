@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "foo": "echo hello",
     "postinstall": "npm-run-all install-infra install-ui install-api",
     "install-infra": "npm install --prefix=infra",
     "install-ui": "npm install --prefix=ui",
@@ -17,13 +16,14 @@
     "build-ui": "npm run build --prefix=ui",
     "build-api": "npm run build --prefix=api",
     "deploy": "npm-run-all build-api deploy-infra deploy-ui deploy-api stack-uri",
-    "deploy-ui": "npm run deploy-ui --prefix=infra",
-    "deploy-api": "npm run deploy-api --prefix=infra",
-    "deploy-infra": "npm run deploy-infra --prefix=infra",
-    "use-datastore": "npm run use-datastore --prefix=infra",
-    "stack-uri": "npm run stack-uri --prefix=infra",
-    "stack-outputs": "npm run stack-outputs --prefix=infra",
-    "test-stak-scripts": "ts-node infra/test/test-scripts.ts"
+    "deploy-ui": "ts-node scripts/deploy-ui.ts",
+    "deploy-api": "ts-node scripts/deploy-api.ts",
+    "deploy-infra": "npm run deploy --prefix=infra",
+    "use-datastore": "ts-node scripts/use-datastore.ts",
+    "stack-uri": "ts-node scripts/stack-uri.ts",
+    "stack-outputs": "ts-node scripts/stack-outputs.ts",
+    "test-scripts": "ts-node scripts/test/test-scripts.ts",
+    "echo-config": "ts-node scripts/echo-config.ts"
   },
   "repository": {
     "type": "git",
@@ -32,10 +32,12 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^14.0.11",
     "npm-run-all": "^4.1.5"
   },
   "dependencies": {
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.3",
+    "jwk-to-pem": "^2.0.3"
   }
 }

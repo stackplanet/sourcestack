@@ -1,5 +1,4 @@
-import { execute } from "../util/execute";
-import rimraf = require("rimraf");
+import { execute } from "../execute";
 import { writeFileSync } from "fs";
 
 (async () => {
@@ -8,7 +7,7 @@ import { writeFileSync } from "fs";
         'environments' : 'alpha1'
     };
     writeFileSync(`test-override.json`, JSON.stringify(config));
-    // await execute(`rm -rf api/dist.zip api/dist ui/dist ui/server.cert ui/server.key`)
+    await execute(`rm -rf api/dist.zip api/dist ui/dist ui/server.cert ui/server.key`)
     await execute(`STAK_CONFIG_FILE_NAME=test-override.json && npm run deploy --env=alpha1`);
 
 })();

@@ -7,10 +7,10 @@ import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
 import * as route53 from '@aws-cdk/aws-route53';
 import { CloudFrontWebDistribution, OriginAccessIdentity, CloudFrontAllowedMethods, SSLMethod, CloudFrontWebDistributionProps } from '@aws-cdk/aws-cloudfront';
-import { Config } from './util/config';
 import { VerificationEmailStyle, OAuthScope, CfnUserPool } from '@aws-cdk/aws-cognito';
 import { StackOutput } from './stackoutput';
 import { Duration } from '@aws-cdk/core';
+import { Config } from '../../../scripts/config';
 
 export class BaseStack extends cdk.Stack {
 
@@ -23,7 +23,6 @@ export class BaseStack extends cdk.Stack {
 
     constructor(scope: cdk.App, id: string, props?: cdk.StackProps) {
         super(scope, id, props);
-        console.log(Config.instance.appEnv)
         this.cognito();
         this.backend();
         this.frontend();

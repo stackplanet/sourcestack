@@ -1,14 +1,8 @@
-- Split into generic subfolders
-- Redo config.ts
-- Look at integrating scripts
 - Complete set of tests
-- Port UI to react?
+    - look at moving to shelljs
+    - cdk destroy, get bucket name and delete first
 
-  - why use this over amplify at all?
-    - I JUST DON'T WANT TO BE TRAPPED BY A FRAMEWORK, and I want to understand what's going on instead of using a leaky abstraction
-    - I also don't want to use React!
-    - I want a good local development experience
-    - I want sensible workspace structure
+- use-datastore -> use-env-locally
 
 - npm run stack-outputs --key DistributionUri
 - Add DistributionUri output to the end of deploy script
@@ -35,7 +29,6 @@
 - Documentation
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - rename req.user to req.jwtInfo or similar
-- Separate out "generic" things like migrationrunner, deplay-backend etc from bespoke things like stack.ts?
 - change username to email and userId to email
 - Use refresh token
 - sensible stack traces/source maps for lambda?

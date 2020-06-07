@@ -1,7 +1,7 @@
 import cdk = require('@aws-cdk/core');
 import dynamodb = require('@aws-cdk/aws-dynamodb');
-import { Config } from './generic/util/config';
 import { BaseStack } from './generic/basestack';
+import { Config } from '../../scripts/config';
 
 export class Stack extends BaseStack {
 
@@ -17,7 +17,6 @@ export class Stack extends BaseStack {
     }
 
 }
-
 
 const app = new cdk.App();
 new Stack(app, Config.instance.appEnv);

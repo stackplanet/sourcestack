@@ -1,16 +1,16 @@
-import { execute } from "../util/execute";
 import { writeFileSync } from "fs";
-import { Config } from "../util/config";
-import { fromStack, StackOutput } from "../stackoutput";
-import {BackendConfig} from '../../../../api/src/generic/backendconfig';
+import { execute } from "./execute";
+import { fromStack, StackOutput } from "../infra/src/generic/stackoutput";
+import { Config } from "./config";
+import { BackendConfig } from "../api/src/generic/backendconfig";
 let jwkToPem = require('jwk-to-pem');
 
 (async () => {
-    await execute(`cd ../api && npm run build`);
+    await execute(`cd api && npm run build`);
     let stackOutputs = await fromStack(Config.instance.appEnv);
-    await writeBackendConfig('../api/dist', stackOutputs);
-    await execute(`cd ../api/dist && zip ../dist.zip *`);
-    await execute(`aws lambda --region eu-west-1 update-function-code --function-name ${stackOutputs.FunctionName} --zip-file fileb://../api/dist.zip`);
+    await writeBackendConfig('api/dist', stackOutputs);
+    await execute(`cd api/dist && zip ../dist.zip *`);
+    await execute(`aws lambda --region eu-west-1 update-function-code --function-name ${stackOutputs.FunctionName} --zip-file fileb://api/dist.zip`);
     console.log('Published ' + stackOutputs.FunctionName);
 })();
 

@@ -14,11 +14,11 @@ export function execute(command: string, exitOnError=true) {
     return new Promise<CommandOutput>((resolve: any, reject:any) => {
         const child = exec(command, {env: ENVIRONMENT});
         let output = new CommandOutput();
-        child.stdout.on('data', (data: any) => {
+        child.stdout?.on('data', (data: any) => {
             console.log(data.toString())
             output.stdout = output.stdout + data.toString();
         })
-        child.stderr.on('data', (data: any) => {
+        child.stderr?.on('data', (data: any) => {
             console.error(data.toString())
             output.stderr = output.stderr + data.toString();
         })
