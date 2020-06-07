@@ -1,4 +1,4 @@
-import { execute } from "../src/util/execute";
+import { execute } from "../util/execute";
 import rimraf = require("rimraf");
 import { writeFileSync } from "fs";
 

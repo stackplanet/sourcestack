@@ -1,6 +1,6 @@
 import m from 'mithril';
 import { bind } from '../../uiutils';
-import { AuthClient } from '../../authclient';
+import { AuthClient } from './authclient';
 import { PasswordValidator } from './passwordvalidator';
 import { LabelledInput } from '../../components/labelledinput';
 import { Button } from '../../components/button';

@@ -26,7 +26,7 @@ export class Config {
             this.fatal('Environment name must match ' + APP_ENV_REGEX);
         }
         let configFileName = process.env.STAK_CONFIG_FILE_NAME || 'app.json';
-        let config = require('../../../' + configFileName);
+        let config = require('../../../../' + configFileName);
         this.app = config.name;
         if (this.app === undefined){
             this.fatal('App name not found in app.json');

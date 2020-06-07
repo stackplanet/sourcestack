@@ -1,4 +1,4 @@
-import { configureApp } from "./api";
+import { configureApp } from "../api";
 
 const app = configureApp();
 let port = 3000;

@@ -1,6 +1,6 @@
 import { Page } from '../components/page';
 import m from 'mithril';
-import { AuthClient } from '../authclient';
+import { AuthClient } from '../generic/login/authclient';
 
 export class SplashPage {
 

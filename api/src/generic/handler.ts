@@ -1,6 +1,6 @@
 import { createServer, proxy } from 'aws-serverless-express';
 import { Context } from 'aws-lambda';
-import { configureApp } from './api';
+import { configureApp } from '../api';
 
 const app = configureApp();
 const server = createServer(app, undefined, []);

@@ -3,10 +3,10 @@ import { json } from 'body-parser';
 import bodyParser = require('body-parser');
 import cookieParser = require('cookie-parser');
 
-import { AuthHandler } from './authhandler';
-import { BackendConfig } from './backendconfig';
+import { AuthHandler } from './generic/authhandler';
 import compression = require('compression');
 import { Decorator, Query, Table } from "dynamo-types";
+import { BackendConfig } from './generic/backendconfig';
 
 BackendConfig.init();
 let tableName = BackendConfig.instance.app + '-' + BackendConfig.instance.env + '-todos';

@@ -1,13 +1,13 @@
 import m from 'mithril';
-import { AuthClient } from './authclient';
+import { AuthClient } from './generic/login/authclient';
 import { LoadingPage } from './pages/loadingpage';
 import { SplashPage } from './pages/splashpage';
-import { LoginPage } from './pages/login/loginpage';
+import { LoginPage } from './generic/login/loginpage';
 import { UserHomePage } from './pages/userhomepage';
-import { SignUpPage } from './pages/login/signuppage';
-import { ConfirmSignupPage } from './pages/login/confirmsignuppage';
-import { ConfirmForgotPasswordPage } from './pages/login/confirmforgotpasswordpage';
-import { ForgotPasswordPage } from './pages/login/forgotpasswordpage';
+import { SignUpPage } from './generic/login/signuppage';
+import { ConfirmSignupPage } from './generic/login/confirmsignuppage';
+import { ConfirmForgotPasswordPage } from './generic/login/confirmforgotpasswordpage';
+import { ForgotPasswordPage } from './generic/login/forgotpasswordpage';
 import './css/main.css';
 
 (async () => {

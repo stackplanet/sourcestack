@@ -2,3 +2,4 @@ node_modules
 .cache
 dist
 dist.zip
+backend-config.json

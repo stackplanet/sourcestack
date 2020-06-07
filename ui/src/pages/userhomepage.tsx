@@ -1,6 +1,6 @@
 import m from 'mithril';
 import { Page } from "../components/page";
-import { AuthClient } from '../authclient';
+import { AuthClient } from '../generic/login/authclient';
 import { Todo} from '../todo'
 import { WithSpinner } from '../components/withspinner';
 

@@ -20,7 +20,7 @@
         "typescript": "^3.6.3"
     },
     "scripts": {
-        "start": "ts-node src/devserver.ts",
+        "start": "ts-node src/generic/devserver.ts",
         "build": "parcel build index.html"
     }
 }
