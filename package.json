@@ -23,6 +23,7 @@
     "stack-uri": "ts-node scripts/stack-uri.ts",
     "stack-outputs": "ts-node scripts/stack-outputs.ts",
     "test-scripts": "ts-node scripts/test/test-scripts.ts",
+    "destroy-env": "ts-node scripts/destroy-env.ts",
     "echo-config": "ts-node scripts/echo-config.ts"
   },
   "repository": {
@@ -33,11 +34,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.0.11",
+    "@types/prompt-sync": "^4.1.0",
     "npm-run-all": "^4.1.5"
   },
   "dependencies": {
+    "jwk-to-pem": "^2.0.3",
+    "prompt-sync": "^4.2.0",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.3",
-    "jwk-to-pem": "^2.0.3"
+    "typescript": "^3.9.3"
   }
 }

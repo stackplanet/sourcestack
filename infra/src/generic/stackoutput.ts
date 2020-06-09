@@ -1,4 +1,4 @@
-import { CloudFormation } from "aws-sdk";
+import { findStack } from "./stackutils";
 
 export interface StackOutput {
 
@@ -9,17 +9,15 @@ export interface StackOutput {
     EndpointUrl: string;
     UserPoolId: string;
     UserPoolClientId: string;
+
 }
 
-
 export async function fromStack(stackName: string): Promise<StackOutput> {
-    let stack = await new CloudFormation().describeStacks({StackName:stackName}).promise();
-    let outputs = stack?.Stacks?.[0].Outputs as CloudFormation.Outputs;
-    if (outputs === undefined){
-        console.error('Stack not found');
-        process.exit(1);
+    let stack = await findStack(stackName);
+    if (stack === undefined){
+        throw new Error(`Stack ${stackName} not found`);
     }
-    let output = (outputName: string) =>  outputs.find((f) => f.OutputKey == outputName)?.OutputValue as string;
+    let output = (outputName: string) =>  stack?.Outputs?.find((f) => f.OutputKey == outputName)?.OutputValue as string;
     return {
         DistributionUri: output('DistributionUri'),
         DistributionId: output('DistributionId'),

@@ -1,5 +1,4 @@
 - Complete set of tests
-    - look at moving to shelljs
     - cdk destroy, get bucket name and delete first
 
 - use-datastore -> use-env-locally
@@ -25,6 +24,7 @@
 
 - Do you need to generate server.cert etc? Try cloning a fresh copy of the repo and running.
 
+- list-environments command
 - Use config pattern for backend-config
 - Documentation
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
