@@ -8,7 +8,8 @@ import { stackExists } from "../infra/src/generic/stackutils";
 async function destroyStack(){
     let stackOutputs = await fromStack(Config.instance.appEnv);
     await execute(`aws s3 rm --recursive ${stackOutputs.HostingBucket}`, false);
-    await execute(`cd infra && npx cdk destroy --force ${Config.instance.appEnv}`, false);
+    await execute(`aws dynamodb delete-table --table-name ${Config.instance.appEnv}-todos`, false);
+    await execute(`cd infra && npx cdk destroy --force ${Config.instance.appEnv}`, true);
     console.log(`Stack ${Config.instance.appEnv} destroyed`);
 }
 

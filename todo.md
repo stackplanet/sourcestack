@@ -1,6 +1,5 @@
 - Complete set of tests
-    - cdk destroy, get bucket name and delete first
-
+    
 - use-datastore -> use-env-locally
 
 - npm run stack-outputs --key DistributionUri

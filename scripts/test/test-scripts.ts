@@ -9,7 +9,7 @@ import { Config } from "../config";
     };
     
     writeFileSync(`test-override.json`, JSON.stringify(config));
-    // // await execute(`rm -rf api/dist.zip api/dist ui/dist ui/server.cert ui/server.key`)
     await execute(`npm run destroy-env --env=alpha1 --configFileName=test-override.json --noConfirmDestroy`);
-    // // await execute(`npm run deploy --env=alpha1 --configFileName=test-override.json`);
+    await execute(`rm -rf api/dist.zip api/dist ui/dist ui/server.cert ui/server.key`)
+    await execute(`npm run deploy --env=alpha1 --configFileName=test-override.json`);
 })();
