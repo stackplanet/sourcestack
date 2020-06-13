@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
 import * as AWS from 'aws-sdk';
 import { UserDetails } from './userdetails';
-import { BackendConfig } from '../backendconfig';
+import { BackendConfig } from './backendconfig';
 
 declare global {
 
