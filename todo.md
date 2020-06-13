@@ -1,21 +1,16 @@
-- Complete set of tests
+- Automated tests
+  - puppeteer tests for sign up and sign in
+  - Production deploys should go to the root domain
     
-- use-datastore -> use-env-locally
-
 - npm run stack-outputs --key DistributionUri
 - Add DistributionUri output to the end of deploy script
-- Add logging instructions using FunctionName output
-
-
-- Forking https://help.github.com/en/github/getting-started-with-github/fork-a-repo
-
-
+- Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
 - Fix hardwired refs to eu-west-1
 - Diagram
 - End to end testing
-  - Production deploys should go to the root domain
-  - Production deploy
-- Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
+
+- Forking https://help.github.com/en/github/getting-started-with-github/fork-a-repo
+
 
 - document certificate thing: thisisunsafe
   - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
@@ -30,22 +25,18 @@
 - rename req.user to req.jwtInfo or similar
 - change username to email and userId to email
 - Use refresh token
-- sensible stack traces/source maps for lambda?
-- consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 - Bug - no error when signing in as non-existent user in cloud
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
 - Test on IE and other browsers
-- Cross platform scripts: https://github.com/shelljs/shx
-
-
-
 
 - 
 # After launch
 
+- consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
+- sensible stack traces/source maps for lambda?
 - Extract generic components and make it more of a reusable tool
-- make scripts cross-platform
+- make scripts cross-platform (e.g. shelljs)
 - Move to HTTP API, see https://github.com/aws/aws-cdk/issues/5362
   - https://aws.amazon.com/blogs/compute/building-better-apis-http-apis-now-generally-available/
   - Not GA in CDK yet, see https://github.com/aws/aws-cdk/issues/5301

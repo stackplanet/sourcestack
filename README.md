@@ -57,7 +57,7 @@ The script outputs `App running at https://xxxxxxx.cloudfront.net`. We'll learn 
 
 ## Get the app running locally
 
-- `npm run use-datastore --env=alpha # Configure your local app to use the database and Cognito user pool in the alpha environment`
+- `npm run use-backend --env=alpha # Configure your local app to use the database and Cognito user pool in the alpha environment`
 - `npm run start`
 
 Once the app has started, go to https://localhost:1234

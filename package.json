@@ -19,7 +19,7 @@
     "deploy-ui": "ts-node scripts/deploy-ui.ts",
     "deploy-api": "ts-node scripts/deploy-api.ts",
     "deploy-infra": "npm run deploy --prefix=infra",
-    "use-datastore": "ts-node scripts/use-datastore.ts",
+    "use-backend": "ts-node scripts/use-backend.ts",
     "stack-uri": "ts-node scripts/stack-uri.ts",
     "stack-outputs": "ts-node scripts/stack-outputs.ts",
     "test-scripts": "ts-node scripts/test/test-scripts.ts",
