@@ -29,6 +29,11 @@ export class Config {
         return this.configFileField('domain', false, /^[\.a-zA-Z0-9_-]+$/) as string;
     }
 
+    get subdomain(){
+        if (this.production) return this.domain;
+        else return this.env + '.' + this.domain;
+    }
+
     get hostedZoneId() {
         let required = this.domain !== undefined;
         return this.configFileField('hostedZoneId', required, /^[a-zA-Z0-9_-]+$/) as string;

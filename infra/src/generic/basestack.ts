@@ -2,7 +2,6 @@ import cdk = require('@aws-cdk/core');
 import lambda = require('@aws-cdk/aws-lambda');
 import apigw = require('@aws-cdk/aws-apigateway');
 import cognito = require('@aws-cdk/aws-cognito');
-import dynamodb = require('@aws-cdk/aws-dynamodb');
 import * as S3 from '@aws-cdk/aws-s3';
 import * as IAM from '@aws-cdk/aws-iam';
 import * as route53 from '@aws-cdk/aws-route53';
@@ -40,7 +39,7 @@ export class BaseStack extends cdk.Stack {
         let distributionProps: CloudFrontWebDistributionProps = {
             comment: Config.instance.appEnv + ' distribution',
             aliasConfiguration: Config.instance.domain ? {
-                names: [this.domainForEnvironment()],
+                names: [Config.instance.subdomain],
                 acmCertRef: Config.instance.certificateArn,
                 sslMethod: SSLMethod.SNI
             } : undefined,
@@ -76,7 +75,7 @@ export class BaseStack extends cdk.Stack {
         if (Config.instance.domain){
             new route53.CfnRecordSet(this, Config.instance.appEnv + '-recordset', {
                 hostedZoneName: Config.instance.domain + '.',
-                name: this.domainForEnvironment(),
+                name: Config.instance.subdomain,
                 type: 'A',
                 aliasTarget: {
                     hostedZoneId: 'Z2FDTNDATAQYW2', // cloudfront.net
@@ -184,11 +183,6 @@ export class BaseStack extends cdk.Stack {
 
             }
         });
-    }
-
-    domainForEnvironment(){
-        if (Config.instance.production) return Config.instance.domain;
-        else return Config.instance.env + '.' + Config.instance.domain;
     }
 
     outputs() {
