@@ -1,6 +1,3 @@
-- Automated tests
-  - puppeteer tests for sign up and sign in
-  - Production deploys should go to the root domain
     
 - npm run stack-outputs --key DistributionUri
 - Add DistributionUri output to the end of deploy script
@@ -8,9 +5,6 @@
 - Fix hardwired refs to eu-west-1
 - Diagram
 - End to end testing
-
-- Forking https://help.github.com/en/github/getting-started-with-github/fork-a-repo
-
 
 - document certificate thing: thisisunsafe
   - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
@@ -29,10 +23,15 @@
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
 - Test on IE and other browsers
+- wiki
 
-- 
 # After launch
 
+- Automated tests
+  - puppeteer tests for sign up and sign in
+  - Production deploys should go to the root domain
+- Document auth
+- code tour
 - consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 - sensible stack traces/source maps for lambda?
 - Extract generic components and make it more of a reusable tool
@@ -47,8 +46,7 @@
 
 - Fix email domain: noreply@staklist.net via amazonses.com 
 
-
-- Could it be a code generator, e.g. stak create-app --ui=react --database=aurora-serverless
+- Pipelines
 
 # Notes
 

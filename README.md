@@ -1,48 +1,49 @@
-# Adaptable template for a full-stack serverless Typescript web app
+# An adaptable template for full-stack serverless Typescript web apps
 
-**stak** is a fully featured serverless web app template, ready to be deployed into your AWS account and adapted to your needs. 
+stak is a fully featured serverless web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
-A lot of full-stack AWS apps these days use the [Amplify framework](https://aws.amazon.com/amplify), which is a nice tool but [doesn't quite meet my requirements](./readme-vs-amplify.md). 
+The template includes a simple todo list app - you can see it running at [staklist.net](https://staklist.net)
 
-Many full-stack AWS apps these days use the [Amplify framework](https://aws.amazon.com/amplify). Amplify tries to simplify development by hiding the configuration of underlying infrastructure. This is great for getting started but often leads to problems when your requirements no longer match the framework's assumptions. 
+## Design philosophy
 
-stak is designed to give you full control over all aspects of the application and infrastructure, with a focus on a slick "out of the box" local development experience.
+stak is designed to give you full control over all aspects of the application and infrastructure.
 
-A running version of the example todo list app can be found at [staklist.net](https://staklist.net)
+Frameworks like [AWS Amplify](https://aws.amazon.com/amplify) aim to simplify development by hiding the details of underlying infrastructure. This is great for getting started but can lead to problems when your requirements no longer match the framework's assumptions. Frameworks tend to be classic [leaky abstractions](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/).
+
+stak takes a "hide nothing" approach, surfacing all infrastructure within the template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the cloud environment. 
+
+Because of this design, you don't use `npm install` or `npm upgrade` to use stak in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository, and customising the code to fit your needs. As bugfixes and improvements are made to this template, you can merge them into your app if you choose.
 
 ## Features
 
 - Typescript everywhere - UI, API and infrastructure (using [AWS CDK](https://aws.amazon.com/cdk/)).
-- Fast builds and fast incremental deployments.
+- A slick local development experience with fast builds and fast incremental deployments.
 - Run and debug all of your application code locally, with hot reloading.
-- Easy management of multiple test environments.
-- Adaptable login UI backed by Amazon Cognito, with signup/forgot password emails sent from your custom domain (if you have one).
-- A curated set of libraries and build tools that all play nicely together.
+- A curated set of libraries and tools that all play nicely together, saving you many hours of frustrating integration work.
+- Easy deployment to your custom domain, e.g. myamazingapp.com, 
+- Easy management of multiple test environments, e.g. alpha.myamazingapp.com, beta.myamazingapp.com 
+- Fully customisable login UI backed by Amazon Cognito, with signup/forgot password emails sent from your custom domain.
 
 ## Technology choices
 
-Stak is really just a flexible template that you can use as a starting point for your web app. The example app uses certain technologies that I find pleasant to use, but you should be able to replace them without too much work:
+The base template uses certain technologies that I find pleasant to use, but you should be able to replace them without too much work:
 
 - The front end uses [Mithril](https://mithril.js.org) and [Tailwind CSS](https://tailwindcss.com), but could be adapted to use React, Vue, Bootstrap, Bulma etc if you prefer.
-- Express is used to provide a rest API, but you could replace this with GraphQL if that's your thing. TODO - what would you use?
+- Express is used to provide a REST API, but you could replace this with GraphQL if that's your thing. TODO - what would you use?
 - DynamoDB is the data store, but you can use Aurora, FaunaDB or something else (I have a fork that uses Aurora Serverless - contact me if you're interested).
+
+Of course, you can just fork this repository and create a new starting point based on different technology choices.
 
 ## Limitations
 
-- Early stage, looking for feedback/help
-- Only tested on Max OSX Catalina so far. Linux should work but not tested yet. Let me know if you'd like Windows support. 
-- Focus on REST APIs - GraphQL not in scope.
-- Link to roadmap
+- The project is at an early stage - I'm looking for feedback.
+- Only tested on Max OSX Catalina so far. Linux should be OK but it's not tested yet. Let me know if you'd like Windows support. 
 
 ## Deploy the app to your AWS account
 
+The instructions below assume that you have an AWS account and an up-to-date installation of nodejs.
+
 > **WARNING - this will create resources in your AWS account.** Charges should be minimal for test workloads, but please be sure that you understand the pricing of these resources as per https://aws.amazon.com/pricing.
-
-Prerequisites:
-
-- AWS account
-- Node etc
-- 
 
 Run the following commands:
 
@@ -53,7 +54,7 @@ Run the following commands:
 
 This will take a while to complete, as CDK creates resources including the Cloudformation distribution.
 
-The script outputs `App running at https://xxxxxxx.cloudfront.net`. We'll learn later how to add your own domain name. 
+The script outputs `App running at https://xxxxxxx.cloudfront.net`. Later you can add your own domain name. 
 
 ## Get the app running locally
 
@@ -94,8 +95,9 @@ Here's how to do this in VS Code:
 - Open `api/src/api.ts` and put a breakpoint in the `/ping` endpoint.
 - Go to https://localhost:1234/api/ping, and the VS Code debugger should open at the breakpoint.
 
-
 ## View logs
+
+TODO
 
 ## Change the application name
 
@@ -120,11 +122,28 @@ Edit `app.json` and change `name` to the application name that you want, e.g.
 - This prevents typos from creating new environments, e.g. `npm run deploy --env=aphla` would result in an error.
 - To create a new environment, ensure that your environment name is in the list in `app.json` and then run `npm run deploy --env=<myenvironment>`
 
+## Destroy an environment
+
+- Run `npm run destroy-env --env=alpha`. 
+- After you confirm, the environment (and all its data!) will be completely deleted.
+
 ## Add a custom domain name 
 
 - See [Use a custom domain](./readme-domain.md)
 
+## Use SNS for sending email
 
-# Docs TODO
+- See [Use SNS for sending email](./readme-email.md)
 
-- Authentication/security
+# Generic vs app-specific code
+
+Note that the template tries to distinguish between "generic" code (that would likely be the same across different applications) and app-specific code.
+
+Of course, you can still modify generic code if it doesn't suit your needs!
+
+Generic code can be found in:
+
+* `ui/src/generic` - login pages, sign up pages, forgot password pages etc.
+* `scripts` - the scripts documented above, e.g. build, deploy etc.
+* `api/src/generic` - authentication handler, backend configuration etc.
+* `infra/src/generic` - the base stack defined in CDK. Note that the app-specific DynamoDB tables are defined in infra/src/stack.ts and this would be changed on a per-app basis.
