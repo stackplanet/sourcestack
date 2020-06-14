@@ -20,8 +20,9 @@ Because of this design, you don't use `npm install` or `npm upgrade` to use stak
 - A slick local development experience with fast builds and fast incremental deployments.
 - Run and debug all of your application code locally, with hot reloading.
 - A curated set of libraries and tools that all play nicely together, saving you many hours of frustrating integration work.
-- Easy deployment to your custom domain, e.g. myamazingapp.com, 
+- Easy deployment to your custom domain, e.g. myamazingapp.com
 - Easy management of multiple test environments, e.g. alpha.myamazingapp.com, beta.myamazingapp.com 
+- Storage of security tokens in httponly cookies instead of localstorage for [increased XSS protection](https://github.com/aws-amplify/amplify-js/issues/3436).
 - Fully customisable login UI backed by Amazon Cognito, with signup/forgot password emails sent from your custom domain.
 
 ## Technology choices
@@ -133,7 +134,12 @@ Edit `app.json` and change `name` to the application name that you want, e.g.
 
 ## Use SNS for sending email
 
-- See [Use SNS for sending email](./readme-email.md)
+By default, your Cognito User Pool sends account verification and password reset emails directly. This has some limitations:
+
+- Emails are sent from no-reply@verificationemail.com rather than your custom domain
+- A maximum of 50 emails can be sent per day: https://docs.aws.amazon.com/cognito/latest/developerguide/limits.html
+
+You can configure your User Pool to send emails from SES, meaning that emails will come from your domain with far higher daily sending limits. See [Use SNS for sending email](./readme-email.md)
 
 # Generic vs app-specific code
 

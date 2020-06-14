@@ -1,6 +1,5 @@
     
-- npm run stack-outputs --key DistributionUri
-- Add DistributionUri output to the end of deploy script
+- Tests for auth
 - Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
 - Fix hardwired refs to eu-west-1
 - Diagram
@@ -32,6 +31,7 @@
   - Production deploys should go to the root domain
 - Document auth
 - code tour
+- why do tsc compile errors not break the build?
 - consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 - sensible stack traces/source maps for lambda?
 - Extract generic components and make it more of a reusable tool
@@ -45,8 +45,17 @@
     ssh: connect to host github.com port 22: No route to host
 
 - Fix email domain: noreply@staklist.net via amazonses.com 
-
+- npm run start: 
+  - (node:10919) Warning: Accessing non-existent property 'INVALID_ALT_NUMB
+  - Browserslist: caniuse-lite is outdated. Please run the following command: `npm update`
 - Pipelines
+
+- Test with expired refresh token: 
+
+
+- Chakra UI looks interesting, react components with atomic css https://news.ycombinator.com/item?id=23511811
+
+- docs: tailwind vscode plugin
 
 # Notes
 
