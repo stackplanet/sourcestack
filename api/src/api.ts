@@ -44,6 +44,10 @@ export function configureApp() {
         res.send('pong');
     });
 
+    app.get('/api/private/ping', async (req, res) => {
+        res.send('pong ' + req.user.userId);
+    });
+
     app.get('/api/private/todos', async (req, res) => {
         let result = await TodoItem.primaryKey.query({hash: req.user.userId as string});
         res.send(result.records.map(t => t.serialize()));

@@ -24,19 +24,31 @@
   },
   "devDependencies": {
     "@types/aws-serverless-express": "^3.3.3",
+    "@types/baretest": "^2.0.0",
     "@types/compression": "^1.7.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
+    "@types/jest": "^26.0.0",
     "@types/jsonwebtoken": "^8.3.9",
     "@types/node": "^13.11.1",
+    "@types/supertest": "^2.0.9",
+    "baretest": "^2.0.0",
+    "jest": "^26.0.1",
     "parcel": "^1.12.4",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-externals": "^0.4.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^26.1.0",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.8.3"
   },
   "externals": [
     "aws-sdk"
-  ]
+  ],
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  }
 }

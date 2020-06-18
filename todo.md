@@ -1,5 +1,14 @@
     
 - Tests for auth
+  - use https://www.npmjs.com/package/jest-runner-groups
+
+refactor to gwt
+
+- rename api/user to something else - in fact rename all auth endpoints
+
+
+
+
 - Docs: You can get the 'FunctionName' output and then 'sam logs -tn <FunctionName>'
 - Fix hardwired refs to eu-west-1
 - Diagram
