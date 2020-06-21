@@ -24,7 +24,8 @@
     "stack-outputs": "ts-node scripts/stack-outputs.ts",
     "test-scripts": "ts-node scripts/test/test-scripts.ts",
     "destroy-env": "ts-node scripts/destroy-env.ts",
-    "echo-config": "ts-node scripts/echo-config.ts"
+    "echo-config": "ts-node scripts/echo-config.ts",
+    "logs": "ts-node scripts/logs.ts"
   },
   "repository": {
     "type": "git",

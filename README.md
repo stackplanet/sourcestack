@@ -6,19 +6,19 @@ The template includes a simple todo list app - you can see it running at [stakli
 
 ## Design philosophy
 
-stak is designed to give you full control over all aspects of the application and infrastructure.
+stak is designed to give you full control over all aspects of your application and infrastructure.
 
 Frameworks like [AWS Amplify](https://aws.amazon.com/amplify) aim to simplify development by hiding the details of underlying infrastructure. This is great for getting started but can lead to problems when your requirements no longer match the framework's assumptions. Frameworks tend to be classic [leaky abstractions](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/).
 
 stak takes a **low abstraction** approach, surfacing all infrastructure within a template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
 
-Because of this design, stak is not a library that you include in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and customising the code to fit your needs. As bugfixes and improvements are made to this template, you can merge them into your app if you choose.
+Because of this design, stak is not a library that you include in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and customising the code to fit your needs. Because everything is open and hackable, you can go in any direction you like - tweak the code, use alternative libraries, add new AWS components, etc. As bugfixes and improvements are made to this template, you can merge them into your app if you choose.
 
 ## Technology choices
 
 This base template uses the following technologies and patterns:
 
-|Layer|Implementation|
+|Aspect|Implementation|
 |----|------------------------------------------|
 | Architecture | Client-side rendering, REST API, Serverless, NoSQL |
 | UI | Mithril, Typescript, TailwindCSS, Parcel |
@@ -27,7 +27,7 @@ This base template uses the following technologies and patterns:
 | AWS components | Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
-Maybe you want to use something different, like React/Svelte for the UI or Aurora/FaunaDB for the database. Just fork this repository and create a new starting point based on your own preferences!
+Maybe you want to use something different, like React for the UI, Bootstrap for CSS or Aurora for the database. Just fork this repository and create your own version of stak for others to use as a starting point!
 
 **Please let me know if you create a fork - I'll link to it here.**
 
@@ -103,9 +103,11 @@ Here's how to do this in VS Code:
 - Open `api/src/api.ts` and put a breakpoint in the `/ping` endpoint.
 - Go to https://localhost:1234/api/ping, and the VS Code debugger should open at the breakpoint.
 
-## View logs
+## View API logs on AWS
 
-TODO
+- [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html).
+- Run `npm run logs --env=alpha`
+- You will now a live view (with a few seconds delay) of any logs written by your API function.
 
 ## Change the application name
 
