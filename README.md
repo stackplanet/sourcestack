@@ -1,6 +1,6 @@
-# An adaptable template for full-stack serverless Typescript web apps
+# An adaptable template for full-stack web apps on AWS
 
-stak is a fully featured serverless web app template, ready to be deployed into your AWS account and adapted to your needs. 
+**stak** is a fully featured serverless web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
 The template includes a simple todo list app - you can see it running at [staklist.net](https://staklist.net)
 
@@ -10,41 +10,48 @@ stak is designed to give you full control over all aspects of the application an
 
 Frameworks like [AWS Amplify](https://aws.amazon.com/amplify) aim to simplify development by hiding the details of underlying infrastructure. This is great for getting started but can lead to problems when your requirements no longer match the framework's assumptions. Frameworks tend to be classic [leaky abstractions](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/).
 
-stak takes a "hide nothing" approach, surfacing all infrastructure within the template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the cloud environment. 
+stak takes a **low abstraction** approach, surfacing all infrastructure within a template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
 
-Because of this design, you don't use `npm install` or `npm upgrade` to use stak in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository, and customising the code to fit your needs. As bugfixes and improvements are made to this template, you can merge them into your app if you choose.
+Because of this design, stak is not a library that you include in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and customising the code to fit your needs. As bugfixes and improvements are made to this template, you can merge them into your app if you choose.
 
-## Features
+## Technology choices
+
+This base template uses the following technologies and patterns:
+
+|Layer|Implementation|
+|----|------------------------------------------|
+| Architecture | Client-side rendering, REST API, Serverless, NoSQL |
+| UI | Mithril, Typescript, TailwindCSS, Parcel |
+| API | Express, Typescript, Parcel |
+| Infrastructure | Amazon CDK, Typescript |
+| AWS components | Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
+| Database | DynamoDB |
+
+Maybe you want to use something different, like React/Svelte for the UI or Aurora/FaunaDB for the database. Just fork this repository and create a new starting point based on your own preferences!
+
+**Please let me know if you create a fork - I'll link to it here.**
+
+## Main features of this template
 
 - Typescript everywhere - UI, API and infrastructure (using [AWS CDK](https://aws.amazon.com/cdk/)).
 - A slick local development experience with fast builds and fast incremental deployments.
 - Run and debug all of your application code locally, with hot reloading.
 - A curated set of libraries and tools that all play nicely together, saving you many hours of frustrating integration work.
-- Easy deployment to your custom domain, e.g. myamazingapp.com
-- Easy management of multiple test environments, e.g. alpha.myamazingapp.com, beta.myamazingapp.com 
+- Easy deployment to your custom domain, e.g. `mystakapp.com`
+- Easy management of multiple test environments, e.g. `alpha.mystakapp.com`, `beta.mystakapp.com` 
 - Storage of security tokens in httponly cookies instead of localstorage for [increased XSS protection](https://github.com/aws-amplify/amplify-js/issues/3436).
 - Fully customisable login UI backed by Amazon Cognito, with signup/forgot password emails sent from your custom domain.
 
-## Technology choices
-
-The base template uses certain technologies that I find pleasant to use, but you should be able to replace them without too much work:
-
-- The front end uses [Mithril](https://mithril.js.org) and [Tailwind CSS](https://tailwindcss.com), but could be adapted to use React, Vue, Bootstrap, Bulma etc if you prefer.
-- Express is used to provide a REST API, but you could replace this with GraphQL if that's your thing. TODO - what would you use?
-- DynamoDB is the data store, but you can use Aurora, FaunaDB or something else (I have a fork that uses Aurora Serverless - contact me if you're interested).
-
-Of course, you can just fork this repository and create a new starting point based on different technology choices.
-
 ## Limitations
 
-- The project is at an early stage - I'm looking for feedback.
+- The project is at an early stage - I'm looking for help and feedback.
 - Only tested on Max OSX Catalina so far. Linux should be OK but it's not tested yet. Let me know if you'd like Windows support. 
 
 ## Deploy the app to your AWS account
 
 The instructions below assume that you have an AWS account and an up-to-date installation of nodejs.
 
-> **WARNING - this will create resources in your AWS account.** Charges should be minimal for test workloads, but please be sure that you understand the pricing of these resources as per https://aws.amazon.com/pricing.
+> **WARNING - this will create resources in your AWS account.** Charges should be minimal for test workloads, but please be sure that you understand the pricing as per https://aws.amazon.com/pricing.
 
 Run the following commands:
 
@@ -102,11 +109,11 @@ TODO
 
 ## Change the application name
 
-Edit `app.json` and change `name` to the application name that you want, e.g.
+- Edit `app.json` and change `name` to the application name that you want, e.g.
 
         {
             ...
-            "name" : "myamazingapp"
+            "name" : "mystakapp"
             ... 
         }
 
@@ -143,9 +150,7 @@ You can configure your User Pool to send emails from SES, meaning that emails wi
 
 # Generic vs app-specific code
 
-Note that the template tries to distinguish between "generic" code (that would likely be the same across different applications) and app-specific code.
-
-Of course, you can still modify generic code if it doesn't suit your needs!
+The template includes "generic" code (code that would likely be the same across different applications) and app-specific code.
 
 Generic code can be found in:
 
@@ -153,3 +158,5 @@ Generic code can be found in:
 * `scripts` - the scripts documented above, e.g. build, deploy etc.
 * `api/src/generic` - authentication handler, backend configuration etc.
 * `infra/src/generic` - the base stack defined in CDK. Note that the app-specific DynamoDB tables are defined in infra/src/stack.ts and this would be changed on a per-app basis.
+
+Of course, you can still modify generic code if it doesn't suit your needs!
