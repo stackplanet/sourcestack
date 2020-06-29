@@ -1,53 +1,60 @@
-# An adaptable template for full-stack web apps on AWS
+# an adaptable template for fullstack web apps
 
-**stak** is a fully featured serverless web app template, ready to be deployed into your AWS account and adapted to your needs. 
+**forkstack** is a fully featured serverless web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
-The template includes a simple todo list app - you can see it running at [staklist.net](https://staklist.net)
+The template includes a simple todo list app - you can try it out at [forklist.net](https://forklist.net)
 
-## Design philosophy
+forkstack provides a simple and coherent set of tools for working with your application:
 
-stak is designed to give you full control over all aspects of your application and infrastructure.
+- A slick local development experience with fast builds and deployments.
+- Run and debug all of your application code locally, with hot reloading.
+- A curated set of libraries and tools that all play nicely together, saving you many hours of frustrating integration work.
+- Easy deployment to your custom domain, e.g. `myforkstackapp.com`, including sending signup/password reset emails from that domain.
+- Easy management of multiple test environments, e.g. `alpha.myforkstackapp.com`, `beta.myforkstackapp.com`
 
-Frameworks like [AWS Amplify](https://aws.amazon.com/amplify) aim to simplify development by hiding the details of underlying infrastructure. This is great for getting started but can lead to problems when your requirements no longer match the framework's assumptions. Frameworks tend to be classic [leaky abstractions](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/).
-
-stak takes a **low abstraction** approach, surfacing all infrastructure within a template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
-
-Because of this design, stak is not a library that you include in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and customising the code to fit your needs. Because everything is open and hackable, you can go in any direction you like - tweak the code, use alternative libraries, add new AWS components, etc. As bugfixes and improvements are made to this template, you can merge them into your app if you choose.
-
-## Technology choices
-
-This base template uses the following technologies and patterns:
+This template makes certain technology choices: 
 
 |Aspect|Implementation|
 |----|------------------------------------------|
 | Architecture | Client-side rendering, REST API, Serverless, NoSQL |
-| UI | Mithril, Typescript, TailwindCSS, Parcel |
+| UI | Mithril, JSX, Typescript, TailwindCSS, Parcel |
 | API | Express, Typescript, Parcel |
-| Infrastructure | Amazon CDK, Typescript |
-| AWS components | Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
+| Infrastructure as code | Amazon CDK, Typescript |
+| Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
-Maybe you want to use something different, like React for the UI, Bootstrap for CSS or Aurora for the database. Just fork this repository and create your own version of stak for others to use as a starting point!
+If you don't like these choices, **forkstack is designed to be forked!** Ideas for forks include:
 
-**Please let me know if you create a fork - I'll link to it here.**
+* Other client frameworks: React, Vue, Svelte...
+* Other CSS frameworks/approaches: Bootstrap, MaterialCSS, no framework...
+* Server side rendering
+* GraphQL instead of REST
+* Javascript instead of Typescript
+* Other clouds: GCP, Azure...
+* Relational databases (I'm working on an Aurora Serverless fork)
 
-## Main features of this template
+Just fork this repository and create your own template. If you'd like to share it with others, please let me know and I'll link to it here.
 
-- Typescript everywhere - UI, API and infrastructure (using [AWS CDK](https://aws.amazon.com/cdk/)).
-- A slick local development experience with fast builds and fast incremental deployments.
-- Run and debug all of your application code locally, with hot reloading.
-- A curated set of libraries and tools that all play nicely together, saving you many hours of frustrating integration work.
-- Easy deployment to your custom domain, e.g. `mystakapp.com`
-- Easy management of multiple test environments, e.g. `alpha.mystakapp.com`, `beta.mystakapp.com` 
-- Storage of security tokens in httponly cookies instead of localstorage for [increased XSS protection](https://github.com/aws-amplify/amplify-js/issues/3436).
-- Fully customisable login UI backed by Amazon Cognito, with signup/forgot password emails sent from your custom domain.
+
+
+
+
+## Design philosophy
+
+forkstack is designed to give you full control over all aspects of your application and infrastructure.
+
+Frameworks like [AWS Amplify](https://aws.amazon.com/amplify) aim to simplify development by hiding the details of underlying infrastructure. This is great for getting started but can lead to problems when your requirements no longer match the framework's assumptions. Frameworks tend to be classic [leaky abstractions](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/).
+
+forkstack takes a **low abstraction** approach, surfacing all infrastructure within the template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
+
+Because of this design, forkstack is not a library that you include in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and customising the code to fit your needs. Because the codebase is designed to be open and hackable, you can go in any direction you like - change the login mechanism, use alternative libraries, add new components, port to a different cloud... As bugfixes and improvements are made to this template, you can update your app as you choose using `git merge`.
 
 ## Limitations
 
 - The project is at an early stage - I'm looking for help and feedback.
 - Only tested on Max OSX Catalina so far. Linux should be OK but it's not tested yet. Let me know if you'd like Windows support. 
 
-## Deploy the app to your AWS account
+## Get started: Deploy the app to your AWS account
 
 The instructions below assume that you have an AWS account and an up-to-date installation of nodejs.
 
@@ -55,8 +62,8 @@ The instructions below assume that you have an AWS account and an up-to-date ins
 
 Run the following commands:
 
-- `git clone https://github.com/martinpllu/stak`
-- `cd stak`
+- `git clone https://github.com/martinpllu/forkstack`
+- `cd forkstack`
 - `npm install`
 - `npm run deploy --env=alpha # Create a test environment called 'alpha' and build/deploy the application code to it`
 
@@ -65,6 +72,8 @@ This will take a while to complete, as CDK creates resources including the Cloud
 The script outputs `App running at https://xxxxxxx.cloudfront.net`. Later you can add your own domain name. 
 
 ## Get the app running locally
+
+The following will get the UI and API code running locally, using DynamoDB tables and Cognito user pools in AWS (a fully local mode using DynamoDB local and stubbed Cognito is on the roadmap).
 
 - `npm run use-backend --env=alpha # Configure your local app to use the database and Cognito user pool in the alpha environment`
 - `npm run start`
@@ -99,7 +108,7 @@ Here's how to do this in VS Code:
 
 - Stop the `npm run start` process you started earlier (Ctrl-C)
 - In VS Code, run `Debug: Toggle Auto Attach` and ensure that *Auto Attach: On* appears in the status bar.
-- In the VS Code Terminal view, cd to the `stak` directory and run `npm run debug`
+- In the VS Code Terminal view, cd to the `forkstack` directory and run `npm run debug`
 - Open `api/src/api.ts` and put a breakpoint in the `/ping` endpoint.
 - Go to https://localhost:1234/api/ping, and the VS Code debugger should open at the breakpoint.
 
@@ -115,7 +124,7 @@ Here's how to do this in VS Code:
 
         {
             ...
-            "name" : "mystakapp"
+            "name" : "myforkstackapp"
             ... 
         }
 
