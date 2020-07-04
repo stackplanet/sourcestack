@@ -1,29 +1,29 @@
-# an adaptable template for fullstack web apps
+# a super flexible template for full-stack node web apps
 
-**forkstack** is a fully featured serverless web app template, ready to be deployed into your AWS account and adapted to your needs. 
+**stak** is a full-stack node web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
-The template includes a simple todo list app - you can try it out at [forklist.net](https://forklist.net)
+The template includes a simple todo list app - you can try it out at [staklist.net](https://staklist.net)
 
-forkstack provides a simple and coherent set of tools for working with your application:
+stak makes it easy to work with your application:
 
 - A slick local development experience with fast builds and deployments.
 - Run and debug all of your application code locally, with hot reloading.
-- A curated set of libraries and tools that all play nicely together, saving you many hours of frustrating integration work.
-- Easy deployment to your custom domain, e.g. `myforkstackapp.com`, including sending signup/password reset emails from that domain.
-- Easy management of multiple test environments, e.g. `alpha.myforkstackapp.com`, `beta.myforkstackapp.com`
+- A curated set of libraries and tools that all play nicely together, saving you all that frustrating integration work.
+- Easy deployment to your custom domain, e.g. `mystakapp.com`, including sending signup/password reset emails from that domain.
+- Easy management of multiple test environments, e.g. `alpha.mystakapp.com`, `beta.mystakapp.com`
 
-This template makes certain technology choices: 
+This version of the template makes certain technology choices: 
 
 |Aspect|Implementation|
 |----|------------------------------------------|
 | Architecture | Client-side rendering, REST API, Serverless, NoSQL |
-| UI | Mithril, JSX, Typescript, TailwindCSS, Parcel |
+| UI | Mithril with JSX (as a simpler alternative to React), Typescript, TailwindCSS, Parcel |
 | API | Express, Typescript, Parcel |
 | Infrastructure as code | Amazon CDK, Typescript |
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
-If you don't like these choices, **forkstack is designed to be forked!** Ideas for forks include:
+If you don't like these choices, stak is designed to be forked. Ideas for forks include:
 
 * Other client frameworks: React, Vue, Svelte...
 * Other CSS frameworks/approaches: Bootstrap, MaterialCSS, no framework...
@@ -33,21 +33,17 @@ If you don't like these choices, **forkstack is designed to be forked!** Ideas f
 * Other clouds: GCP, Azure...
 * Relational databases (I'm working on an Aurora Serverless fork)
 
-Just fork this repository and create your own template. If you'd like to share it with others, please let me know and I'll link to it here.
-
-
-
-
+Just fork this repository and create your own template or app. If you'd like to share it with others, please let me know and I'll link to it here.
 
 ## Design philosophy
 
-forkstack is designed to give you full control over all aspects of your application and infrastructure.
+stak is designed to give you full control over all aspects of your application and infrastructure.
 
 Frameworks like [AWS Amplify](https://aws.amazon.com/amplify) aim to simplify development by hiding the details of underlying infrastructure. This is great for getting started but can lead to problems when your requirements no longer match the framework's assumptions. Frameworks tend to be classic [leaky abstractions](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/).
 
-forkstack takes a **low abstraction** approach, surfacing all infrastructure within the template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
+stak takes a **low abstraction** approach, surfacing all infrastructure as code within the template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
 
-Because of this design, forkstack is not a library that you include in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and customising the code to fit your needs. Because the codebase is designed to be open and hackable, you can go in any direction you like - change the login mechanism, use alternative libraries, add new components, port to a different cloud... As bugfixes and improvements are made to this template, you can update your app as you choose using `git merge`.
+Because of this design, stak is not a library that you include in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and customising the code to fit your needs. Because the codebase is designed to be open and hackable, you can go in any direction you like - change the login mechanism, use alternative libraries, add new components, port to a different cloud... As bugfixes and improvements are made to the template you forked from, you can update your app as you choose using `git merge`.
 
 ## Limitations
 
@@ -62,8 +58,8 @@ The instructions below assume that you have an AWS account and an up-to-date ins
 
 Run the following commands:
 
-- `git clone https://github.com/martinpllu/forkstack`
-- `cd forkstack`
+- `git clone https://github.com/martinpllu/stak`
+- `cd stak`
 - `npm install`
 - `npm run deploy --env=alpha # Create a test environment called 'alpha' and build/deploy the application code to it`
 
@@ -108,7 +104,7 @@ Here's how to do this in VS Code:
 
 - Stop the `npm run start` process you started earlier (Ctrl-C)
 - In VS Code, run `Debug: Toggle Auto Attach` and ensure that *Auto Attach: On* appears in the status bar.
-- In the VS Code Terminal view, cd to the `forkstack` directory and run `npm run debug`
+- In the VS Code Terminal view, cd to the `stak` directory and run `npm run debug`
 - Open `api/src/api.ts` and put a breakpoint in the `/ping` endpoint.
 - Go to https://localhost:1234/api/ping, and the VS Code debugger should open at the breakpoint.
 
@@ -116,7 +112,7 @@ Here's how to do this in VS Code:
 
 - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html).
 - Run `npm run logs --env=alpha`
-- You will now a live view (with a few seconds delay) of any logs written by your API function.
+- You will now see a live view (with a few seconds delay) of any logs written by your API function.
 
 ## Change the application name
 
@@ -124,7 +120,7 @@ Here's how to do this in VS Code:
 
         {
             ...
-            "name" : "myforkstackapp"
+            "name" : "mystakapp"
             ... 
         }
 
@@ -170,4 +166,4 @@ Generic code can be found in:
 * `api/src/generic` - authentication handler, backend configuration etc.
 * `infra/src/generic` - the base stack defined in CDK. Note that the app-specific DynamoDB tables are defined in infra/src/stack.ts and this would be changed on a per-app basis.
 
-Of course, you can still modify generic code if it doesn't suit your needs!
+Of course, you can still modify generic code if it doesn't suit your needs.

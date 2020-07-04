@@ -2,9 +2,11 @@
 - rename req.user to req.jwtInfo or similar
 - change username to email and userId to email
 - Fix hardwired refs to eu-west-1
-
+- explain Mithril a bit
 - roadmap    
+- license
 - End to end testing
+- npm audit/fix
 
 - document certificate thing: thisisunsafe
   - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
@@ -32,6 +34,7 @@
 - Fork ideas:
   - Aurora Serverless
   - React, possibly using Chakra UI (react components with atomic css https://news.ycombinator.com/item?id=23511811)
+    - https://blog.logrocket.com/building-photo-gallery-app-from-scratch-chakra-ui/
   - SSR
 - Document auth
 - Move to HTTP API, see https://github.com/aws/aws-cdk/issues/5362
