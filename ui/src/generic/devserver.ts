@@ -3,7 +3,10 @@ const ParcelProxyServer = require('parcel-proxy-server');
 const server = new ParcelProxyServer({
     entryPoint: './index.html',
     parcelOptions: {
-        https: true,
+        https: {
+            cert: './localhost.crt',
+            key: './localhost.key'
+        },
         watch: true
     },
     proxies: {

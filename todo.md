@@ -1,5 +1,6 @@
 - rename api/user to something else - in fact rename all auth endpoints
 - rename req.user to req.jwtInfo or similar
+- Remove copyright and legal notice from staklist
 - change username to email and userId to email
 - Fix hardwired refs to eu-west-1
 - explain Mithril a bit
@@ -7,11 +8,6 @@
 - license
 - End to end testing
 - npm audit/fix
-
-- document certificate thing: thisisunsafe
-  - https://stackoverflow.com/questions/58802767/no-proceed-anyway-option-on-neterr-cert-invalid-in-chrome-on-macos
-  - why does this not happen for RA webpack server?
-  - Do you need to generate server.cert etc? Try cloning a fresh copy of the repo and running.
 
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - Bug - no error when signing in as non-existent user in cloud
@@ -31,6 +27,7 @@
 
 - Roadmap 
   - Social login
+- Legal stuff
 - Fork ideas:
   - Aurora Serverless
   - React, possibly using Chakra UI (react components with atomic css https://news.ycombinator.com/item?id=23511811)
