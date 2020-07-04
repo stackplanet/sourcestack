@@ -1,9 +1,9 @@
-- rename api/user to something else - in fact rename all auth endpoints
 - rename req.user to req.jwtInfo or similar
 - Remove copyright and legal notice from staklist
 - change username to email and userId to email
 - Fix hardwired refs to eu-west-1
 - explain Mithril a bit
+- fix refresh unit test
 - roadmap    
 - license
 - End to end testing
@@ -21,7 +21,6 @@
   - (node:10919) Warning: Accessing non-existent property 'INVALID_ALT_NUMB
   - Browserslist: caniuse-lite is outdated. Please run the following command: `npm update`
 
-- revisit cli - can this be made simple? 
 
 # After launch
 

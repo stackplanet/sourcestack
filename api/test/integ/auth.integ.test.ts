@@ -34,7 +34,7 @@ let deleteUser = async () => {
 }
 
 let signUp = async (username = user1, password = password1) => {
-    return await request(app).post('/api/signup').send({ username: username, password: password });
+    return await request(app).post('/api/auth/signup').send({ username: username, password: password });
 }
 
 let confirmSignUp = async (username = user1) => {
@@ -42,7 +42,7 @@ let confirmSignUp = async (username = user1) => {
 }
 
 let login = async (username = user1, password = password1) => {
-    let response = await request(app).post('/api/login').send({ username: username, password: password });
+    let response = await request(app).post('/api/auth/login').send({ username: username, password: password });
     let authTokenCookie = response.header['set-cookie'][0];
     testState.authToken = authTokenCookie.split(';')[0];
     let refreshTokenCookie = response.header['set-cookie'][1];
@@ -56,14 +56,14 @@ test(`when not logged in, then 401 on private endpoint`, async () => {
 });
 
 test(`when not logged in, then undefined on user endpoint`, async () => {
-    let response = await request(app).get('/api/user');
+    let response = await request(app).get('/api/auth/user');
     expect(response.body).toEqual({ userId: undefined });
 });
 
 test(`when signed up but not confirmed, can't log in`, async () => {
     await deleteUser();
     await signUp();
-    let response = await request(app).post('/api/login').send({ username: user1, password: password1 });
+    let response = await request(app).post('/api/auth/login').send({ username: user1, password: password1 });
     expect(response.body).toEqual({ loginError: "User is not confirmed." });
 });
 
@@ -83,7 +83,7 @@ test(`when signing up, then success`, async () => {
 test(`when signing up with password that doesn't meet policy, then error message`, async () => {
     await deleteUser();
 
-    let response = await request(app).post('/api/signup').send({ username: user1, password: 'p4ssw0rd' });
+    let response = await request(app).post('/api/auth/signup').send({ username: user1, password: 'p4ssw0rd' });
     expect(testState.authToken).toEqual('');
     expect(response.body.loginError).toEqual('Password did not conform with policy: Password must have uppercase characters');
 });
@@ -91,7 +91,7 @@ test(`when signing up with password that doesn't meet policy, then error message
 test(`when sign up code incorrect, then error`, async () => {
     await deleteUser();
     await signUp();
-    let response = await request(app).post('/api/confirmsignup').send({ code: 'rubbish', username: user1 });
+    let response = await request(app).post('/api/auth/confirmsignup').send({ code: 'rubbish', username: user1 });
     expect(response.body.loginError).toBe('Invalid verification code provided, please try again.');
 })
 
@@ -107,7 +107,7 @@ test(`when logging in with wrong password, then error`, async () => {
     await deleteUser();
     await signUp();
     await confirmSignUp();
-    let response = await request(app).post('/api/login').send({ username: user1, password: 'ahaha' });
+    let response = await request(app).post('/api/auth/login').send({ username: user1, password: 'ahaha' });
     expect(response.body.loginError).toEqual('Incorrect username or password.');
 });
 
@@ -116,7 +116,7 @@ test(`when logged in, user and private endpoints work`, async () => {
     await signUp();
     await confirmSignUp();
     await login();
-    let response = await request(app).get('/api/user').set('Cookie', [testState.authToken]);
+    let response = await request(app).get('/api/auth/user').set('Cookie', [testState.authToken]);
     expect(response.body).toEqual({ userId: user1 });
     response = await request(app).get('/api/private/ping').set('Cookie', [testState.authToken]);
     expect(response.text).toEqual(`pong ${user1}`);
@@ -130,16 +130,16 @@ test(`when expired token, then refresh`, async () => {
     await signUp();
     await confirmSignUp();
     await login();
-    await request(app).get('/api/user').set('Cookie', [testState.authToken, testState.refreshToken]);
+    await request(app).get('/api/auth/user').set('Cookie', [testState.authToken, testState.refreshToken]);
     let expiredCookie = `auth_token=${expiredJwt}; Path=/; HttpOnly; Secure`;
     let response2 = await request(app).get('/api/private/ping').set('Cookie', [expiredCookie, testState.refreshToken]);
     let authTokenCookie = response2.header['set-cookie'][0];
     let newAuthToken = authTokenCookie.split(';')[0];
     expect(newAuthToken).toMatch(/auth_token=.*/);
     expect(newAuthToken).not.toEqual(testState.authToken);
-    expect(response2.text).toMatch('pong ' + user1);
+    expect(response2.text).toMatch('pong refreshtest@staklist.net');
     let response3 = await request(app).get('/api/private/ping').set('Cookie', [newAuthToken, testState.refreshToken]);
-    expect(response3.text).toMatch('pong ' + user1);
+    expect(response3.text).toMatch('pong refreshtest@staklist.net');
 });
 
 async function generateExpiredJwt(){

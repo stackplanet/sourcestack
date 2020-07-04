@@ -61,22 +61,22 @@ export namespace AuthHandler {
             }
         });
 
-        app.get('/api/user', async (req, res) => {
+        app.get('/api/auth/user', async (req, res) => {
             const userId = await getId(req, res, config);
             res.send({userId: userId} || {});
         });
 
-        app.post('/api/logout', async (req, res) => {
+        app.post('/api/auth/logout', async (req, res) => {
             res.clearCookie('auth_token');
             res.clearCookie('refresh_token');
             res.sendStatus(200);
         });
     
-        app.post('/api/login', async (req, res) => {
+        app.post('/api/auth/login', async (req, res) => {
             login(req, res, config);
         });
 
-        app.post('/api/forgotpassword', async (req, res) => {
+        app.post('/api/auth/forgotpassword', async (req, res) => {
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
                 let response = await cognito.forgotPassword({
@@ -94,7 +94,7 @@ export namespace AuthHandler {
 
 
         // dupe - remove
-        // app.post('/api/forgotpassword', async (req, res) => {
+        // app.post('/api/auth/forgotpassword', async (req, res) => {
         //     let cognito = new AWS.CognitoIdentityServiceProvider();
         //     try {
         //         let username = req.body.username;
@@ -112,7 +112,7 @@ export namespace AuthHandler {
         // });
 
 
-        app.post('/api/confirmforgotpassword', async (req, res) => {
+        app.post('/api/auth/confirmforgotpassword', async (req, res) => {
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
                 let username = req.body.username;
@@ -132,7 +132,7 @@ export namespace AuthHandler {
         });
 
 
-        app.post('/api/signup', async (req, res) => {
+        app.post('/api/auth/signup', async (req, res) => {
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
                 let username = req.body.username;
@@ -151,7 +151,7 @@ export namespace AuthHandler {
             }
         });
 
-        app.post('/api/confirmsignup', async (req, res) => {
+        app.post('/api/auth/confirmsignup', async (req, res) => {
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
                 let username = req.body.username;

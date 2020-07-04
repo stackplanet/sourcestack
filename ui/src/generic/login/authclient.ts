@@ -7,21 +7,21 @@ export class AuthClient {
 
     static async init(){
         AuthClient.user = await m.request({
-            url: '/api/user'
+            url: '/api/auth/user'
         });
     }
 
     static async logout(){
         AuthClient.user = {};
         await m.request({
-            url: '/api/logout',
+            url: '/api/auth/logout',
             method: 'POST'
         })
     }
 
     static async forgotPassword(username: string){
         await m.request({
-            url: '/api/forgotpassword',
+            url: '/api/auth/forgotpassword',
             method: 'POST',
             body: {
                 username: username
@@ -32,7 +32,7 @@ export class AuthClient {
 
     static async login(username: string, password: string) {
         AuthClient.user = await m.request({
-            url: 'api/login',
+            url: 'api/auth/login',
             method: 'POST',
             body: {
                 username: username, password: password
@@ -43,7 +43,7 @@ export class AuthClient {
 
     static async signup(username: string, password: string) {
         AuthClient.user = await m.request({
-            url: 'api/signup',
+            url: 'api/auth/signup',
             method: 'POST',
             body: {
                 username: username, password: password
@@ -55,7 +55,7 @@ export class AuthClient {
 
     static async confirmSignup(username: string, code: string) {
         AuthClient.user = await m.request({
-            url: 'api/confirmsignup',
+            url: 'api/auth/confirmsignup',
             method: 'POST',
             body: {
                 username: username, password: AuthClient.user.password, code: code
@@ -65,7 +65,7 @@ export class AuthClient {
 
     static async confirmForgotPassword(username: string, code: string, password: string) {
         AuthClient.user = await m.request({
-            url: 'api/confirmforgotpassword',
+            url: 'api/auth/confirmforgotpassword',
             method: 'POST',
             body: {
                 username: username, password: password, code: code
