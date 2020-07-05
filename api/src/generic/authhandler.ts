@@ -208,8 +208,9 @@ export namespace AuthHandler {
         let kid = decoded['header']['kid'];
         let pem = config.identityProviderKeys[kid];
         if (!pem) return undefined;
+        let region = process.env.AWS_REGION;
         try {
-            let issuer = `https://cognito-idp.eu-west-1.amazonaws.com/${config.UserPoolId}`;
+            let issuer = `https://cognito-idp.${region}.amazonaws.com/${config.UserPoolId}`;
             jwt.verify(token, pem, { issuer: issuer });
         }
         catch (err) {
