@@ -1,8 +1,6 @@
-- fix refresh unit test
+
 - roadmap    
 - license, package.json blurb
-- End to end testing
-  - https://github.com/smooth-code/jest-puppeteer/tree/master/packages/expect-puppeteer
 - npm audit/fix
 - code review
 

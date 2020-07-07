@@ -17,6 +17,9 @@ let app = configureApp();
 let user1 = 'foo@staklist.net';
 let password1 = 'Foo_Bar_123';
 
+let refreshTestUser = 'refreshtest@staklist.net';
+let refreshTestPassword = 'Tht_htht%214';
+
 let userPoolId = '';
 
 let testState = {
@@ -126,10 +129,7 @@ test(`when logged in, user and private endpoints work`, async () => {
 test(`when expired token, then refresh`, async () => {
     // If this user needs to be recreated, run "generate expiredJwt" below.
     let expiredJwt = 'eyJraWQiOiJvakdUR0tcL0FydjFiNEI2Q0tGczdXRzVxNmMxRWxkYXpITG5NXC9qTXVSTTg9IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiIxYTJmYzg4Ni1jODFmLTQ1ZTUtOGEwOC05MzBjNGYzYTY1NGYiLCJldmVudF9pZCI6IjVmYzE2MWVhLTRiMDQtNDYyNy1hNDllLWM0OTE3ZDk4Nzc2MyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4iLCJhdXRoX3RpbWUiOjE1OTI1MDU5MTksImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5ldS13ZXN0LTEuYW1hem9uYXdzLmNvbVwvZXUtd2VzdC0xX1NTYUVQYmVMdCIsImV4cCI6MTU5MjUwOTUxOSwiaWF0IjoxNTkyNTA1OTE5LCJqdGkiOiI1YzFjOThlNi01NTNkLTRhOTAtYjdhOC1jNjJlMjdhMGY2YTQiLCJjbGllbnRfaWQiOiI3dG1qOXNycTZqODZodGVwbDZhMXI4dTVrYyIsInVzZXJuYW1lIjoiMWEyZmM4ODYtYzgxZi00NWU1LThhMDgtOTMwYzRmM2E2NTRmIn0.j6VkoBLRJaxu1rbQMdfoHBxzX9YlFSzFAcaeVcJLfRqcydt2eT9gUonMTZcXVxU1d1wLQy0OBmL2Drr3FmuSA-PsUS5-IBBVh8lF40DnA9T26RPH7ieLyUqZ8LORHCOl1epEmb4j5Lwh2Y2KZzJABlOCZ3wt3wZaq70UY29-g6dZdO1zD9Clr6nRzy5ElLvZGggwL-ikmxYu6p2Ha4FJUoKVm8C-cGStG27DfFti4wyjE1nZN3wBGeJiSkRlo_0azs6g6urvrfLlN30ebfqh1kex7zzRwFN-pF0f1ZmWs8YViFTtGe_M0VpVFWgWhgVi8GUc4V7jDboSJUX5B876cg';
-    await deleteUser();
-    await signUp();
-    await confirmSignUp();
-    await login();
+    await login(refreshTestUser, refreshTestPassword);
     await request(app).get('/api/auth/user').set('Cookie', [testState.authToken, testState.refreshToken]);
     let expiredCookie = `auth_token=${expiredJwt}; Path=/; HttpOnly; Secure`;
     let response2 = await request(app).get('/api/private/ping').set('Cookie', [expiredCookie, testState.refreshToken]);
@@ -143,11 +143,9 @@ test(`when expired token, then refresh`, async () => {
 });
 
 async function generateExpiredJwt(){
-    let user = 'refreshtest@staklist.net';
-    let password = 'Tht_htht%214';
-    await signUp(user, password);
-    await confirmSignUp(user);
-    await login(user, password);
+    await signUp(refreshTestUser, refreshTestPassword);
+    await confirmSignUp(refreshTestUser);
+    await login(refreshTestUser, refreshTestPassword);
     console.log('Use the following for the value of expiredJwt (it will expire after 1 hour)')
     console.log(testState.authToken);
 }
