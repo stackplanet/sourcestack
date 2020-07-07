@@ -3,7 +3,7 @@ import { exec } from 'child_process';
 export class CommandOutput {
     stdout = '';
     stderr = '';
-    exitCode:number;
+    exitCode:number = -1;
 }
 
 
