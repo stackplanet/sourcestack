@@ -1,21 +1,18 @@
-- rename req.user to req.jwtInfo or similar
-- Remove copyright and legal notice from staklist
-- change username to email and userId to email
-- Fix hardwired refs to eu-west-1
-- explain Mithril a bit
 - fix refresh unit test
 - roadmap    
-- license
+- license, package.json blurb
 - End to end testing
+  - https://github.com/smooth-code/jest-puppeteer/tree/master/packages/expect-puppeteer
 - npm audit/fix
+- code review
 
-- cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - Bug - no error when signing in as non-existent user in cloud
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
 - Test on IE and other browsers
 - wiki
-- docs: tailwind vscode plugin
+- code notes
+  - docs: tailwind vscode plugin
 
 - npm run start: 
   - (node:10919) Warning: Accessing non-existent property 'INVALID_ALT_NUMB
@@ -24,6 +21,9 @@
 
 # After launch
 
+- enable full email testing by creating a service, e.g. mailsink.net, that has an api to read back the email you sent
+- e2e test that can be run by others
+- cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - Roadmap 
   - Social login
 - Legal stuff
@@ -51,6 +51,7 @@
 
 - Fix email domain: noreply@staklist.net via amazonses.com 
 - Pipelines
+- Can email be put into JWT?
 - Test with expired refresh token: 
 
 

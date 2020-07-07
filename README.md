@@ -17,9 +17,9 @@ This version of the template makes certain technology choices:
 |Aspect|Implementation|
 |----|------------------------------------------|
 | Architecture | Client-side rendering, REST API, Serverless, NoSQL |
-| UI | Mithril with JSX (as a simpler alternative to React), Typescript, TailwindCSS, Parcel |
-| API | Express, Typescript, Parcel |
-| Infrastructure as code | Amazon CDK, Typescript |
+| UI | Typescript, Mithril with JSX (as a simpler alternative to React), TailwindCSS, Parcel |
+| API | Typescript, Express, Parcel |
+| Infrastructure as code | Typescript, Amazon CDK |
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
