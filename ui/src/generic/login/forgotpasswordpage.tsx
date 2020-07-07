@@ -29,6 +29,7 @@ export class ForgotPasswordPage extends AuthPage {
     }
 
     async resetpassword() {
+        AuthClient.user.userId = this.email;
         await AuthClient.forgotPassword(this.email);
         this.navigateOnSuccess('/confirmforgotpassword');
     }

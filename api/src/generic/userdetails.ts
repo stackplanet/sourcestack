@@ -1,6 +1,6 @@
 export interface UserDetails {
 
-    userId?: string;
+    userId: string;
     loginError?: string;
     
 }

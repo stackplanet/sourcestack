@@ -3,8 +3,6 @@
 - license, package.json blurb
 - npm audit/fix
 - code review
-- Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
-- Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
 - Test on IE and other browsers
 - wiki
 - code notes
