@@ -26,7 +26,7 @@ export class SignUpPage {
                     <LabelledInput label="Password" id="password" type="password" placeholder="********"/>    
                 </div>
                 <div class="mb-4">
-                    <LabelledInput label="Password" id="confirmPassword" type="password" placeholder="********"/>    
+                    <LabelledInput label="Confirm password" id="confirmPassword" type="password" placeholder="********"/>    
                     {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
                     {this.password && this.confirmPassword && !this.passwordsMatch() && <p class="text-red-500 text-xs italic">Passwords do not match</p>}
                     {this.password && !PasswordValidator.passwordValid(this.password) && <p class="text-red-500 text-xs italic">{PasswordValidator.passwordPolicy()}</p>}
