@@ -5,8 +5,9 @@ import { PasswordValidator } from './passwordvalidator';
 import { LabelledInput } from '../../components/labelledinput';
 import { Button } from '../../components/button';
 import { LoginPanel } from '../../components/login/loginpanel';
+import { AuthPage } from './authpage';
 
-export class ConfirmForgotPasswordPage {
+export class ConfirmForgotPasswordPage extends AuthPage {
 
     code = '';
     password = '';
@@ -35,7 +36,7 @@ export class ConfirmForgotPasswordPage {
                         {this.password && !PasswordValidator.passwordValid(this.password) && <p class="text-red-500 text-xs italic">{PasswordValidator.passwordPolicy()}</p>}
                     </div>
                 </div>}
-                {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
+                {this.error && <p class="text-red-500 text-xs italic">{this.error}</p>}
                 <div class="mb-4">
                     <Button label="OK" disabled={!this.complete()} callback={() => this.login()}/>
                 </div>
@@ -45,12 +46,7 @@ export class ConfirmForgotPasswordPage {
 
     async login() {
         await AuthClient.confirmForgotPassword(AuthClient.user.userId, this.code, this.password);
-        if (!AuthClient.user.loginError){
-            m.route.set('/home');
-        }
-        else {
-            m.redraw();
-        }
+        this.navigateOnSuccess('/home');
     }
 
     complete() {

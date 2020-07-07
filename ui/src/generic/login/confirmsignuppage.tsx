@@ -4,8 +4,9 @@ import { AuthClient } from './authclient';
 import { LabelledInput } from '../../components/labelledinput';
 import { Button } from '../../components/button';
 import { LoginPanel } from '../../components/login/loginpanel';
+import { AuthPage } from './authpage';
 
-export class ConfirmSignupPage {
+export class ConfirmSignupPage extends AuthPage {
 
     code = '';
 
@@ -21,7 +22,7 @@ export class ConfirmSignupPage {
                 </div>
                 <div class="mb-4">
                     <LabelledInput label="Code" id="code" type="text" placeholder="******"/>    
-                    {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
+                    {this.error && <p class="text-red-500 text-xs italic">{this.error}</p>}
                 </div>
                 <div class="mb-4">
                     <Button label="OK" disabled={!this.complete()} callback={() => this.login()}/>
@@ -32,12 +33,7 @@ export class ConfirmSignupPage {
 
     async login() {
         await AuthClient.confirmSignup(AuthClient.user.userId, this.code);
-        if (!AuthClient.user.loginError){
-            m.route.set('/home');
-        }
-        else {
-            m.redraw();
-        }
+        this.navigateOnSuccess('/home');
     }
 
     complete() {

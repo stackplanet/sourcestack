@@ -4,8 +4,9 @@ import { AuthClient } from './authclient';
 import { LabelledInput } from '../../components/labelledinput';
 import { Button } from '../../components/button';
 import { LoginPanel } from '../../components/login/loginpanel';
+import { AuthPage } from './authpage';
 
-export class LoginPage {
+export class LoginPage extends AuthPage {
 
     email: string = '';
     password: string = '';
@@ -22,7 +23,7 @@ export class LoginPage {
                 </div>
                 <div class="mb-4">
                     <LabelledInput label="Password" id="password" type="password" placeholder="********"/>    
-                    {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
+                    {this.error && <p class="text-red-500 text-xs italic">{this.error}</p>}
                     <a class="text-sm text-blue-500" href="/#!/forgotpassword">Forgot your password?</a>
                 </div>
                 <div class="mb-4">
@@ -37,12 +38,7 @@ export class LoginPage {
 
     async signup() {
         await AuthClient.login(this.email, this.password);
-        if (!AuthClient.user.loginError){
-            m.route.set('/home');
-        }
-        else {
-            m.redraw();
-        }
+        this.navigateOnSuccess('/home');
     }
 
     complete() {

@@ -4,8 +4,9 @@ import { bind } from '../../uiutils';
 import { LabelledInput } from '../../components/labelledinput';
 import { AuthClient } from './authclient';
 import { Button } from '../../components/button';
+import { AuthPage } from './authpage';
 
-export class ForgotPasswordPage {
+export class ForgotPasswordPage extends AuthPage {
 
     email: string = '';
 
@@ -18,7 +19,7 @@ export class ForgotPasswordPage {
             <div {...bind(this)}>   
                 <div class="mb-4">
                     <LabelledInput label="Email" id="email" type="email" placeholder="me@awesome.com"/>    
-                    {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
+                    {this.error && <p class="text-red-500 text-xs italic">{this.error}</p>}
                 </div>
                 <div class="mb-4">
                     <Button label="Reset" disabled={!this.complete()} callback={() => this.resetpassword()}/>
@@ -29,12 +30,7 @@ export class ForgotPasswordPage {
 
     async resetpassword() {
         await AuthClient.forgotPassword(this.email);
-        if (!AuthClient.user.loginError){
-            m.route.set('/confirmforgotpassword');
-        }
-        else {
-            m.redraw();
-        }
+        this.navigateOnSuccess('/confirmforgotpassword');
     }
 
     complete() {

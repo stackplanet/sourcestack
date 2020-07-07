@@ -1,10 +1,8 @@
-
+- sourcestack
 - roadmap    
 - license, package.json blurb
 - npm audit/fix
 - code review
-
-- Bug - no error when signing in as non-existent user in cloud
 - Bug - sign up and get the "account with that email already exists" error. when going to other pages, the error persists
 - Bug: enter incorrect change password confirm code, then the correct one. get "Missing required key 'Username' in params"
 - Test on IE and other browsers
@@ -16,6 +14,8 @@
   - (node:10919) Warning: Accessing non-existent property 'INVALID_ALT_NUMB
   - Browserslist: caniuse-lite is outdated. Please run the following command: `npm update`
 
+- Test setup on another machine
+
 
 # After launch
 
@@ -24,6 +24,7 @@
 - cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
 - Roadmap 
   - Social login
+  - Pipelines
 - Legal stuff
 - Fork ideas:
   - Aurora Serverless

@@ -5,8 +5,9 @@ import { PasswordValidator } from './passwordvalidator';
 import { LabelledInput } from '../../components/labelledinput';
 import { Button } from '../../components/button';
 import { LoginPanel } from '../../components/login/loginpanel';
+import { AuthPage } from './authpage';
 
-export class SignUpPage {
+export class SignUpPage extends AuthPage {
 
     email: string = '';
     password: string = '';
@@ -27,7 +28,7 @@ export class SignUpPage {
                 </div>
                 <div class="mb-4">
                     <LabelledInput label="Confirm password" id="confirmPassword" type="password" placeholder="********"/>    
-                    {AuthClient.user.loginError && <p class="text-red-500 text-xs italic">{AuthClient.user.loginError}</p>}
+                    {this.error && <p class="text-red-500 text-xs italic">{this.error}</p>}
                     {this.password && this.confirmPassword && !this.passwordsMatch() && <p class="text-red-500 text-xs italic">Passwords do not match</p>}
                     {this.password && !PasswordValidator.passwordValid(this.password) && <p class="text-red-500 text-xs italic">{PasswordValidator.passwordPolicy()}</p>}
                 </div>
@@ -40,13 +41,7 @@ export class SignUpPage {
 
     async login() {
         await AuthClient.signup(this.email, this.password);
-        if (AuthClient.user.loginError){
-            m.redraw();
-        }
-        else {
-            m.route.set('/confirmsignup');
-        }
-        
+        this.navigateOnSuccess('/confirmsignup');
     }
 
     complete() {
