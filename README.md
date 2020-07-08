@@ -2,7 +2,7 @@
 
 **sourcestack** is a full-stack node web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
-sourcestack surfaces all infrastructure as source code within the template, unlike frameworks like AWS Amplify that push infrastructure down into libraries and code generation tools. This means that you have total control over your application and won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stacklords/sourcestack/wiki/Design-philosophy) for more.
+sourcestack surfaces all infrastructure as source code within the template, unlike frameworks like AWS Amplify that push infrastructure down into libraries and code generation tools. This means that you have total control over your application and won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stackplanet/sourcestack/wiki/Design-philosophy) for more.
 
 The template includes a simple todo list app - you can try it out at [sourcestack-demo.com](https://sourcestack-demo.com)
 
@@ -30,13 +30,13 @@ This version of the template makes certain technology choices:
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
-If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stacklords/sourcestack/wiki/Potential-forks-of-sourcestack).
+If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stackplanet/sourcestack/wiki/Potential-forks-of-sourcestack).
 
-Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and I'll link to it here.
+Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and we'll link to it here.
 
 ## Limitations
 
-- The project is at an early stage - I'm looking for help and feedback.
+- The project is at an early stage - we're looking for help and feedback.
 - Only tested on Max OSX Catalina so far. Linux should be OK but has not been tested yet. Windows is not currently supported.
 
 ## Get started: Deploy the app to your AWS account
@@ -47,7 +47,7 @@ The instructions below assume that you have an AWS account and an up-to-date ins
 
 Run the following commands:
 
-- `git clone https://github.com/stacklords/sourcestack`
+- `git clone https://github.com/stackplanet/sourcestack`
 - `cd sourcestack`
 - `npm install`
 - `npm run deploy --env=dev # Create a test environment called 'dev' and build/deploy the application code to it`
@@ -146,7 +146,7 @@ You can configure your User Pool to send emails from SES, meaning that emails wi
 
 ## Further reading
 
-- [Code notes](https://github.com/stacklords/sourcestack/wiki/Code-notes) explains the structure and operation of the template code.
-- [sourcestack vs AWS Amplify](https://github.com/stacklords/sourcestack/wiki/sourcestack-vs-AWS-Amplify)
-- [Roadmap](https://github.com/stacklords/sourcestack/wiki/Roadmap)
-- [Troubleshooting](https://github.com/stacklords/sourcestack/wiki/Troubleshooting)
+- [Code notes](https://github.com/stackplanet/sourcestack/wiki/Code-notes) explains the structure and operation of the template code.
+- [sourcestack vs AWS Amplify](https://github.com/stackplanet/sourcestack/wiki/sourcestack-vs-AWS-Amplify)
+- [Roadmap](https://github.com/stackplanet/sourcestack/wiki/Roadmap)
+- [Troubleshooting](https://github.com/stackplanet/sourcestack/wiki/Troubleshooting)
