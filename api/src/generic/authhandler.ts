@@ -1,7 +1,6 @@
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
 import * as AWS from 'aws-sdk';
-import { UserDetails } from './userdetails';
 import { BackendConfig } from './backendconfig';
 
 declare global {
@@ -111,7 +110,6 @@ export namespace AuthHandler {
             }
         });
 
-
         app.post('/api/auth/signup', async (req, res) => {
             let cognito = new AWS.CognitoIdentityServiceProvider();
             try {
@@ -210,5 +208,11 @@ export namespace AuthHandler {
         return user.UserAttributes?.find((s) => {return s.Name == 'email'})?.Value;
     }
 
+}
 
+export interface UserDetails {
+
+    userId: string;
+    loginError?: string;
+    
 }
