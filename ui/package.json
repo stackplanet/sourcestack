@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "description": "Web App",
     "dependencies": {
-        "bulma": "^0.8.2",
         "mithril": "^2.0.4",
         "mithril-tsx-component": "^3.0.1",
         "tailwindcss": "^1.4.6"
