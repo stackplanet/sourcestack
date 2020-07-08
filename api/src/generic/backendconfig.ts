@@ -7,6 +7,7 @@ export interface BackendConfig {
     UserPoolId: string;
     UserPoolClientId: string;
     identityProviderKeys: any;
+    
 }
 
 export namespace BackendConfig {
