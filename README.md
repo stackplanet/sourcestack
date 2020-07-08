@@ -8,7 +8,7 @@ sourcestack makes it easy to work with your application:
 
 - A slick development experience with fast builds and deployments.
 - Run and debug all of your application code locally, with hot reloading.
-- A curated set of libraries and tools that all play nicely together, saving you all that frustrating integration work.
+- A curated set of tools and libraries that play nicely together, saving you all that frustrating integration work.
 - Easy deployment to your custom domain, e.g. `myapp.com`, including sending signup/password reset emails from that domain.
 - Easy management of multiple test environments, e.g. `dev.myapp.com`, `staging.myapp.com`
 - Serverless infrastructure for seamless scalability, minimal operations overhead and low-cost test environments.
@@ -18,7 +18,7 @@ This version of the template makes certain technology choices:
 |Aspect|Implementation|
 |----|------------------------------------------|
 | Architecture | Client-side rendering, REST API, Serverless, NoSQL |
-| UI | Typescript, Mithril with JSX (as a simpler alternative to React), TailwindCSS, Parcel |
+| UI | Typescript, Mithril with JSX, TailwindCSS, Parcel |
 | API | Typescript, Express, Parcel |
 | Infrastructure as code | Typescript, Amazon CDK |
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
