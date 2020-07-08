@@ -6,23 +6,23 @@
         "bulma": "^0.8.2",
         "mithril": "^2.0.4",
         "mithril-tsx-component": "^3.0.1",
-        "tailwindcss": "^1.4.4"
+        "tailwindcss": "^1.4.6"
     },
     "devDependencies": {
-        "@types/mithril": "^2.0.0",
-        "@types/node": "^13.13.4",
+        "@types/mithril": "^2.0.3",
+        "@types/node": "^13.13.13",
         "@types/randomstring": "^1.1.6",
-        "autoprefixer": "^9.7.6",
+        "autoprefixer": "^9.8.4",
         "expect": "^26.1.0",
         "parcel": "^1.12.4",
         "parcel-bundler": "^1.12.4",
-        "parcel-plugin-static-files-copy": "^2.2.1",
+        "parcel-plugin-static-files-copy": "^2.4.3",
         "parcel-proxy-server": "^1.1.0",
         "randomstring": "^1.1.5",
-        "sass": "^1.26.5",
+        "sass": "^1.26.10",
         "taiko": "^1.0.12",
         "ts-node": "^8.10.2",
-        "typescript": "^3.6.3"
+        "typescript": "^3.9.6"
     },
     "scripts": {
         "start": "ts-node src/generic/devserver.ts",
