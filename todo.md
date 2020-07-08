@@ -1,4 +1,3 @@
-- license, package.json blurb
 - npm audit/fix
 - code review
 - roadmap
@@ -11,7 +10,7 @@
   - Browserslist: caniuse-lite is outdated. Please run the following command: `npm update`
 
 - Test setup on another machine
-
+- remove todo.md
 
 # After launch
 

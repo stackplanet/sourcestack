@@ -24,17 +24,9 @@ This version of the template makes certain technology choices:
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
-If you don't like these choices, sourcestack is designed to be forked. Ideas for forks include:
+If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stackfun/sourcestack/wiki/Fork-ideas).
 
-* Other client frameworks: React, Vue, Svelte...
-* Other CSS frameworks/approaches: Bootstrap, MaterialCSS, no framework...
-* Server side rendering
-* GraphQL instead of REST
-* Javascript instead of Typescript
-* Other clouds: GCP, Azure...
-* Relational databases (I'm working on an Aurora Serverless fork)
-
-Just fork this repository and create your own template or app. If you'd like to share it with others, please raise an issue and I'll link to it here.
+Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and I'll link to it here.
 
 ## Design philosophy
 
@@ -44,7 +36,7 @@ Frameworks like [AWS Amplify](https://aws.amazon.com/amplify) aim to simplify de
 
 sourcestack takes a **low abstraction** approach, surfacing all infrastructure as source code within the template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
 
-Because of this design, sourcestack is not a library that you include in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and customising the code to fit your needs. Because the codebase is designed to be open and hackable, you can go in any direction you like - change the login mechanism, use alternative libraries, add new components, port to a different cloud... As bugfixes and improvements are made to the template you forked from, you can update your app as you choose using `git merge`.
+Because of this design, sourcestack is not a library that you include in your app. Instead you start by forking this repository and customising the code to fit your needs. Because the codebase is designed to be open and hackable, you can go in any direction you like - change the login mechanism, use alternative libraries, add new components, port to a different cloud... As bugfixes and improvements are made to the template you forked from, you can update your app as you choose using `git merge`.
 
 ## Limitations
 
