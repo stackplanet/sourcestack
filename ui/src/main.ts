@@ -1,6 +1,5 @@
 import m from 'mithril';
 import { AuthClient } from './generic/login/authclient';
-import { LoadingPage } from './pages/loadingpage';
 import { SplashPage } from './pages/splashpage';
 import { LoginPage } from './generic/login/loginpage';
 import { UserHomePage } from './pages/userhomepage';
@@ -15,7 +14,6 @@ import './css/main.css';
     await AuthClient.init();
 
     m.route(document.body, '/splash', {
-        '/loading': LoadingPage,
         '/splash': SplashPage,
         '/login': LoginPage,
         '/home': UserHomePage,
