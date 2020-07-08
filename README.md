@@ -2,7 +2,11 @@
 
 **sourcestack** is a full-stack node web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
+sourcestack surfaces all infrastructure as source code within the template, unlike frameworks like AWS Amplify that push infrastructure down into libraries and code generation tools. This means that you have total control over your application and won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stackfun/sourcestack/wiki/Design-philosophy) for more.
+
 The template includes a simple todo list app - you can try it out at [sourcestack-demo.com](https://sourcestack-demo.com)
+
+## Main features
 
 sourcestack makes it easy to work with your application:
 
@@ -12,6 +16,8 @@ sourcestack makes it easy to work with your application:
 - Easy deployment to your custom domain, e.g. `myapp.com`, including sending signup/password reset emails from that domain.
 - Easy management of multiple test environments, e.g. `dev.myapp.com`, `staging.myapp.com`
 - Serverless infrastructure for seamless scalability, minimal operations overhead and low-cost test environments.
+
+## Technology choices
 
 This version of the template makes certain technology choices: 
 
@@ -27,16 +33,6 @@ This version of the template makes certain technology choices:
 If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stackfun/sourcestack/wiki/Fork-ideas).
 
 Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and I'll link to it here.
-
-## Design philosophy
-
-sourcestack is designed to give you full control over all aspects of your application and infrastructure.
-
-Frameworks like [AWS Amplify](https://aws.amazon.com/amplify) aim to simplify development by hiding the details of underlying infrastructure. This is great for getting started but can lead to problems when your requirements no longer match the framework's assumptions. Frameworks tend to be classic [leaky abstractions](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/).
-
-sourcestack takes a **low abstraction** approach, surfacing all infrastructure as source code within the template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
-
-Because of this design, sourcestack is not a library that you include in your app. Instead you start by forking this repository and customising the code to fit your needs. Because the codebase is designed to be open and hackable, you can go in any direction you like - change the login mechanism, use alternative libraries, add new components, port to a different cloud... As bugfixes and improvements are made to the template you forked from, you can update your app as you choose using `git merge`.
 
 ## Limitations
 
