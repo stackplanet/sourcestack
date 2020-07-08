@@ -1,4 +1,4 @@
-# sourcestack: a super flexible template for full-stack node web apps
+# sourcestack: a highly adaptable template for full-stack node web apps
 
 **sourcestack** is a full-stack node web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
@@ -30,14 +30,14 @@ This version of the template makes certain technology choices:
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
-If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stacklords/sourcestack/wiki/Fork-ideas).
+If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stacklords/sourcestack/wiki/Potential-forks-of-sourcestack).
 
 Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and I'll link to it here.
 
 ## Limitations
 
 - The project is at an early stage - I'm looking for help and feedback.
-- Only tested on Max OSX Catalina so far. Linux should be OK but it's not tested yet. Let me know if you'd like Windows support. 
+- Only tested on Max OSX Catalina so far. Linux should be OK but has not been tested yet. Windows is not currently supported.
 
 ## Get started: Deploy the app to your AWS account
 
