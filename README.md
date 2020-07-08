@@ -2,7 +2,7 @@
 
 **sourcestack** is a full-stack node web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
-sourcestack surfaces all infrastructure as source code within the template, unlike frameworks like AWS Amplify that push infrastructure down into libraries and code generation tools. This means that you have total control over your application and won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stackfun/sourcestack/wiki/Design-philosophy) for more.
+sourcestack surfaces all infrastructure as source code within the template, unlike frameworks like AWS Amplify that push infrastructure down into libraries and code generation tools. This means that you have total control over your application and won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stacklords/sourcestack/wiki/Design-philosophy) for more.
 
 The template includes a simple todo list app - you can try it out at [sourcestack-demo.com](https://sourcestack-demo.com)
 
@@ -30,7 +30,7 @@ This version of the template makes certain technology choices:
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
-If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stackfun/sourcestack/wiki/Fork-ideas).
+If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stacklords/sourcestack/wiki/Fork-ideas).
 
 Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and I'll link to it here.
 
@@ -47,7 +47,7 @@ The instructions below assume that you have an AWS account and an up-to-date ins
 
 Run the following commands:
 
-- `git clone https://github.com/stackfun/sourcestack`
+- `git clone https://github.com/stacklords/sourcestack`
 - `cd sourcestack`
 - `npm install`
 - `npm run deploy --env=dev # Create a test environment called 'dev' and build/deploy the application code to it`
@@ -146,7 +146,7 @@ You can configure your User Pool to send emails from SES, meaning that emails wi
 
 ## Further reading
 
-- [Code notes](https://github.com/stackfun/sourcestack/wiki/Code-notes) explains the structure and operation of the template code.
-- [sourcestack vs AWS Amplify](https://github.com/stackfun/sourcestack/wiki/sourcestack-vs-AWS-Amplify)
-- [Roadmap](https://github.com/stackfun/sourcestack/wiki/Roadmap)
-- [Troubleshooting](https://github.com/stackfun/sourcestack/wiki/Troubleshooting)
+- [Code notes](https://github.com/stacklords/sourcestack/wiki/Code-notes) explains the structure and operation of the template code.
+- [sourcestack vs AWS Amplify](https://github.com/stacklords/sourcestack/wiki/sourcestack-vs-AWS-Amplify)
+- [Roadmap](https://github.com/stacklords/sourcestack/wiki/Roadmap)
+- [Troubleshooting](https://github.com/stacklords/sourcestack/wiki/Troubleshooting)
