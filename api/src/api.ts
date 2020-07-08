@@ -2,33 +2,12 @@ import express from 'express';
 import { json } from 'body-parser';
 import bodyParser = require('body-parser');
 import cookieParser = require('cookie-parser');
+import compression = require('compression');
 
 import { AuthHandler } from './generic/authhandler';
-import compression = require('compression');
-import { Decorator, Query, Table } from "dynamo-types";
 import { BackendConfig } from './generic/backendconfig';
+import { TodoItem } from './todoitem';
 
-BackendConfig.init();
-let tableName = BackendConfig.instance.app + '-' + BackendConfig.instance.env + '-todos';
-
-@Decorator.Table({ name: tableName })
-class TodoItem extends Table {
-
-    @Decorator.Attribute()
-    public userId: string;
-
-    @Decorator.Attribute()
-    public taskId: number;
-
-    @Decorator.Attribute()
-    public title: string;
-
-    @Decorator.FullPrimaryKey('userId', 'taskId')
-    static readonly primaryKey: Query.FullPrimaryKey<TodoItem, string, number>;
-
-    @Decorator.Writer()
-    static readonly writer: Query.Writer<TodoItem>;
-}
 
 export function configureApp() {
     const app = express();
@@ -38,6 +17,7 @@ export function configureApp() {
     app.use(compression());
     app.use(bodyParser.urlencoded({ extended: true }));
     
+    BackendConfig.init();
     AuthHandler.init(BackendConfig.instance, app);
 
     app.get('/api/ping', async (req, res) => {
