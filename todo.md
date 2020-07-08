@@ -1,8 +1,9 @@
-- npm audit/fix
+
 - code review
 - roadmap
 - wiki
 - code notes
+  - concepts: infra, api, ui
   - docs: tailwind vscode plugin
 
 - npm run start: 
@@ -14,7 +15,8 @@
 
 # After launch
 
-
+- dynamodb pricing... 
+  - delete unused envs
 - enable full email testing by creating a service, e.g. mailsink.net, that has an api to read back the email you sent
 - e2e test that can be run by others
 - cookie policy/privacy policy for sourcestack-demo.com: https://gdpr.eu/privacy-notice/
