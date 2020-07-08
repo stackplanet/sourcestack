@@ -1,4 +1,4 @@
 {
     "name" : "sourcestack-demo",
-    "environments" : ["alpha","beta","production"]
+    "environments" : ["dev","staging","production"]
 }

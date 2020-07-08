@@ -10,7 +10,7 @@ sourcestack makes it easy to work with your application:
 - Run and debug all of your application code locally, with hot reloading.
 - A curated set of libraries and tools that all play nicely together, saving you all that frustrating integration work.
 - Easy deployment to your custom domain, e.g. `myapp.com`, including sending signup/password reset emails from that domain.
-- Easy management of multiple test environments, e.g. `alpha.myapp.com`, `beta.myapp.com`
+- Easy management of multiple test environments, e.g. `dev.myapp.com`, `staging.myapp.com`
 
 This version of the template makes certain technology choices: 
 
@@ -61,7 +61,7 @@ Run the following commands:
 - `git clone https://github.com/martinpllu/sourcestack`
 - `cd sourcestack`
 - `npm install`
-- `npm run deploy --env=alpha # Create a test environment called 'alpha' and build/deploy the application code to it`
+- `npm run deploy --env=dev # Create a test environment called 'dev' and build/deploy the application code to it`
 
 This will take a while to complete, as CDK creates resources including the Cloudformation distribution.
 
@@ -71,7 +71,7 @@ The script outputs `App running at https://xxxxxxx.cloudfront.net`. Later you ca
 
 The following will get the UI and API code running locally, using DynamoDB tables and Cognito user pools in AWS (a fully local mode using DynamoDB local and stubbed Cognito is on the roadmap).
 
-- `npm run use-backend --env=alpha # Configure your local app to use the database and Cognito user pool in the alpha environment`
+- `npm run use-backend --env=dev # Configure your local app to use the database and Cognito user pool in the dev environment`
 - `npm run start`
 
 Once the app has started, go to https://localhost:1234
@@ -80,21 +80,21 @@ Once the app has started, go to https://localhost:1234
 
 - Open `ui/src/pages/splashpage.tsx` and change the title text.
 - You'll see the updated text at https://localhost:1234.
-- Run `npm run deploy-ui --env=alpha`
-- You'll now see the updated text in the alpha environment.
+- Run `npm run deploy-ui --env=dev`
+- You'll now see the updated text in the dev environment.
 
 ## Make an API change
 
 - Open `api/src/api.ts` and change the text returned by the `/ping` endpoint.
 - You'll see the updated text at https://localhost:1234/api/ping.
-- Run `npm run deploy-api --env=alpha`
-- You'll now see the updated text in the alpha environment.
+- Run `npm run deploy-api --env=dev`
+- You'll now see the updated text in the dev environment.
 
 ## Make an infrastructure change
 
 - Open `infra/src/stack.ts`, find the `cognito()` function and change the text for `emailSubject`
-- Run `npm run deploy-infra --env=alpha`
-- The new text will now be used in emails for user signup, forgot password etc in the alpha environment.
+- Run `npm run deploy-infra --env=dev`
+- The new text will now be used in emails for user signup, forgot password etc in the dev environment.
 
 > Note that `npm run deploy` can be used to build and deploy the complete app (ui, api and infratructure). The `deploy-ui`, `deploy-api` and `deploy-infra` commands provide a faster route to deploy if only a part of the application has changed.
 
@@ -111,7 +111,7 @@ Here's how to do this in VS Code:
 ## View API logs on AWS
 
 - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html).
-- Run `npm run logs --env=alpha`
+- Run `npm run logs --env=dev`
 - You will now see a live view (with a few seconds delay) of any logs written by your API function.
 
 ## Change the application name
@@ -130,7 +130,7 @@ Here's how to do this in VS Code:
 
         {
             ...
-            "environments" : ["alpha","beta","production"]
+            "environments" : ["dev","staging","production"]
             ... 
         }
 
@@ -139,7 +139,7 @@ Here's how to do this in VS Code:
 
 ## Destroy an environment
 
-- Run `npm run destroy-env --env=alpha`. 
+- Run `npm run destroy-env --env=dev`. 
 - After you confirm, the environment (and all its data!) will be completely deleted.
 
 ## Add a custom domain name 

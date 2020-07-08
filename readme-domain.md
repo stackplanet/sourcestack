@@ -21,5 +21,5 @@ Here's how to create a custom domain and associate it with your app:
             ...
         }
 
-- Test environments will now be deployed to subdomains, e.g. `npm run deploy --env=alpha` deploys your app to `https://alpha.myapp.com`
+- Test environments will now be deployed to subdomains, e.g. `npm run deploy --env=dev` deploys your app to `https://dev.myapp.com`
 - Production will be deployed to the apex domain, e.g. `npm run deploy --env=production` deploys your app to `https://myapp.com`

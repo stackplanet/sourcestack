@@ -64,4 +64,4 @@
             ...
         }
 
-- Run `npm run deploy --env=alpha`. When you go through the forgot password process you should receive an email from your domain.
+- Run `npm run deploy --env=dev`. When you go through the forgot password process you should receive an email from your domain.

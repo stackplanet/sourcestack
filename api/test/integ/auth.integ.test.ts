@@ -6,7 +6,7 @@ import { execute } from '../../../scripts/execute';
 /**
  * Integration test for authhandler.
  * 
- * To run, this requires an environment called sourcestack-demo-alpha to be created.
+ * To run, this requires an environment called sourcestack-demo-dev to be created.
  * 
  * It also requires a user refreshtest@sourcestack-demo.com to be created. Follow the instructions in "generate expiredJwt" below.
  * 
@@ -28,7 +28,7 @@ let testState = {
 }
 
 beforeAll(async () => {
-    let s = await fromStack('sourcestack-demo-alpha')
+    let s = await fromStack('sourcestack-demo-dev')
     userPoolId = s.UserPoolId;
 });
 

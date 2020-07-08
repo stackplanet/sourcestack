@@ -1,5 +1,3 @@
-- sourcestack
-  - alpha, beta -> dev, uat
 - add note on serverless to readme:
 
     - Serverless infrastructure for seamless scalability
@@ -22,6 +20,7 @@
 
 # After launch
 
+
 - enable full email testing by creating a service, e.g. mailsink.net, that has an api to read back the email you sent
 - e2e test that can be run by others
 - cookie policy/privacy policy for sourcestack-demo.com: https://gdpr.eu/privacy-notice/
@@ -34,6 +33,7 @@
   - React, possibly using Chakra UI (react components with atomic css https://news.ycombinator.com/item?id=23511811)
     - https://blog.logrocket.com/building-photo-gallery-app-from-scratch-chakra-ui/
   - SSR
+- Favicon for demo app
 - Document auth
 - Move to HTTP API, see https://github.com/aws/aws-cdk/issues/5362
   - https://aws.amazon.com/blogs/compute/building-better-apis-http-apis-now-generally-available/
