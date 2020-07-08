@@ -168,8 +168,7 @@ export class BaseStack extends cdk.Stack {
                     authorizationCodeGrant: true,
                     implicitCodeGrant: true
                 },
-                scopes: [OAuthScope.OPENID, OAuthScope.COGNITO_ADMIN],
-                callbackUrls: ['https://localhost:1234']
+                scopes: [OAuthScope.OPENID, OAuthScope.COGNITO_ADMIN]
             }
         })
 
