@@ -9,7 +9,7 @@ export default class Navbar {
         return <nav>
           <div class="container mx-auto px-6 py-2 flex justify-between items-center">
             <a class="font-bold text-2xl lg:text-4xl" href="#">
-              staklist
+            sourcestack demo
             </a>
             <div class="block lg:hidden">
               <button class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-800 hover:border-gray-500 appearance-none focus:outline-none"

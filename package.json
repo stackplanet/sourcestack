@@ -1,5 +1,5 @@
 {
-  "name": "stak",
+  "name": "sourcestack",
   "version": "0.0.1",
   "description": "",
   "scripts": {
@@ -29,7 +29,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/martinpllu/stak.git"
+    "url": "git+https://github.com/martinpllu/sourcestack.git"
   },
   "author": "",
   "license": "MIT",

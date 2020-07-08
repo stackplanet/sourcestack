@@ -5,7 +5,7 @@ import { execute } from '../../../scripts/execute';
 
 export async function testApp(url: string, userPoolId: string){
     let random = randomstring.generate({length: 8,charset: 'alphabetic'});
-    let username = random + '@staklist.net';
+    let username = random + '@sourcestack-demo.com';
     let password = randomstring.generate() + '!';
     let createdUser = false;
     try {

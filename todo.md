@@ -1,5 +1,10 @@
 - sourcestack
-- roadmap    
+  - alpha, beta -> dev, uat
+- add note on serverless to readme:
+
+    - Serverless infrastructure for seamless scalability
+
+- roadmap
 - license, package.json blurb
 - npm audit/fix
 - code review
@@ -19,7 +24,7 @@
 
 - enable full email testing by creating a service, e.g. mailsink.net, that has an api to read back the email you sent
 - e2e test that can be run by others
-- cookie policy/privacy policy for staklist: https://gdpr.eu/privacy-notice/
+- cookie policy/privacy policy for sourcestack-demo.com: https://gdpr.eu/privacy-notice/
 - Roadmap 
   - Social login
   - Pipelines
@@ -46,7 +51,7 @@
 - make scripts cross-platform (e.g. shelljs)
 - Caching on Cloudfront for API Gateway - what is the best practice?
 
-- Fix email domain: noreply@staklist.net via amazonses.com 
+- Fix email domain: noreply@sourcestack-demo.com via amazonses.com 
 - Pipelines
 - Can email be put into JWT?
 - Test with expired refresh token: 

@@ -1,4 +1,4 @@
-# stak vs AWS Amplify
+# sourcestack vs AWS Amplify
 
 I've used AWS Amplify to create a number of applications and it's a great tool. 
 

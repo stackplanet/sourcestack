@@ -8,8 +8,8 @@ function writeConfig(config: any){
 }
 
 (async () => {
-    let app = 'staktest';
-    let env = 'alpha1';
+    let app = 'sourcestack-test';
+    let env = 'full-deploy';
     writeConfig({
         'name' : app,
         'environments' : env,

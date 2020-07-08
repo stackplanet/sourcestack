@@ -6,18 +6,18 @@ import { execute } from '../../../scripts/execute';
 /**
  * Integration test for authhandler.
  * 
- * To run, this requires an environment called staklist-alpha to be created.
+ * To run, this requires an environment called sourcestack-demo-alpha to be created.
  * 
- * It also requires a user refreshtest@staklist.net to be created. Follow the instructions in "generate expiredJwt" below.
+ * It also requires a user refreshtest@sourcestack-demo.com to be created. Follow the instructions in "generate expiredJwt" below.
  * 
  */
 
 let app = configureApp();
 
-let user1 = 'foo@staklist.net';
+let user1 = 'foo@sourcestack-demo.com';
 let password1 = 'Foo_Bar_123';
 
-let refreshTestUser = 'refreshtest@staklist.net';
+let refreshTestUser = 'refreshtest@sourcestack-demo.com';
 let refreshTestPassword = 'Tht_htht%214';
 
 let userPoolId = '';
@@ -28,7 +28,7 @@ let testState = {
 }
 
 beforeAll(async () => {
-    let s = await fromStack('staklist-alpha')
+    let s = await fromStack('sourcestack-demo-alpha')
     userPoolId = s.UserPoolId;
 });
 
@@ -137,9 +137,9 @@ test(`when expired token, then refresh`, async () => {
     let newAuthToken = authTokenCookie.split(';')[0];
     expect(newAuthToken).toMatch(/auth_token=.*/);
     expect(newAuthToken).not.toEqual(testState.authToken);
-    expect(response2.text).toMatch('pong refreshtest@staklist.net');
+    expect(response2.text).toMatch('pong ' + refreshTestUser);
     let response3 = await request(app).get('/api/private/ping').set('Cookie', [newAuthToken, testState.refreshToken]);
-    expect(response3.text).toMatch('pong refreshtest@staklist.net');
+    expect(response3.text).toMatch('pong ' + refreshTestUser);
 });
 
 async function generateExpiredJwt(){

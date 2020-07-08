@@ -18,7 +18,7 @@ export class SignUpPage extends AuthPage {
     }
 
     view() {
-        return <LoginPanel title="Sign up for staklist">
+        return <LoginPanel title="Sign up for sourcestack-demo">
             <div {...bind(this)}>
                 <div class="mb-4">
                     <LabelledInput label="Email" id="email" type="email" placeholder="me@awesome.com"/>    

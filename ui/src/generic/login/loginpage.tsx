@@ -16,7 +16,7 @@ export class LoginPage extends AuthPage {
     }
 
     view() {
-        return <LoginPanel title="Log in to staklist">
+        return <LoginPanel title="Log in to sourcestack-demo">
             <div {...bind(this)}>
                 <div class="mb-4">
                     <LabelledInput label="Email" id="email" type="email" placeholder="me@awesome.com"/>

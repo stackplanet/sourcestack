@@ -1,4 +1,4 @@
 {
-    "name" : "staklist",
+    "name" : "sourcestack-demo",
     "environments" : ["alpha","beta","production"]
 }
