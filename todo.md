@@ -1,12 +1,7 @@
-- add note on serverless to readme:
-
-    - Serverless infrastructure for seamless scalability
-
-- roadmap
 - license, package.json blurb
 - npm audit/fix
 - code review
-- Test on IE and other browsers
+- roadmap
 - wiki
 - code notes
   - docs: tailwind vscode plugin
@@ -45,6 +40,7 @@
   - use https://www.npmjs.com/package/jest-runner-groups
 - list-environments command
 - code tour
+- Test on IE?
 - why do tsc compile errors not break the build?
 - consider refactoring the password/confirmPassword dialog into a component. The containing page will need to be able to see the status of the matching passwords/validation etc - how can that be done?
 - sensible stack traces/source maps for lambda?

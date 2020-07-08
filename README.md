@@ -11,6 +11,7 @@ sourcestack makes it easy to work with your application:
 - A curated set of libraries and tools that all play nicely together, saving you all that frustrating integration work.
 - Easy deployment to your custom domain, e.g. `myapp.com`, including sending signup/password reset emails from that domain.
 - Easy management of multiple test environments, e.g. `dev.myapp.com`, `staging.myapp.com`
+- Serverless infrastructure for seamless scalability, minimal operations overhead, and low-cost test environments.
 
 This version of the template makes certain technology choices: 
 
@@ -33,7 +34,7 @@ If you don't like these choices, sourcestack is designed to be forked. Ideas for
 * Other clouds: GCP, Azure...
 * Relational databases (I'm working on an Aurora Serverless fork)
 
-Just fork this repository and create your own template or app. If you'd like to share it with others, please let me know and I'll link to it here.
+Just fork this repository and create your own template or app. If you'd like to share it with others, please raise an issue and I'll link to it here.
 
 ## Design philosophy
 
@@ -41,7 +42,7 @@ sourcestack is designed to give you full control over all aspects of your applic
 
 Frameworks like [AWS Amplify](https://aws.amazon.com/amplify) aim to simplify development by hiding the details of underlying infrastructure. This is great for getting started but can lead to problems when your requirements no longer match the framework's assumptions. Frameworks tend to be classic [leaky abstractions](https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/).
 
-sourcestack takes a **low abstraction** approach, surfacing all infrastructure as code within the template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
+sourcestack takes a **low abstraction** approach, surfacing all infrastructure as source code within the template instead of pushing it down into libraries and code generation tools. This gives the developer total control and encourages a deeper understanding of the technology stack. 
 
 Because of this design, sourcestack is not a library that you include in your app. Instead you start by [forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and customising the code to fit your needs. Because the codebase is designed to be open and hackable, you can go in any direction you like - change the login mechanism, use alternative libraries, add new components, port to a different cloud... As bugfixes and improvements are made to the template you forked from, you can update your app as you choose using `git merge`.
 
@@ -58,7 +59,7 @@ The instructions below assume that you have an AWS account and an up-to-date ins
 
 Run the following commands:
 
-- `git clone https://github.com/martinpllu/sourcestack`
+- `git clone https://github.com/stackfun/sourcestack`
 - `cd sourcestack`
 - `npm install`
 - `npm run deploy --env=dev # Create a test environment called 'dev' and build/deploy the application code to it`
