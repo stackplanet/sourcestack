@@ -148,15 +148,9 @@ By default, your Cognito User Pool sends account verification and password reset
 
 You can configure your User Pool to send emails from SES, meaning that emails will come from your domain with far higher daily sending limits. See [Use SNS for sending email](./readme-email.md)
 
-# Generic vs app-specific code
+## Further reading
 
-The template includes "generic" code (code that would likely be the same across different applications) and app-specific code.
-
-Generic code can be found in:
-
-* `ui/src/generic` - login pages, sign up pages, forgot password pages etc.
-* `scripts` - the scripts documented above, e.g. build, deploy etc.
-* `api/src/generic` - authentication handler, backend configuration etc.
-* `infra/src/generic` - the base stack defined in CDK. Note that the app-specific DynamoDB tables are defined in infra/src/stack.ts and this would be changed on a per-app basis.
-
-Of course, you can still modify generic code if it doesn't suit your needs.
+- [Code notes](https://github.com/stackfun/sourcestack/wiki/Code-notes) explains the structure and operation of the template code.
+- [sourcestack vs AWS Amplify](https://github.com/stackfun/sourcestack/wiki/sourcestack-vs-AWS-Amplify)
+- [Roadmap](https://github.com/stackfun/sourcestack/wiki/Roadmap)
+- [Troubleshooting](https://github.com/stackfun/sourcestack/wiki/Troubleshooting)
