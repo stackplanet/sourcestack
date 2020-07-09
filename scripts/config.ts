@@ -14,6 +14,9 @@ export class Config {
         if (!ENV_REGEX.test(env)){
             this.fatal('Environment name must match ' + ENV_REGEX);
         }
+        if (!this.environments.includes(env)){
+            this.fatal(`Environment "${env}" not found in app.json. Allowed environments are: ${this.environments}`);
+        }
         return env;
     }
 
