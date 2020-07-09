@@ -54,7 +54,7 @@ Run the following commands:
 - `npm install`
 - `npm run deploy --env=dev # Create a test environment called 'dev' and build/deploy the application code to it`
 
-This will take a while to complete, as CDK creates resources including the Cloudformation distribution.
+This will take a while to complete, as CDK creates resources including the CloudFront distribution.
 
 The script outputs `App running at https://xxxxxxx.cloudfront.net`. Later you can add your own domain name. 
 
