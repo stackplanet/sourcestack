@@ -1,6 +1,7 @@
-import { CloudFormation } from "aws-sdk";
+import { CloudFormation, config } from "aws-sdk";
 
 export async function findStack(stackName: string) {
+    checkEnv();
     let stacks = await new CloudFormation().describeStacks().promise();
     return stacks.Stacks?.find(s => s.StackName == stackName);
 }
@@ -10,9 +11,13 @@ export async function stackExists(stackName: string) {
 }
 
 export function getRegion(){
-    let region = process.env.AWS_REGION;
-    if (region === undefined){
-        throw new Error('Unable to determine AWS region: environment variable AWS_REGION not set');
+    checkEnv();
+    return config.region;
+}
+
+export function checkEnv(){
+    if (!process.env.AWS_SDK_LOAD_CONFIG){
+        console.error('Missing configuration. Please run the following: export AWS_SDK_LOAD_CONFIG=1');
+        process.exit(1);
     }
-    return region;
 }

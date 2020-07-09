@@ -41,7 +41,15 @@ Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a
 - The project is at an early stage - we're looking for help and feedback.
 - Only tested on Max OSX Catalina so far. Linux should be OK but has not been tested yet. Windows is not currently supported.
 
-## Get started: Deploy the app to your AWS account
+## Get started: Configure environment
+
+Run the following command to allow the AWS nodejs SDK to [read config files](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-configured-credential-process.html)
+
+- `export AWS_SDK_LOAD_CONFIG=1`
+
+You might want to put this command into your `bash_profile` file or similar, so that the environment is always correctly set up.
+
+## Deploy the app to your AWS account
 
 The instructions below assume that you have an AWS account and an up-to-date installation of nodejs.
 
@@ -54,7 +62,7 @@ Run the following commands:
 - `npm install`
 - `npm run deploy --env=dev # Create a test environment called 'dev' and build/deploy the application code to it`
 
-This will take a while to complete, as CDK creates resources including the CloudFront distribution.
+This will take a while to complete as CDK creates resources for the first time.
 
 The script outputs `App running at https://xxxxxxx.cloudfront.net`. Later you can add your own domain name. 
 
