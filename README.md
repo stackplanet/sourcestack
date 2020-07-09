@@ -1,8 +1,8 @@
 # sourcestack: a highly adaptable template for full-stack serverless nodejs web apps
 
-**sourcestack** is a full-stack serverless nodejs web app template, ready to be deployed into your AWS account and adapted to your needs. 
+sourcestack is a full-stack serverless nodejs web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
-sourcestack surfaces all infrastructure as source code within the template, in contrast to frameworks such as AWS Amplify that push infrastructure down into libraries and code generation tools. This gives you total control over your application and ensures that you won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stackplanet/sourcestack/wiki/Design-philosophy) for more.
+**sourcestack surfaces all infrastructure as source code**, unlike frameworks such as AWS Amplify that push infrastructure down into libraries and code generation tools. This gives you total control over your application and ensures that you won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stackplanet/sourcestack/wiki/Design-philosophy) for more on this "low-abstraction" approach.
 
 The template includes a simple todo list app - you can try it out at [sourcestack-demo.com](https://sourcestack-demo.com)
 
@@ -13,6 +13,8 @@ sourcestack makes it easy to work with your application:
 - A slick development experience with fast builds and deployments.
 - Run and debug all of your application code locally, with hot reloading.
 - A curated set of tools and libraries that play nicely together, saving you all that frustrating integration work.
+- A strong focus on simplicity throughout.
+- Customisable login UI/API with signup, signin and forgot password workflows.
 - Easy deployment to your custom domain, e.g. `myapp.com`, including sending signup/password reset emails from that domain.
 - Easy management of multiple test environments, e.g. `dev.myapp.com`, `staging.myapp.com`
 - Serverless infrastructure for seamless scalability, minimal operations overhead and low-cost test environments.
