@@ -2,7 +2,7 @@
 
 sourcestack is a "batteries included" full-stack serverless Typescript web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
-**sourcestack surfaces all infrastructure as source code**, in contrast with frameworks such as AWS Amplify that push infrastructure down into libraries and code generation tools. This gives you total control over your application and ensures that you won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stackplanet/sourcestack/wiki/Design-philosophy) for more on this approach.
+**sourcestack surfaces all infrastructure as source code**, in contrast to frameworks such as AWS Amplify that push infrastructure down into libraries and code generation tools. This gives you total control over your application and ensures that you won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stackplanet/sourcestack/wiki/Design-philosophy) for more on this approach.
 
 The template includes a simple todo list app - you can try it out at [sourcestack-demo.com](https://sourcestack-demo.com)
 
