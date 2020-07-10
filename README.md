@@ -27,6 +27,7 @@ This version of the template makes certain technology choices:
 | Architecture | Client-side rendering, REST API, Serverless, NoSQL |
 | UI | Typescript, Mithril with JSX, TailwindCSS, Parcel |
 | API | Typescript, Express, Parcel |
+| Test tools | Jest, supertest, taiko |
 | Infrastructure as code | Typescript, Amazon CDK |
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
