@@ -39,7 +39,7 @@ Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a
 
 ## Architecture
 
-![Architecture Diagram](sourcestack.png?raw=true)
+![Architecture Diagram](architecture.png?raw=true)
 
 ## Limitations
 
