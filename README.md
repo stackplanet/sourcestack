@@ -1,23 +1,22 @@
-# sourcestack: a highly adaptable template for full-stack serverless nodejs web apps
+# sourcestack: a highly adaptable template for full-stack serverless Node.js web apps
 
-sourcestack is a full-stack serverless nodejs web app template, ready to be deployed into your AWS account and adapted to your needs. 
+sourcestack is a "batteries included" full-stack serverless Node.js web app template, ready to be deployed into your AWS account and adapted to your needs. 
 
-**sourcestack surfaces all infrastructure as source code**, unlike frameworks such as AWS Amplify that push infrastructure down into libraries and code generation tools. This gives you total control over your application and ensures that you won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stackplanet/sourcestack/wiki/Design-philosophy) for more on this approach.
+**sourcestack surfaces all infrastructure as source code**, in contrast with frameworks such as AWS Amplify that push infrastructure down into libraries and code generation tools. This gives you total control over your application and ensures that you won't be trapped by the assumptions made by a framework. See [Design philosophy](https://github.com/stackplanet/sourcestack/wiki/Design-philosophy) for more on this approach.
 
 The template includes a simple todo list app - you can try it out at [sourcestack-demo.com](https://sourcestack-demo.com)
 
 ## Main features
 
-sourcestack makes it easy to work with your application:
-
 - A slick development experience with fast builds and deployments.
-- Run and debug all of your application code locally, with hot reloading.
+- Run and debug all of your application code locally with hot reloading.
 - A curated set of tools and libraries that play nicely together, saving you all that frustrating integration work.
-- A strong focus on simplicity throughout.
+- Designed to be forked, so you can use alternative UI frameworks, different infrastructure components, etc.
 - Customisable login UI/API with signup, signin and forgot password workflows.
 - Easy deployment to your custom domain, e.g. `myapp.com`, including sending signup/password reset emails from that domain.
 - Easy management of multiple test environments, e.g. `dev.myapp.com`, `staging.myapp.com`
 - Serverless infrastructure for seamless scalability, minimal operations overhead and low-cost test environments.
+- A focus on simplicity throughout.
 
 ## Technology choices
 
@@ -25,15 +24,14 @@ This version of the template makes certain technology choices:
 
 |Aspect|Implementation|
 |----|------------------------------------------|
-| Architecture | Client-side rendering, REST API, Serverless, 
-NoSQL |
+| Architecture | Client-side rendering, REST API, Serverless, NoSQL |
 | UI | Typescript, Mithril with JSX, TailwindCSS, Parcel |
 | API | Typescript, Express, Parcel |
 | Infrastructure as code | Typescript, Amazon CDK |
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
-If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stackplanet/sourcestack/wiki/Potential-forks-of-sourcestack).
+If you want to use something else, sourcestack is designed to be forked. [Ideas for forks](https://github.com/stackplanet/sourcestack/wiki/Fork-ideas)
 
 Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and we'll link to it here.
 
@@ -43,12 +41,11 @@ Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a
 
 ## Limitations
 
-- The project is at an early stage - we're looking for help and feedback.
-- Only tested on Max OSX Catalina so far. Linux should be OK but has not been tested yet. Windows is not currently supported.
+The project is at an early stage - we're looking for help and feedback. See [Roadmap](https://github.com/stackplanet/sourcestack/wiki/Roadmap)
 
 ## Get started: Configure environment
 
-Run the following command to allow the AWS nodejs SDK to [read config files](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-configured-credential-process.html)
+Run the following command to allow the AWS Node.js SDK to [read config files](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/loading-node-credentials-configured-credential-process.html):
 
 - `export AWS_SDK_LOAD_CONFIG=1`
 
@@ -56,7 +53,12 @@ You might want to put this command into your `bash_profile` file or similar, so 
 
 ## Deploy the app to your AWS account
 
-The instructions below assume that you have an AWS account and an up-to-date installation of nodejs.
+The instructions below assume that you have:
+
+* An AWS account
+* An up-to-date installation of Node.js and the AWS CLI
+* Some experience with AWS
+* A Mac OSX or Linux environment (Windows not currently supported)
 
 > **WARNING - this will create resources in your AWS account.** Charges should be minimal for test workloads, but please be sure that you understand the pricing as per https://aws.amazon.com/pricing.
 
@@ -67,7 +69,9 @@ Run the following commands:
 - `npm install`
 - `npm run deploy --env=dev # Create a test environment called 'dev' and build/deploy the application code to it`
 
-This will take a while to complete as CDK creates resources for the first time.
+> Each "environment" is a self-contained instance of your application and infrastructure, with its own CloudFormation stack (called `sourcestack-demo-dev` in this case). You might have different environments representing different test stages or feature branches, such as `dev`, `staging`, `big-ui-refactor`, `production`.
+
+The `deploy` script will take a while to complete as CDK creates resources for the first time.
 
 The script outputs `App running at https://xxxxxxx.cloudfront.net`. Later you can add your own domain name. 
 
@@ -75,7 +79,7 @@ The script outputs `App running at https://xxxxxxx.cloudfront.net`. Later you ca
 
 The following will get the UI and API code running locally, using DynamoDB tables and Cognito user pools in AWS (a fully local mode using DynamoDB local and stubbed Cognito is on the roadmap).
 
-- `npm run use-backend --env=dev # Configure your local app to use the database and Cognito user pool in the dev environment`
+- `npm run use-backend --env=dev # Configure your local app to use the database and Cognito user pool in the 'dev' environment`
 - `npm run start`
 
 Once the app has started, go to https://localhost:1234
