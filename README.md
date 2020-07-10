@@ -25,7 +25,8 @@ This version of the template makes certain technology choices:
 
 |Aspect|Implementation|
 |----|------------------------------------------|
-| Architecture | Client-side rendering, REST API, Serverless, NoSQL |
+| Architecture | Client-side rendering, REST API, Serverless, 
+NoSQL |
 | UI | Typescript, Mithril with JSX, TailwindCSS, Parcel |
 | API | Typescript, Express, Parcel |
 | Infrastructure as code | Typescript, Amazon CDK |
@@ -35,6 +36,10 @@ This version of the template makes certain technology choices:
 If you don't like these choices, sourcestack is designed to be forked! See [ideas for forks](https://github.com/stackplanet/sourcestack/wiki/Potential-forks-of-sourcestack).
 
 Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and we'll link to it here.
+
+## Architecture
+
+![Architecture Diagram](sourcestack.png?raw=true)
 
 ## Limitations
 
