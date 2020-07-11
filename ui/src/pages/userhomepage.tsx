@@ -43,7 +43,6 @@ export class UserHomePage {
         let input = document.getElementById('newTodo') as HTMLInputElement;
         let todo:Todo = {
             title: input.value,
-            userId: AuthClient.user.userId, // TODO - move this to server side
         }
         await m.request({
             method: 'POST',

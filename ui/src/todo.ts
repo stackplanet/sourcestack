@@ -1,7 +1,7 @@
 export interface Todo {
 
     taskId?: number;
-    userId: string;
+    userId?: string;
     title: string;
     
 }
