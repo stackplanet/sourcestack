@@ -34,7 +34,7 @@ This version of the template makes certain technology choices:
 
 If you want to use something else, sourcestack is designed to be forked. [Ideas for forks](https://github.com/stackplanet/sourcestack/wiki/Fork-ideas)
 
-Just [fork](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and we'll link to it here.
+Just [fork](https://github.com/stackplanet/sourcestack/wiki/Forking) this repository and create your own template or app. If you'd like to share it with others, please raise an issue and we'll link to it here.
 
 ## Architecture
 
