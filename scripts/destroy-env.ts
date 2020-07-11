@@ -29,7 +29,7 @@ async function confirmAndDestroy(){
         }
         else {
             console.log('Exiting');
-            process.exit(1);
+            process.exit(0);
         }
     }
 }
