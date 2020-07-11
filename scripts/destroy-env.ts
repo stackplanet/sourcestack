@@ -19,7 +19,7 @@ async function confirmAndDestroy(){
     if (Config.instance.noConfirmDestroy) await destroyStack();
     else {
         console.log();
-        console.log(`*** This will COMPLETELY DELETE environment "${env}" and ALL ASSOCIATED DATA! ***`);
+        console.log(`*** This will COMPLETELY DELETE environment "${env}" for application "${Config.instance.app}" and ALL ASSOCIATED DATA! ***`);
         console.log();
         console.log(`To confirm, please type Y and press return`);
         let input = p('> ')
