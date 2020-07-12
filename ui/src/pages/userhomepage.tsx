@@ -22,7 +22,6 @@ export class UserHomePage {
                         <div>{t.title}</div> 
                         <button class="focus:outline-none" onclick={() => this.deleteTodo(t)}>×</button>
                     </li>)}
-
                 </ul>
             </WithSpinner>
         </Page>

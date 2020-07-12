@@ -8,7 +8,6 @@ import { AuthHandler } from './generic/authhandler';
 import { BackendConfig } from './generic/backendconfig';
 import { TodoItem } from './todoitem';
 
-
 export function configureApp() {
     const app = express();
     app.use(json());
