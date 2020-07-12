@@ -25,10 +25,10 @@ This version of the template makes certain technology choices:
 |Aspect|Implementation|
 |----|------------------------------------------|
 | Architecture | Client-side rendering, REST API, Serverless, NoSQL |
-| UI | Typescript, Mithril with JSX, TailwindCSS, Parcel |
-| API | Typescript, Express, Parcel |
-| Test tools | Jest, supertest, taiko |
-| Infrastructure as code | Typescript, Amazon CDK |
+| UI | Typescript, Mithril with JSX, TailwindCSS, Parcel ([code example](https://github.com/stackplanet/sourcestack/blob/master/ui/src/pages/userhomepage.tsx)) |
+| API | Typescript, Express, Parcel ([code example](https://github.com/stackplanet/sourcestack/blob/master/api/src/api.ts))|
+| Test tools | Jest, Supertest, Taiko |
+| Infrastructure as code | Typescript, Amazon CDK ([code example](https://github.com/stackplanet/sourcestack/blob/master/infra/src/generic/basestack.ts))|
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
 | Database | DynamoDB |
 
@@ -39,6 +39,8 @@ Just [fork](https://github.com/stackplanet/sourcestack/wiki/Forking) this reposi
 ## Architecture
 
 ![Architecture Diagram](architecture.png?raw=true)
+
+See [Code notes](https://github.com/stackplanet/sourcestack/wiki/Code-notes) for more.
 
 ## Limitations
 
