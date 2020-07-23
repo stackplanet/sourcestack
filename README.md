@@ -13,6 +13,8 @@ The template is based on a simple todo list app - you can try it out at [sources
 - A slick development experience with fast builds and deployments.
 - Run and debug all of your application code locally with hot reloading.
 - A curated set of tools and libraries that play nicely together, saving you all that frustrating integration work.
+- Typescript everywhere: UI, API and infrastructure (using AWS CDK).
+- A well-typed REST API, with type defintions shared between UI and API layers.
 - Designed to be forked, so you can use alternative UI frameworks, different infrastructure components, etc.
 - Customisable login UI/API with signup, signin and forgot password workflows.
 - Easy deployment to your custom domain, e.g. `myapp.com`, including sending signup/password reset emails from that domain.
@@ -28,7 +30,7 @@ This version of the template makes certain technology choices:
 |----|------------------------------------------|
 | Architecture | Client-side rendering, REST API, Serverless, NoSQL |
 | UI | Typescript, Mithril with JSX, TailwindCSS, Parcel ([code example](https://github.com/stackplanet/sourcestack/blob/master/ui/src/pages/userhomepage.tsx)) |
-| API | Typescript, Express, Parcel ([code example](https://github.com/stackplanet/sourcestack/blob/master/api/src/api.ts))|
+| API | Typescript, Express, RESTyped, Parcel ([code example](https://github.com/stackplanet/sourcestack/blob/master/api/src/todoapi.ts))|
 | Test tools | Jest, Supertest, Taiko |
 | Infrastructure as code | Typescript, Amazon CDK ([code example](https://github.com/stackplanet/sourcestack/blob/master/infra/src/generic/basestack.ts))|
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |

@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { configureApp } from '../../src/api';
+import { createApp } from '../../src/generic/main';
 import { fromStack } from '../../../infra/src/generic/stackoutput';
 import { execute } from '../../../scripts/execute';
 
@@ -12,7 +12,7 @@ import { execute } from '../../../scripts/execute';
  * 
  */
 
-let app = configureApp();
+let app = createApp();
 
 let user1 = 'foo@sourcestack-demo.com';
 let password1 = 'Foo_Bar_123';

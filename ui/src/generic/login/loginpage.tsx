@@ -42,7 +42,6 @@ export class LoginPage extends AuthPage {
     }
 
     complete() {
-        console.log('Calling complete')
         return this.email !== '' && this.password !== ''
     }
 }

@@ -20,7 +20,8 @@
     "data-api-client": "^1.0.1",
     "dynamo-types": "^2.10.0",
     "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "restyped-express-async": "^0.6.1"
   },
   "devDependencies": {
     "@types/aws-serverless-express": "^3.3.3",

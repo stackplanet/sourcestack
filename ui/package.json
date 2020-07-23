@@ -5,6 +5,7 @@
     "dependencies": {
         "mithril": "^2.0.4",
         "mithril-tsx-component": "^3.0.1",
+        "restyped-axios": "^2.0.0",
         "tailwindcss": "^1.4.6"
     },
     "devDependencies": {

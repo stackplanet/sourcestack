@@ -1,13 +1,15 @@
 import m from 'mithril';
+import axios from 'restyped-axios';
+import { Todo } from '../../../api/src/todo';
+import { TodoApi } from '../../../api/src/todoapitypes';
 import { Page } from "../components/page";
-import { AuthClient } from '../generic/login/authclient';
-import { Todo} from '../todo'
 import { WithSpinner } from '../components/withspinner';
 
 export class UserHomePage {
 
     results:Todo[] = [];
     loading = true;
+    client = axios.create<TodoApi>();
 
     async oninit() {
         await this.refresh();
@@ -28,22 +30,24 @@ export class UserHomePage {
     }
 
     async deleteTodo(todo:Todo){
-        await m.request({
+        await this.client.request({
+            url: '/api/private/todo',
             method: 'DELETE',
-            url: '/api/private/todo?id=' + todo.taskId,
+            params: {
+                id: todo.taskId.toString()
+            }
         });
         await this.refresh();
     }
 
     async createTodo(){
         let input = document.getElementById('newTodo') as HTMLInputElement;
-        let todo:Todo = {
-            title: input.value,
-        }
-        await m.request({
-            method: 'POST',
+        await this.client.request({
             url: '/api/private/todo',
-            body: todo
+            method: 'POST',
+            data: {
+                title: input.value
+            }
         });
         input.value = '';
         await this.refresh();
@@ -52,9 +56,11 @@ export class UserHomePage {
     async refresh(){
         this.loading = true;
         m.redraw()
-        this.results = await m.request({
-            url: '/api/private/todos'
-        })
+        let res = await this.client.request({
+            url: '/api/private/todos',
+            method: 'GET',
+        });
+        this.results = res.data;
         this.loading = false;
         m.redraw();
         document.getElementById('newTodo').focus();
