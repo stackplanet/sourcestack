@@ -1,4 +1,4 @@
-import { Todo } from "./todo";
+import { Todo } from "./model";
 
 export interface TodoApi {
     '/api/private/todos': {

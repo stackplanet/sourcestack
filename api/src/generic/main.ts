@@ -6,7 +6,7 @@ import compression = require('compression');
 
 import { AuthHandler } from './auth/authapi';
 import { BackendConfig } from './backendconfig';
-import { createTodoApi } from '../todoapi';
+import { createApi } from '../api';
 
 export function createApp() {
     const app = express();
@@ -17,6 +17,6 @@ export function createApp() {
     app.use(bodyParser.urlencoded({ extended: true }));
     BackendConfig.init();
     AuthHandler.init(BackendConfig.instance, app);
-    createTodoApi(app);
+    createApi(app);
     return app;
 }

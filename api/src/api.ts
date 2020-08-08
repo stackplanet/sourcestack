@@ -1,10 +1,10 @@
 import express from 'express';
 import RestypedRouter from 'restyped-express-async';
-import { TodoApi } from "./todoapitypes";
-import { Todo } from "./todo";
-import { TodoDao } from './tododao';
+import { TodoApi } from "./apitypes";
+import { Todo } from "./model";
+import { TodoDao } from './dao';
 
-export function createTodoApi(app: express.Express){
+export function createApi(app: express.Express){
 
     let router = RestypedRouter<TodoApi>(app);
     
@@ -22,17 +22,16 @@ export function createTodoApi(app: express.Express){
         return todo;
     });
 
-    router.delete('/api/private/todo', async (req, res) => {
+    router.delete('/api/private/todo', async (req, _) => {
         await TodoDao.primaryKey.delete(req.user.userId as string, parseInt(req.query.id));
     });
 
-    router.get('/api/ping', async (req, res) => {
+    router.get('/api/ping', async (_) => {
         return 'pong';
     });
 
     router.get('/api/private/ping', async (req, _) => {
         return 'pong ' + req.user.userId;
     });
-
 
 }

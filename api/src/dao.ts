@@ -1,6 +1,6 @@
 import { Decorator, Query, Table } from "dynamo-types";
 import { BackendConfig } from './generic/backendconfig';
-import { Todo } from "./todo";
+import { Todo } from "./model";
 
 BackendConfig.init();
 
