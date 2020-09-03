@@ -30,7 +30,7 @@ This version of the template makes certain technology choices:
 |----|------------------------------------------|
 | Architecture | Client-side rendering, REST API, Serverless, NoSQL |
 | UI | Typescript, Mithril with JSX, TailwindCSS, Parcel ([code example](https://github.com/stackplanet/sourcestack/blob/master/ui/src/pages/userhomepage.tsx)) |
-| API | Typescript, Express, RESTyped, Parcel ([code example](https://github.com/stackplanet/sourcestack/blob/master/api/src/todoapi.ts))|
+| API | Typescript, Express, RESTyped, Parcel ([code example](https://github.com/stackplanet/sourcestack/blob/master/api/src/api.ts))|
 | Test tools | Jest, Supertest, Taiko |
 | Infrastructure as code | Typescript, Amazon CDK ([code example](https://github.com/stackplanet/sourcestack/blob/master/infra/src/generic/basestack.ts))|
 | Infrastructure | AWS, Route 53, Cloudfront, API Gateway, Lambda, Cognito, SES |
