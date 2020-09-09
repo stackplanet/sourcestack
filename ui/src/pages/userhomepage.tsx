@@ -1,7 +1,7 @@
 import m from 'mithril';
 import axios from 'restyped-axios';
-import { Todo } from '../../../api/src/todo';
-import { TodoApi } from '../../../api/src/todoapitypes';
+import { Todo } from '../../../api/src/model';
+import { TodoApi } from '../../../api/src/apitypes';
 import { Page } from "../components/page";
 import { WithSpinner } from '../components/withspinner';
 
