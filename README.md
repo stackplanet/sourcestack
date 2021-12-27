@@ -1,3 +1,8 @@
+
+
+> Please note - development of sourcstack is currently on hold while I work on a real-world project based on it - https://wastebase.org. I plan to update sourcestack based on the developments made in this project.
+
+
 # sourcestack: a highly adaptable template for full-stack serverless Typescript web apps
 
 sourcestack is a "batteries included" full-stack serverless Typescript web app template, ready to be deployed into your AWS account and adapted to your needs. 
