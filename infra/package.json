@@ -25,7 +25,7 @@
     "@aws-cdk/aws-sqs": "^1.50.0",
     "@aws-cdk/core": "^1.50.0",
     "aws-cdk": "^1.50.0",
-    "aws-sdk": "^2.711.0",
+    "aws-sdk": "^2.814.0",
     "child_process": "^1.0.2",
     "module": "^1.2.5"
   }
